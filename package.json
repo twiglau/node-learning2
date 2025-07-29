@@ -1,0 +1,25 @@
+{
+  "name": "node-learning2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twiglau/node-learning2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/twiglau/node-learning2/issues"
+  },
+  "homepage": "https://github.com/twiglau/node-learning2#readme",
+  "dependencies": {
+    "koa": "^3.0.1",
+    "koa-body": "^6.0.1",
+    "koa-router": "^13.1.1"
+  }
+}
