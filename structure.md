@@ -64,3 +64,12 @@ module.exports = new UserController();
 ```
 
 ### 错误处理机制
+
+- koa 自带错误处理
+  > 要执行自定义错误处理逻辑，如 集中式 日志记录，您可以添加一个 "error" 事件侦听器。
+
+```js
+app.on("error", (err) => {
+  log.error("server error", err);
+});
+```
