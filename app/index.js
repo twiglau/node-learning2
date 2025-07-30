@@ -35,7 +35,7 @@ app.use(koaBody({
 }))
 
 app.use(KoaStatic(
-  path.join(__dirname, staticPath)
+  path.join(__dirname, 'public')
 ))
 
 app.use(parameter(app))

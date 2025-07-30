@@ -6,10 +6,10 @@ class HomeController {
   }
   upload(ctx) {
     const file = ctx.request.files.file
-    const basename = path.basename(file.path)
+    const basename = path.basename(file.filepath)
     console.log('basename>>>', basename);
 
-    const url = `${ctx.origin}/uploads/${basename}`
+    const url = `${ctx.request.origin}/uploads/${basename}`
 
     ctx.body = {
       url
