@@ -13,8 +13,8 @@ const {
   checkUserExit,
   follow,
   unfollow,
-  listenFollower,
-  listenFollowing,
+  listFollower,
+  listFollowing,
   currentUser
 } = require('../controllers/users')
 
@@ -37,11 +37,11 @@ router.post('/login', login)
 // 关注
 router.put('/follow/:id', auth, checkUserExit, follow)
 // 取消关注
-router.delete('/unfollow/:id', auth, checkUserExit, follow)
+router.delete('/unfollow/:id', auth, checkUserExit, unfollow)
 // 粉丝
-router.get('/:id/listenFollower', listenFollower)
+router.get('/:id/follower', listFollower)
 // 关注
-router.get('/:id/listenFollowing', listenFollowing)
+router.get('/:id/following', listFollowing)
 
 // 管理员
 router.get('/api/currentUser', currentUser)

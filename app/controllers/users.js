@@ -11,12 +11,13 @@ class UserController {
   async findById(ctx) {
     const { fields='' } = ctx.query
     const selectFields = fields.split(';').filter(f => f).map(f => ' +' + f).join('')
+    console.log(selectFields, ctx.params)
     const user = await User.findById(ctx.params.id).select(selectFields)
 
     if(!user){
       ctx.throw(404, '用户不存在')
-      ctx.body = user
     }
+    ctx.body = user
   }
   async create(ctx) {
     ctx.status = 200
@@ -87,28 +88,31 @@ class UserController {
     await next()
   }
   async follow (ctx) {
+    
     const me = await User.findById(ctx.state.user._id).select('+following');
+    
     if (!me.following.map(id => id.toString()).includes(ctx.params.id)) {
       me.following.push(ctx.params.id);
       me.save();
     }
-    ctx.status = 204;
+    ctx.body = formatResultData(200, null, '成功')
   }
   async unfollow (ctx) {
+    
     let user = await User.findById(ctx.state.user._id).select('+following')
     let index = user.following.map(id=>id.toString()).indexOf(ctx.params.id)
     if(index > -1) {
       user.following.splice(index)
       user.save()
     }
-    ctx.status = 204
+    ctx.body = formatResultData(200, null, '成功')
   }
-  async listenFollowing (ctx) {
+  async listFollowing (ctx) {
     let user = await User.findById(ctx.params.id).select('+following').populate('following')
     if (!user) {ctx.throw(404)}
     ctx.body = user.following
   }
-  async listenFollower(ctx) {
+  async listFollower(ctx) {
     const users = await User.find({following: ctx.params.id})
     ctx.body = users
   }
