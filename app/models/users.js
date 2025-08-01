@@ -18,12 +18,12 @@ const UserSchema = new Schema({
   avatar_url: {type: String},
   gender: {type: String, enum: ['male', 'female'], default: 'male'},
   headline: {type: String},
-  locations: {type: [{type: String}], select: false},
-  business: {type: String, select: false},
+  locations: {type: [{type: Schema.Types.ObjectId, ref: 'Topic'}], select: false},
+  business: {type: Schema.Types.ObjectId, ref: 'Topic', select: false},
   employments: {
     type: [{
-      company: {type: String},
-      job: {type: String},
+      company: {type: Schema.Types.ObjectId, ref:'Topic'},
+      job: {type: Schema.Types.ObjectId, ref: 'Topic'},
     }],
     select: false
   },

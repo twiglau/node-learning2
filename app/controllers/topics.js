@@ -3,7 +3,15 @@ const Topic = require('../models/topics')
 
 class TopicController {
   async find(ctx) {
-    ctx.body = await Topic.find()
+    const { pageNum = 1, pageSize = 10 } = ctx.query
+    const page_size = Math.max(pageSize * 1, 1);
+    const page_num = Math.max(pageNum * 1,1) - 1
+    
+    ctx.body = await Topic
+      .find({
+        name: new RegExp(ctx.query.like)
+      })
+      .limit(page_size).skip(page_num * page_size);
   }
   async findById(ctx) {
     const { fields } = ctx.query;
