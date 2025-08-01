@@ -19,7 +19,7 @@ class TopicController {
     const topic = await Topic.findById(ctx.params.id).select(selectFields)
 
     if(!topic) {
-      ctx.throw(404, '主题不存在')
+      ctx.throw(404, '话题不存在')
     }
     ctx.body = topic
   }
@@ -42,9 +42,14 @@ class TopicController {
     
     const topic = await Topic.findByIdAndUpdate(ctx.params.id, ctx.request.body)
 
-    if(!user) { ctx.throw(404, '主题不存在')}
+    if(!topic) { ctx.throw(404, '话题不存在')}
 
-    ctx.body = user
+    ctx.body = topic
+  }
+  async checkTopicExit(ctx, next) {
+    const topic = await Topic.findById(ctx.params.id)
+    if(!topic) {ctx.throw(404, '话题不存在')}
+    await next()
   }
 }
 

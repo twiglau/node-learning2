@@ -13,10 +13,15 @@ const {
   checkUserExit,
   follow,
   unfollow,
+  followTopics,
+  unfollowTopics,
   listFollower,
   listFollowing,
   currentUser
 } = require('../controllers/users')
+const {
+  checkTopicExit
+} = require('../controllers/topics')
 
 const auth = jwt({
   secret: jwtSecret
@@ -38,6 +43,10 @@ router.post('/login', login)
 router.put('/follow/:id', auth, checkUserExit, follow)
 // 取消关注
 router.delete('/unfollow/:id', auth, checkUserExit, unfollow)
+// 关注话题
+router.put('/followTopics/:id', auth, checkTopicExit, followTopics)
+// 取消关注话题
+router.delete('/unfollowTopics/:id', auth, checkTopicExit, unfollowTopics)
 // 粉丝
 router.get('/:id/follower', listFollower)
 // 关注
