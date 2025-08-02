@@ -1,6 +1,7 @@
 const jsonwebtoken = require('jsonwebtoken')
 const User = require('../models/users')
 const Question = require('../models/questions')
+const Answer = require('../models/answers')
 const jwtSecret = require('../config').jwt_secret
 const currentMockUser = require('../models/mock/user')
 const { formatResultData } = require('../utils')
