@@ -1,5 +1,6 @@
 const jsonwebtoken = require('jsonwebtoken')
 const User = require('../models/users')
+const Question = require('../models/questions')
 const jwtSecret = require('../config').jwt_secret
 const currentMockUser = require('../models/mock/user')
 const { formatResultData } = require('../utils')
@@ -154,6 +155,11 @@ class UserController {
   async listFollower(ctx) {
     const users = await User.find({following: ctx.params.id})
     ctx.body = users
+  }
+  async listQuestions(ctx) {
+    const questions = await Question.find({ questioner: ctx.params.id })
+
+    ctx.body = questions
   }
   async currentUser (ctx) {
     ctx.body = currentMockUser

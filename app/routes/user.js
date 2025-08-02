@@ -17,7 +17,8 @@ const {
   unfollowTopics,
   listFollower,
   listFollowing,
-  currentUser
+  currentUser,
+  listQuestions
 } = require('../controllers/users')
 const {
   checkTopicExit
@@ -51,8 +52,9 @@ router.delete('/unfollowTopics/:id', auth, checkTopicExit, unfollowTopics)
 router.get('/:id/follower', listFollower)
 // 关注
 router.get('/:id/following', listFollowing)
-
 // 管理员
 router.get('/api/currentUser', currentUser)
+
+router.get('/:id/questions', listQuestions)
 
 module.exports = router
