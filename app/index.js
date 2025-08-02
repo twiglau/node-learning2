@@ -22,7 +22,12 @@ databaseConnect().catch(err => console.log(err));
 mongoose.connection.on(error, console.error)
 
 app.use(error({
-  postFormat: ({stack, ...rest}) => process.env.NODE_ENV !== 'production' ? rest: {stack, ...rest}
+  format: (err) => ({
+        status: err.status || 500,
+        message: err.message,
+        // Add other relevant error properties
+      }),
+  postFormat: ({stack, ...rest}) => process.env.NODE_ENV !== 'production' ? rest: ({stack, ...rest})
 }))
 
 

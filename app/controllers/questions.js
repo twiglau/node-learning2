@@ -46,8 +46,9 @@ class QuestionController {
       description: { type: 'string', required: false }
     })
     
-    await ctx.state.question.update(ctx.request.body);
-    ctx.body = ctx.state.question;
+    
+    const question = await Question.findByIdAndUpdate(ctx.state.question._id.toString(), ctx.state.question)
+    ctx.body = formatResultData(200, question, '成功');
   }
   async checkQuestioner(ctx, next) {
     const { question } = ctx.state;
