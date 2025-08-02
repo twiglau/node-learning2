@@ -1,5 +1,7 @@
 const Topic = require('../models/topics')
-
+const Question = require('../models/questions');
+const User = require('../models/users')
+const { formatResultData } = require('../utils');
 
 class TopicController {
   async find(ctx) {
@@ -50,6 +52,14 @@ class TopicController {
     const topic = await Topic.findById(ctx.params.id)
     if(!topic) {ctx.throw(404, '话题不存在')}
     await next()
+  }
+  async listFollowers(ctx) {
+    const users = await User.find({ followingTopics: ctx.params.id })
+    ctx.body = formatResultData(200, users, '成功')
+  }
+  async listQuestions(ctx) {
+    const questions = await Question.find({ topics: ctx.params.id })
+    ctx.body = formatResultData(200, questions, '成功')
   }
 }
 

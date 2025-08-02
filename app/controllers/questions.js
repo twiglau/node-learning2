@@ -21,7 +21,7 @@ class QuestionController {
     const question = await Question
       .findById(ctx.params.id)
       .select(selectFields)
-      .populate('questioner')
+      .populate('questioner topics')
 
     if(!question) {
       ctx.throw(404, '问题不存在')
@@ -45,7 +45,7 @@ class QuestionController {
       title: { type: 'string', required: false },
       description: { type: 'string', required: false }
     })
-    
+
     
     const question = await Question.findByIdAndUpdate(ctx.state.question._id.toString(), ctx.state.question)
     ctx.body = formatResultData(200, question, '成功');
