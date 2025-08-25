@@ -1,3 +1,5 @@
+const Model = require('../model')
+
 
 exports.register = async (req, res) => {
    console.log(req.body)
