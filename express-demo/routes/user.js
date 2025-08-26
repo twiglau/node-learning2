@@ -5,8 +5,9 @@ var userValidator = require('../middleware/validator/user')
 
 
 router
-  .post('/register',userValidator.register,userCtrl.register)
-  .get('/list', userCtrl.list)
+  .post('/logins',userValidator.login,userCtrl.login)
+  .post('/registers',userValidator.register,userCtrl.register)
+  .get('/lists', userCtrl.list)
   .delete('/', userCtrl.delete);
 
 module.exports = router;

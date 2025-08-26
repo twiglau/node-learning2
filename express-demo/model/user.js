@@ -14,7 +14,8 @@ const userScheme = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    set:value => md5(value)
+    set:value => md5(value),
+    select: false // 默认不返回
   },
   phone: {
     type: String,

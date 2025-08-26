@@ -1,5 +1,5 @@
 const Model = require('../model')
-
+const jwt = require('jsonwebtoken')
 
 exports.register = async (req, res) => {
    console.log(req.body)
@@ -13,6 +13,22 @@ exports.register = async (req, res) => {
     data,
     message:null
    })
+}
+
+exports.login = async (req, res) => {
+  // 客户端数据验证
+  // 链接数据库查询
+  var db = await Model.User.findOne(req.body)
+  if(!db) {
+    res.status(401).json({
+      code: 401,
+      message: '邮箱或密码不正确'
+    })
+  }
+  const data = db.toJSON()
+  data.token = jwt.sign(data, 'a5ffa310-1060-47f1-acc2-fb22fb4d64c5')
+  
+  res.status(200).json({message:'success', data})
 }
 
 exports.list = async (req,res) => {

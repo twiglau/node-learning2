@@ -1,6 +1,8 @@
 const { body } = require('express-validator')
 const validate = require('./error')
 const { User } = require('../../model')
+
+
 module.exports.register = validate(
   [
     body('username')
@@ -25,3 +27,10 @@ module.exports.register = validate(
       }).bail(),
   ]
 )
+
+module.exports.login = validate([
+  body('email')
+    .notEmpty().withMessage('邮箱不能为空').bail(),
+  body('password')
+     .notEmpty().withMessage('密码不能为空').bail()
+])
