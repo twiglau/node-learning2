@@ -12,4 +12,7 @@
 
 1. 基础中间件，路由模块，业务逻辑模块
 
-## 用户注册 - Mongoose 数据库模型
+## 用户注册
+
+1. - Mongoose 数据库模型
+2. - express-validator:数据校验
