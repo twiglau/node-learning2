@@ -19,5 +19,4 @@ router.use('/user', require('./user'))
 router.use('/video', require('./video'))
 
 
-
 module.exports = router;

@@ -38,6 +38,7 @@ app.use(function(err, req, res, next) {
   // render the error page
   var code = err.status || 500
   var message = err.message || 'unknown error'
+  console.log('error handler:', message)
   res.status(code);
   res.send({
     code,

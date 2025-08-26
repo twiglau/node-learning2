@@ -16,3 +16,4 @@
 
 1. - Mongoose 数据库模型
 2. - express-validator:数据校验
+3. - 数据唯一性验证
