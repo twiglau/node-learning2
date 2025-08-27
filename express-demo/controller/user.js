@@ -1,5 +1,5 @@
 const Model = require('../model')
-const jwt = require('jsonwebtoken')
+const { createToken } = require('../util/jwt')
 
 exports.register = async (req, res) => {
    console.log(req.body)
@@ -26,7 +26,7 @@ exports.login = async (req, res) => {
     })
   }
   const data = db.toJSON()
-  data.token = jwt.sign(data, 'a5ffa310-1060-47f1-acc2-fb22fb4d64c5')
+  data.token = await createToken(data)
   
   res.status(200).json({message:'success', data})
 }
