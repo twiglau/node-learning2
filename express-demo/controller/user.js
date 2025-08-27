@@ -18,9 +18,10 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   // 客户端数据验证
   // 链接数据库查询
+  console.log(req.body)
   var db = await Model.User.findOne(req.body)
   if(!db) {
-    res.status(401).json({
+    return res.status(401).json({
       code: 401,
       message: '邮箱或密码不正确'
     })
