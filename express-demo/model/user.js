@@ -25,6 +25,10 @@ const userScheme = new mongoose.Schema({
     type: String,
     default: null
   },
+  channeldes: {
+    type: String,
+    default: null
+  },
   ...base
 })
 

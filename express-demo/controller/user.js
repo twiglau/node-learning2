@@ -36,6 +36,9 @@ exports.list = async (req,res) => {
   res.send('/user/list')
 }
 
+exports.update = async (req, res) => {
+  res.send('/user/update')
+}
 exports.delete = async (req,res) => {
   res.send('/user/delete')
 }

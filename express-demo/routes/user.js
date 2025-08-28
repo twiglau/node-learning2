@@ -8,6 +8,7 @@ router
   .post('/logins',userValidator.login,userCtrl.login)
   .post('/registers',userValidator.register,userCtrl.register)
   .get('/lists', verifyToken, userCtrl.list)
+  .put('/', verifyToken, userValidator.update, userCtrl.update)
   .delete('/', userCtrl.delete);
 
 module.exports = router;
