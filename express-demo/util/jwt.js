@@ -21,8 +21,9 @@ module.exports.verifyToken = async (req, res, next) => {
     res.status(402).json({code: 402, message: '用户未登录'})
   }
   try {
-    let user = await verifyJwt(token, uuid)
-    res.user = user
+    const user = await verifyJwt(token, uuid)
+    
+    req.user = user
     next()
   } catch (error) {
     res.status('402').json({code: 402, message: '无效token'})

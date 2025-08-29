@@ -37,7 +37,12 @@ exports.list = async (req,res) => {
 }
 
 exports.update = async (req, res) => {
-  res.send('/user/update')
+  
+  const data = await Model.User.findByIdAndUpdate(req.user._id, req.body)
+  res.status(200).json({
+    code: 200, 
+    data
+  })
 }
 exports.delete = async (req,res) => {
   res.send('/user/delete')

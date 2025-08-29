@@ -50,7 +50,5 @@ module.exports.login = validate([
 
 module.exports.update = validate([
   body('email')
-    .notEmpty().withMessage('邮箱不能为空').bail(),
-  body('password')
-     .notEmpty().withMessage('密码不能为空').bail()
+    .notEmpty().withMessage('邮箱不能为空').bail()
 ])
