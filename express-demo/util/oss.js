@@ -1,18 +1,18 @@
 const OSS = require('ali-oss')
 const fs = require('fs')
-const { ali_oss } = require('../config/config.default')
+const config = require('../config/config.default')
 
 const client = new OSS({
-   region: ali_oss.region,
-   accessKeyId: ali_oss.accessKeyId,
-   accessKeySecret: ali_oss.accessKeySecret
+   region: config.OSS_REGION,
+   accessKeyId: config.OSS_ACCESS_KEY_ID,
+   accessKeySecret: config.OSS_SECRET_ACCESS_KEY
 })
 
 
 module.exports = async function (key, localFile) {
   
   try {
-    client.useBucket(ali_oss.bucket);
+    client.useBucket(config.OSS_BUCKET);
     const result = await client.put(key, localFile)
     
     fs.unlinkSync(localFile)

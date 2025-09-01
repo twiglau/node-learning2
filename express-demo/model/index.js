@@ -1,9 +1,9 @@
 
 const mongoose = require('mongoose');
-const { mongoPath } = require('../config/config.default')
+const { MONGOPATH } = require('../config/config.default')
 
 async function main() {
-  await mongoose.connect(mongoPath)
+  await mongoose.connect(MONGOPATH)
 }
 
 main().then(res => {
