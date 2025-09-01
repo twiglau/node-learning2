@@ -1,0 +1,22 @@
+{
+  "name": "custom-cli",
+  "version": "1.0.0",
+  "description": "- 全局命令行执行能力\r - 命令行交互能力\r - 项目初始化代码下载能力",
+  "main": "index.js",
+  "bin": {
+    "myCli": "bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@inquirer/prompts": "^7.8.3",
+    "chalk": "^4.1.2",
+    "commander": "^14.0.0",
+    "download-git-repo": "^3.0.2",
+    "ora": "^5.4.1"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "node-learning2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app/index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node app",
+    "dev": "nodemon app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twiglau/node-learning2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/twiglau/node-learning2/issues"
+  },
+  "homepage": "https://github.com/twiglau/node-learning2#readme",
+  "dependencies": {
+    "@koa/cors": "^5.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "koa": "^3.0.1",
+    "koa-body": "^6.0.1",
+    "koa-json-error": "^3.1.2",
+    "koa-jwt": "^4.0.4",
+    "koa-parameter": "^3.0.1",
+    "koa-router": "^13.1.1",
+    "koa-static": "^5.0.0",
+    "mongoose": "^8.16.5",
+    "shelljs": "^0.10.0"
+  },
+  "devDependencies": {
+    "cross-env": "^10.0.0",
+    "nodemon": "^3.1.10",
+    "pm2": "^6.0.8"
+  }
+}
