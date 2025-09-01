@@ -30,8 +30,23 @@ exports.list = async (req, res) => {
   }
 }
 
-exports.users = async (req, res) => {
-  res.send('/video/users')
+exports.videoDetail = async (req, res) => {
+  const { videoId } = req.params
+  try {
+    const db = await Model.Video.findById(videoId)
+    .populate('user')
+
+    const data = db.toJSON()
+    res.status(200).json({
+      code: 200,
+      data
+    })
+  } catch (error) {
+    res.status(500).json({
+      code: 500,
+      message: error.message
+    })
+  }
 }
 
 exports.create = async (req, res) => {
