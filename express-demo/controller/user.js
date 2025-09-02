@@ -6,6 +6,17 @@ const { promisify } = require('util')
 const rename = promisify(fs.rename)
 const lodash = require('lodash')
 
+exports.getsubscribe = async (req, res) => {
+  console.log(req.params.userId)
+  let subscribeList = await Model.Subscribe.find({ user: req.params.userId }).populate('channel')
+
+  
+  res.status(200).json({
+    code: 200,
+    data: subscribeList
+  })
+}
+
 exports.getuser = async (req, res) => {
 
   var isSubscribe = false
@@ -126,6 +137,7 @@ exports.subscribe = async (req, res) => {
     })
   }
 }
+
 exports.register = async (req, res) => {
    console.log(req.body)
    const userModel = new Model.User(req.body)
