@@ -8,6 +8,7 @@ const uploadImage = multer({ dest: 'public/images/', limits: { fieldSize: 1024 *
 const uploadVideo = multer({ dest: 'public/videos/'})
 
 router
+  .get('/subscribe/:userId', verifyToken(), userCtrl.subscribes)
   .post('/logins',userValidator.login,userCtrl.login)
   .post('/registers',userValidator.register,userCtrl.register)
   .get('/lists', verifyToken(), userCtrl.list)

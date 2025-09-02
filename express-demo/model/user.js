@@ -29,6 +29,10 @@ const userScheme = new mongoose.Schema({
     type: String,
     default: null
   },
+  subscribeCount: {
+    type: Number,
+    default: 0
+  },
   ...base
 })
 

@@ -5,6 +5,51 @@ const ossUpload = require('../util/oss')
 const { promisify } = require('util')
 const rename = promisify(fs.rename)
 
+
+exports.subscribes = async (req, res) => {
+  const userId = req.user._id;
+  const channelId = req.params.userId
+
+  if(userId === channelId) {
+    return res.status(401).json({
+      code: 401,
+      message: '不能关注自己'
+    })
+  }
+
+  try {
+    const record = await Model.Subscribe.findOne({
+      user: userId,
+      channel: channelId
+    })
+
+    if(record) {
+      return res.status(401).json({
+        code: 401,
+        message: '已经订阅了此频道',
+      })
+    }
+    await new Model.Subscribe({
+      user: userId,
+      channel: channelId
+    }).save()
+
+    const user = await Model.User.findById(channelId)
+    user.subscribeCount++;
+    await user.save();
+
+    res.status(200).json({
+      code: 200,
+      message: '关注成功'
+    })
+
+  } catch (error) {
+    res.status(500).json({
+      code: 500,
+      message: error.message
+    })
+  }
+}
 exports.register = async (req, res) => {
    console.log(req.body)
    const userModel = new Model.User(req.body)
@@ -37,7 +82,25 @@ exports.login = async (req, res) => {
 }
 
 exports.list = async (req,res) => {
-  res.send('/user/list')
+  const { pageNo, pageSize } = req.query
+  try {
+    var content = await Model.User.find()
+      .skip((pageNo -1) * pageSize)
+      .limit(pageSize)
+      .sort({ createAt: -1 })
+    var total = await Model.User.countDocuments()
+
+    res.status(200).json({
+      code: 200,
+      data: { content, total }
+    })
+  } catch (error) {
+    res.status(500).json({
+      code: 500,
+      message: error.message
+    })
+  }
+
 }
 
 exports.update = async (req, res) => {
