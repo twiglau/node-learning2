@@ -10,10 +10,10 @@ const uploadVideo = multer({ dest: 'public/videos/'})
 router
   .post('/logins',userValidator.login,userCtrl.login)
   .post('/registers',userValidator.register,userCtrl.register)
-  .get('/lists', verifyToken, userCtrl.list)
-  .post('/avatar', verifyToken, uploadImage.single('avatar'), userCtrl.headerImg)
-  .post('/video', verifyToken, uploadVideo.single('video'), userCtrl.video)
-  .put('/', verifyToken, userValidator.update, userCtrl.update)
+  .get('/lists', verifyToken(), userCtrl.list)
+  .post('/avatar', verifyToken(), uploadImage.single('avatar'), userCtrl.headerImg)
+  .post('/video', verifyToken(), uploadVideo.single('video'), userCtrl.video)
+  .put('/', verifyToken(), userValidator.update, userCtrl.update)
   .delete('/', userCtrl.delete);
 
 module.exports = router;

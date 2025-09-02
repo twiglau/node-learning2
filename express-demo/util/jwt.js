@@ -14,18 +14,23 @@ module.exports.createToken = async user => {
 }
 
 
-module.exports.verifyToken = async (req, res, next) => {
-  var token = req.headers.authorization
-  token = token ? token.split("Bearer ")[1] : null
-  if(!token) {
-    res.status(402).json({code: 402, message: '用户未登录'})
-  }
-  try {
-    const user = await verifyJwt(token, UUID)
-    
-    req.user = user
-    next()
-  } catch (error) {
-    res.status('402').json({code: 402, message: '无效token'})
+module.exports.verifyToken = function (required = true) {
+  return async (req, res, next) => {
+    var token = req.headers.authorization
+    token = token ? token.split("Bearer ")[1] : null
+    if(token) {
+      try {
+        const user = await verifyJwt(token, UUID)
+        
+        req.user = user
+        next()
+      } catch (error) {
+        res.status('402').json({code: 402, message: '无效token'})
+      }
+    } else if(required){
+      res.status(402).json({code: 402, message: '用户未登录'})
+    } else {
+      next()
+    }
   }
 }

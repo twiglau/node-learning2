@@ -33,8 +33,9 @@ exports.list = async (req, res) => {
 exports.videoDetail = async (req, res) => {
   const { videoId } = req.params
   try {
-    const db = await Model.Video.findById(videoId)
-    .populate('user')
+    const db = await Model.Video
+                .findById(videoId)
+                .populate('user', '_id username')
 
     const data = db.toJSON()
     res.status(200).json({
