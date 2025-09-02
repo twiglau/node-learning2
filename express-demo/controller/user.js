@@ -5,8 +5,50 @@ const ossUpload = require('../util/oss')
 const { promisify } = require('util')
 const rename = promisify(fs.rename)
 
+exports.unsubscribe = async (req, res) => {
+  const userId = req.user._id;
+  const channelId = req.params.userId
 
-exports.subscribes = async (req, res) => {
+  if(userId === channelId) {
+    return res.status(401).json({
+      code: 401,
+      message: '不能取消关注自己'
+    })
+  }
+
+  try {
+    const record = await Model.Subscribe.findOne({
+      user: userId,
+      channel: channelId
+    })
+
+    if(!record) {
+      return res.status(401).json({
+        code: 401,
+        message: '没有订阅了此频道',
+      })
+    }
+
+    await record.remove()
+    const user = await Model.User.findById(channelId)
+    user.subscribeCount--;
+    await user.save();
+
+    res.status(200).json({
+      code: 200,
+      message: '取消订阅成功'
+    })
+
+  } catch (error) {
+    res.status(500).json({
+      code: 500,
+      message: error.message
+    })
+  }
+}
+
+// 关注频道
+exports.subscribe = async (req, res) => {
   const userId = req.user._id;
   const channelId = req.params.userId
 
