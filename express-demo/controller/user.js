@@ -4,6 +4,40 @@ const fs = require('fs')
 const ossUpload = require('../util/oss')
 const { promisify } = require('util')
 const rename = promisify(fs.rename)
+const lodash = require('lodash')
+
+exports.getuser = async (req, res) => {
+
+  var isSubscribe = false
+
+  if(req.user) {
+    const record = await Model.Subscribe.findOne({
+      channel: req.params.userId,
+      user: req.user._id
+    })
+    if(record) {
+      isSubscribe = true
+    }
+  }
+
+  const user = await Model.User.findById(req.params.userId)
+  
+  res.status(200).json({
+    code: 200,
+    data: {
+      ...lodash.pick(user, [
+        '_id',
+        'username',
+        'image',
+        'cover',
+        'channeldes',
+        'subscribeCount'
+      ]),
+      isSubscribe
+    }
+  })
+
+}
 
 exports.unsubscribe = async (req, res) => {
   const userId = req.user._id;
