@@ -9,7 +9,7 @@ exports.likelist = async (req, res) => {
     .skip((pageNo - 1) * pageSize)
     .limit(pageSize)
     .sort({ createAt: -1 })
-    .populate('video', "_id title videoUrl user")
+    .populate('video', "_id title videoUrl")
 
   var total = await Model.Videolike.countDocuments({
     like: 1,
@@ -160,6 +160,7 @@ exports.deleteComment = async (req, res) => {
     message: '删除成功'
   })
 }
+
 exports.commentList = async (req, res) => {
   const videoId = req.params.videoId
   const { pageNo = 1, pageSize = 10 } = req.query
@@ -179,6 +180,7 @@ exports.commentList = async (req, res) => {
     }
   })
 }
+
 exports.comment = async (req, res) => {
   const { videoId }= req.params
   try {
