@@ -8,6 +8,7 @@ const uploadImage = multer({ dest: 'public/images/', limits: { fieldSize: 1024 *
 const uploadVideo = multer({ dest: 'public/videos/'})
 
 router
+  .get('/getchannel', verifyToken(), userCtrl.getchannel)
   .get('/getsubscribe/:userId', userCtrl.getsubscribe)
   .get('/getuser/:userId', verifyToken(false), userCtrl.getuser)
   .get('/unsubscribe/:userId', verifyToken(), userCtrl.unsubscribe)

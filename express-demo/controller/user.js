@@ -6,10 +6,41 @@ const { promisify } = require('util')
 const rename = promisify(fs.rename)
 const lodash = require('lodash')
 
+exports.getchannel = async (req, res) => {
+  console.log('user:', req.user)
+  let channelList = await Model.Subscribe.find({ channel: req.user._id }).populate('user')
+
+  channelList = channelList.map(item => {
+    return lodash.pick(item.user, [
+      '_id',
+      'username',
+      'image',
+      'subscribeCount',
+      'cover',
+      'channeldes'
+    ])
+  })
+
+  res.status(200).json({
+    code: 200,
+    data: channelList
+  })
+}
+
 exports.getsubscribe = async (req, res) => {
-  console.log(req.params.userId)
+  
   let subscribeList = await Model.Subscribe.find({ user: req.params.userId }).populate('channel')
 
+  subscribeList = subscribeList.map(item => {
+    return lodash.pick(item.channel, [
+      '_id',
+      'username',
+      'image',
+      'subscribeCount',
+      'cover',
+      'channeldes'
+    ])
+  })
   
   res.status(200).json({
     code: 200,
