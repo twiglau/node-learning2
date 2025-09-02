@@ -24,6 +24,18 @@ const userScheme = new mongoose.Schema({
     type: String,
     required: false
   },
+  commentCount: {
+    type: Number,
+    default: 0
+  },
+  likeCount: {
+    type: Number,
+    default: 0
+  },
+  dislikeCount: {
+    type: Number,
+    default: 0
+  },
   ...base
 })
 

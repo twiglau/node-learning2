@@ -34,17 +34,10 @@ module.exports.login = validate([
       .isEmail().withMessage('邮箱格式不正确').bail()
       .custom(async email => {
          const emailExist = await User.findOne({email})
-         if(emailExist) {
-          return Promise.reject('邮箱已经被注册')
+         if(!emailExist) {
+          return Promise.reject('邮箱未注册')
          }
-      }).bail(),
-  body('username')
-     .custom(async username => {
-        const userExist = await User.findOne({ username })
-        if(userExist) {
-          return Promise.reject('用户名已经被注册')
-        }
-     })
+      }).bail()
 ])
 
 
