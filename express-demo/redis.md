@@ -51,3 +51,137 @@
    ```sh
    set key_test "this is ce-shi"
    ```
+
+4. 查看信息
+
+   ```sh
+   info server
+   ```
+
+## Redis 数据类型
+
+1. String: 字符串，其他数据类型的基础类型。
+2. Hash: 散列，是由与值相关联的字段组成的内容。字段和值都是字符串。
+3. List: 列表，根据插入顺序排序的字符串元素的组合。
+4. Set: 未排序的字符串元素组合，集合中数据时不重复的。
+5. ZSet: 与 Set 类似，但每个字符串元素都与一个数值的相关联。且按数值大小进行排序。
+
+## 操作指令
+
+1. Redis 数据类型
+2. 字符串操作指令
+
+```sh
+set s1 lishi
+get s1
+
+set s2 2
+
+MSET s3 3 s4 4
+
+keys *
+
+GETSET s1 66
+
+get s1
+
+MGET s1 s2 s3
+
+STRLEN s1
+
+type s1
+```
+
+3. 哈希操作指令
+
+```sh
+HSET hash h1 1 h2 2 h3 3
+HKEYS hash
+HLEN hash
+HGET hash h2
+HMGET hash h2 h3
+HGETALL hash
+HDEL hash h2
+
+HGETALL hash
+
+DEL hash
+```
+
+4. 列表操作指令
+
+```sh
+LPUSH l1 11 22 33 44
+LRANGE l1 1 3
+LRANGE l1 0 3
+
+LINSERT l1 before  22 00
+LRANGE l1 0 6
+```
+
+5. 集合操作指令
+
+```sh
+SADD s1 11 22 33
+SMEMBERS s1
+SCARD s1
+
+SRANDMEMBER s1
+“11”
+SRANDMEMBER s1 2
+“33”
+“11”
+
+SREM s1 11
+(integer) 1
+
+SPOP s1
+
+```
+
+6. 有序集合操作指令
+
+```sh
+ZADD z1 5 u1 6 u2 66 u3 44 u4 55 u5
+
+ZRANGE z1 3 99
+ZRANGE z1 0 99
+"u1"
+"u2"
+"u3"
+"u5"
+ZREVRANGE z1 0 99
+
+ZRANK z1 u2
+1
+
+ZRANK z1 u1
+0
+
+ZREVRANK z1 u4
+2
+
+ZCARD z1
+
+ZINCRBY z1 1 u2
+"7"
+
+ZINCRBY z1 3 u2
+"10"
+
+ZREM z1 u2
+```
+
+## 配置修改
+
+```sh
+CONFIG GET requirepass
+CoNFIG SET requirepass root
+
+# 密码登录
+redis-cli -h 127.0.0.1 -p 6379 -a myRedis
+# 查看密码
+config get requirepass
+# 修改密码
+config set requirepass my_redis
+```
