@@ -7,7 +7,6 @@ exports.getHots = async (req, res) => {
   var topnum = req.params.topnum
   var tops = await topHots(topnum)
 
-  console.log('tops:', tops)
   res.status(200).json({
     code: 200,
     data: tops
