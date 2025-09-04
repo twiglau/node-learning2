@@ -17,5 +17,6 @@ module.exports = {
   Video: mongoose.model('Video', require('./video')),
   Subscribe: mongoose.model('Subscribe', require('./subscribe')),
   Videocomment: mongoose.model('Videocomment', require('./videocomment')),
-  Videolike: mongoose.model('Videolike', require('./videolike'))
+  Videolike: mongoose.model('Videolike', require('./videolike')),
+  Collect: mongoose.model('Collect', require('./collect'))
 }

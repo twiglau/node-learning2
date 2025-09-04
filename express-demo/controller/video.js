@@ -1,5 +1,59 @@
 
 const Model = require('../model')
+const { hotInc, topHots } = require('../model/redis/redis-hots-inc')
+
+
+exports.getHots = async (req, res) => {
+  var topnum = req.params.topnum
+  var tops = await topHots(topnum)
+
+  console.log('tops:', tops)
+  res.status(200).json({
+    code: 200,
+    data: tops
+  })
+}
+
+// 视频推荐机制
+// 观看 +1， 点赞 +2, 评论 +2, 收藏 +3
+exports.collect = async (req, res) => {
+  const videoId = req.params.videoId;
+  const userId = req.user._id;
+  const video = await Model.Video.findById(videoId)
+  if(!video) {
+    return res.status(200).json({
+      code: 200,
+      message: '视频不存在'
+    })
+  }
+
+  var doc = await Model.Collect.findOne({
+    user: userId,
+    video: videoId
+  })
+
+  if(doc) {
+    return res.status(403).json({
+      code: 403,
+      message: '视频已经被收藏'
+    })
+  }
+
+  const myCollect = await Model.Collect({
+    user: userId,
+    video: videoId
+  }).save()
+
+  if(myCollect) {
+    hotInc(videoId, 3)
+  }
+
+  res.status(200).json({
+    code: 200,
+    data: myCollect.toJSON()
+  })
+}
+
 
 exports.likelist = async (req, res) => {
   const { pageNo = 1, pageSize = 10 }= req.query
@@ -101,6 +155,7 @@ exports.likeVideo = async (req, res) => {
     doc.like = 1
     await doc.save()
     isLike = true
+    await hotInc(videoId, 2)
   } else {
     await Model.Videolike({
       user: userId,
@@ -108,6 +163,7 @@ exports.likeVideo = async (req, res) => {
       like: 1
     })
     isLike = true
+    await hotInc(videoId, 2)
   }
 
   video.likeCount = await Model.Videolike.countDocuments({
@@ -191,6 +247,7 @@ exports.comment = async (req, res) => {
       video: videoId
     }).save()
 
+    await hotInc(videoId, 2)
     videoInfo.commentCount++;
     await videoInfo.save();
     const data = comment.toJSON();
@@ -239,6 +296,19 @@ exports.videoDetail = async (req, res) => {
                 .populate('user', '_id username')
 
     const data = db.toJSON()
+
+    const userId = req.user._id
+    if(await Model.Videolike.findOne({ user: userId, video: videoId, like: 1})) {
+      data.islike = true
+    }
+    if(await Model.Videolike.findOne({ user: userId, video: videoId, like: -1})) {
+      data.isDislike = true
+    }
+    if(await Model.Subscribe.findOne({ user: userId, channel: data.user._id })) {
+      data.isSubscribe = true
+    }
+    await hotInc(videoId, 1)
+
     res.status(200).json({
       code: 200,
       data

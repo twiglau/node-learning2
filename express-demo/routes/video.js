@@ -5,6 +5,8 @@ const { validatorVideo } = require('../middleware/validator/video')
 const { verifyToken } = require('../util/jwt')
 
 router
+  .get('/gethots/:topnum', verifyToken(), videoCtrl.getHots)
+  .get('/collect/:videoId', verifyToken(), videoCtrl.collect)
   .get('/likelist', verifyToken(), videoCtrl.likelist)
   .get('/dislike/:videoId', verifyToken(), videoCtrl.dislikeVideo)
   .get('/like/:videoId', verifyToken(), videoCtrl.likeVideo)
