@@ -185,3 +185,11 @@ config get requirepass
 # 修改密码
 config set requirepass my_redis
 ```
+
+## 查看服务器上 redis 安装位置
+
+```sh
+ps -ef | grep redis # 查看 redis 进程号
+ll -l /proc/655/cwd # 通过进程号： 4687, 查看安装位置
+# lrwxrwxrwx 1 redis redis 0 9月   5 17:22 /proc/655/cwd -> /var/lib/redis
+```
