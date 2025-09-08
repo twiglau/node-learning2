@@ -6,7 +6,7 @@ class Test extends Controller {
   }
 
   /**
-   * 复杂计算
+   * 复杂计算, cpu密集
    */
   bad() {
     let sum=0;
