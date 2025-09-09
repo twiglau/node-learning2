@@ -26,7 +26,7 @@ function setResInfo(ctx, ret, message, dataInfo, httpStatus=200) {
     ctx.response.type = 'text/plain';
     ctx.response.status = httpStatus;
     ctx.response.body = JSON.stringify(retInfo);
-    return;
+    return ctx;
 }
 
 module.exports = {

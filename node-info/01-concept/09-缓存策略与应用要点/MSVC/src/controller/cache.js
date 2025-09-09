@@ -33,7 +33,7 @@ class Cache extends Controller {
     }
 
     let res = this.resApi(true, 'success', `sum 0 - 1_000_000_000 is ${result}`);
-    console.log('res:', this.ctx);
+    console.log('res:', res);
     return res;
   }
 
