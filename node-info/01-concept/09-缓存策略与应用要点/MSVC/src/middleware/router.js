@@ -55,6 +55,7 @@ module.exports = function () {
     try {
       //尝试调用类中的方法
       const controllerObj = new ControllerClass(ctx);
+
       if(controllerObj[
         routerMapping[pathname]['method']
       ][Symbol.toStringTag] === 'AsyncFunction') {
@@ -62,9 +63,7 @@ module.exports = function () {
         // 判断是否为 异步 promise 方法，如果是则使用 await
         await controllerObj[routerMapping[pathname]['method']]();
         return await next();
-
       } else {
-        console.log('22')
         // 普通方法，则直接调用
         return controllerObj[routerMapping[pathname]['method']]();
       }
@@ -74,7 +73,5 @@ module.exports = function () {
       baseFun.setResInfo(ctx, false, 'server error', null, 500);
       return await next();
     }
-
-    next();
   }
 }

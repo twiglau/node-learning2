@@ -4,7 +4,7 @@ const cache = require("../lib/cache")(true, false);
 const redisCache = require("../lib/cache")(false, true);
 const bothCache = require("../lib/cache")(true, true);
 
-class LocalCache extends Controller {
+class Cache extends Controller {
 
   async local() {
     const cacheKey = "sum_result";
@@ -31,8 +31,10 @@ class LocalCache extends Controller {
       }
        redisCache.set(cacheKey, result, 10).then();
     }
-    console.log('aaaa', result)
-    return this.resApi(true, 'success', `sum 0 - 1_000_000_000 is ${result}`);
+
+    let res = this.resApi(true, 'success', `sum 0 - 1_000_000_000 is ${result}`);
+    console.log('res:', this.ctx);
+    return res;
   }
 
   async both() {
@@ -51,4 +53,4 @@ class LocalCache extends Controller {
   }
 }
 
-module.exports = LocalCache;
+module.exports = Cache;
