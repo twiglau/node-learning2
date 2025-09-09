@@ -22,6 +22,18 @@ const routerMapping = {
   '/v1/no-cache': {
     'controller': 'localCache',
     'method': 'no'
+  },
+  '/v1/local-cache': {
+    'controller': 'cache',
+    'method': 'local'
+  },
+  '/v1/redis-cache': {
+    'controller': 'cache',
+    'method': 'redis'
+  },
+  '/v1/both-cache': {
+    'controller': 'cache',
+    'method': 'both'
   }
 }
 
@@ -34,9 +46,10 @@ module.exports = function () {
 
     // 过滤非拉取用户信息请求
     if(!routerMapping[pathname]) {
-      return baseFun.setResInfo(ctx, false, 'path not found', null, 404);
+      baseFun.setResInfo(ctx, false, 'path not found', null, 404);
+      return await next();
     }
-    // required 对应的 controller 类
+    // require 对应的 controller 类
     const ControllerClass = require(`../controller/${routerMapping[pathname]['controller']}`);
 
     try {
@@ -45,17 +58,21 @@ module.exports = function () {
       if(controllerObj[
         routerMapping[pathname]['method']
       ][Symbol.toStringTag] === 'AsyncFunction') {
+        
         // 判断是否为 异步 promise 方法，如果是则使用 await
-        return await controllerObj[routerMapping[pathname]['method']]();
+        await controllerObj[routerMapping[pathname]['method']]();
+        return await next();
+
       } else {
+        console.log('22')
         // 普通方法，则直接调用
         return controllerObj[routerMapping[pathname]['method']]();
       }
     } catch (error) {
       // 异常时， 需要返回 500 错误码 给前端
       console.log(error);
-      return baseFun.setResInfo(ctx, false, 'server error', null, 500);
-      
+      baseFun.setResInfo(ctx, false, 'server error', null, 500);
+      return await next();
     }
 
     next();
