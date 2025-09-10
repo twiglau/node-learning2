@@ -15,7 +15,7 @@ class Controller {
    * @param {*} httpStatus int
    * @returns 
    */
-  resApi(ret,message, dataInfo, httpStatus=200) {
+  resApi(ret, message, dataInfo, httpStatus=200) {
     return baseFun.setResInfo(this.ctx, ret, message, dataInfo, httpStatus)
   }
 }

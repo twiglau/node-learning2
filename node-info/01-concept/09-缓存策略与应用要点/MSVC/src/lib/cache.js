@@ -34,6 +34,7 @@ class Cache {
     }
     if(!value && this.redisEnable) {
       try {
+        await this.testRedis()
         value = await promisify(this.client.get).bind(this.client)(key);
         console.log(`redis value is ${value}`);
       } catch (error) {
@@ -59,8 +60,9 @@ class Cache {
     }
     if(this.redisEnable) {
       try {
+        
         redisRet = await promisify(this.client.set).bind(this.client)(key, value, 'EX', expire);
-        console.log('redis update:', redisRet)
+        
       } catch (error) {
         console.log('redis set method error:', error);
       }
@@ -73,6 +75,15 @@ class Cache {
       return null;
     }
     return this.client;
+  }
+  // 测试 Redis 连接是否正常
+  async testRedis() {
+      try {
+          await this.client.ping();
+          console.log('Redis 连接正常');
+      } catch (error) {
+          console.error('Redis 连接失败:', error);
+      }
   }
 }
 
