@@ -5,14 +5,12 @@
     "pro": "npx pm2 start pm2.config.js --env production"
   },
   "dependencies": {
-    "koa": "^3.0.1",
+    "koa": "^2.13.1",
     "lodash": "^4.17.21",
-    "mongodb": "^6.19.0",
     "node-cache": "^5.1.2",
-    "pm2": "^6.0.10",
     "redis": "^3.0.2",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
-    "util": "^0.12.5"
+    "util": "^0.12.3"
   }
 }

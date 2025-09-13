@@ -10,15 +10,19 @@ module.exports = function () {
         
         // 去除非常规请求路径，将-转化为大写
         pathname = pathname.replace('..', '').replace(/\-(\w)/g, (all,letter)=>letter.toUpperCase());
+        console.log(pathname)
 
         pathnameArr = pathname.split('/');
+        console.log('pathnameArr1', pathnameArr)
         pathnameArr.shift();
+        console.log('pathnameArr2', pathnameArr)
         
         if(pathnameArr.length < 2){
             baseFun.setResInfo(ctx, false, 'path not found', null, 404);
             return await next();
         }
         let method = pathnameArr.pop();
+        console.log('pathnameArr3', method)
         if(!method){
             baseFun.setResInfo(ctx, false, 'path not found', null, 404);
             return await next();
