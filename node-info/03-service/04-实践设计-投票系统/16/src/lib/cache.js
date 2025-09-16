@@ -13,10 +13,10 @@ class Cache {
         if(redisEnable) {
             this.client = redis.createClient({
                 //host: 'redis-17353.c245.us-east-1-3.ec2.cloud.redislabs.com',
-                host: '127.0.0.1',
+                host: 'localhost',
                 //port: 17353,
                 port: 6379,
-                //password: 'nodejs@2021',
+                password: 'root',
                 db: 0,
                 connect_timeout: 60
             });

@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clinic-test": "cd bin;node clinic_test.js;cd .."
   },
@@ -25,6 +26,7 @@
     "moment": "^2.29.1",
     "mongodb": "^3.6.6",
     "node-cache": "^5.1.2",
+    "nodemon": "^3.1.10",
     "npm": "^7.7.6",
     "redis": "^3.0.2",
     "request": "^2.88.2",
