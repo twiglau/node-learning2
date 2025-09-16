@@ -8,8 +8,13 @@ class Load {
      * @param {string} modelName 
      * @param  {object} params 
      */
-    static loadModel(modelName, ...params) {
-        return this.loadBase(modelName, 'model', ...params);
+    static loadModel(ctx, modelName, ...params) {
+        if(params.length > 0){
+            params.push(ctx);
+        } else {
+            params = [ctx];
+        }
+        return this.loadBase(modelName, 'model', params);
     }
 
     /**
@@ -18,8 +23,13 @@ class Load {
      * @param {string} serviceName 
      * @param  {object} params 
      */
-    static loadService(serviceName, ...params) {
-        return this.loadBase(serviceName, 'service', ...params);
+    static loadService(ctx, serviceName, ...params) {
+        if(params.length > 0){
+            params.push(ctx);
+        } else {
+            params = [ctx];
+        }
+        return this.loadBase(serviceName, 'service', params);
     }
 
     /**
@@ -29,7 +39,7 @@ class Load {
      * @param  {object} params 
      */
     static loadLib(libName, ...params) {
-        return this.loadBase(libName, 'lib', ...params);
+        return this.loadBase(libName, 'lib', params);
     }
 
     /**
@@ -39,13 +49,13 @@ class Load {
      * @param {string} type model ｜ service ｜ lib
      * @param  {...any} params 
      */
-    static loadBase(name, type, ...params) {
+    static loadBase(name, type, params, ctx) {
         name = this.filterName(name);
-
         try {
             const ClassInfo = require(`../${type}/${name}`);
             return new ClassInfo(...params);
         } catch (error) {
+            console.log(error);
             throw new Error(`${name} ${type} class not found`);
         }
     }
