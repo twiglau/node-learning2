@@ -1,8 +1,23 @@
+const querystring = require('querystring');
 const baseFun = require('../lib/baseFun');
 
 class Controller {
     constructor(ctx) {
         this.ctx = ctx;
+    }
+
+    /**
+     * 
+     * @param {string} key 
+     * @param {any} def 
+     */
+    getParams(key, def='') {
+        const params = querystring.parse(this.ctx.request.querystring);
+        let value = params[key];
+        if(!value) {
+            return def;
+        }
+        return decodeURI(value).trim();
     }
 
     /**
@@ -21,10 +36,11 @@ class Controller {
     /**
      * 
      * @param {string} logType 日志类型 info | error | warning | debug
+     * @param {string} message 消息
      * @param {object} logInfo 日志信息
      */
-    log(logType, logInfo) {
-        return this.ctx.log.add(logType, this.ctx.pathname, logInfo);
+    log(logType, message, logInfo) {
+        return this.ctx.log.add(logType, this.ctx.pathname, message, logInfo);
     }
 }
 
