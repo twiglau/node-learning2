@@ -79,6 +79,43 @@ class CodeService extends Service {
 
     return true;
   }
+
+  async getTicketIdByCode(code) {
+    if(!code) {
+      return false;
+    }
+    return await cache.get(CODE_TICKET_MAPPING.replace('{code}', code));
+  }
+
+  async getUserJoinCode(actId) {
+    let ticketCode = await cache.get(ACT_USER_JOIN_RESULT.replace('{actId}', actId).replace('{userId}', this.ctx.userId));
+    if(!ticketCode) {
+      return 0; // 可以参加
+    }
+    return ticketCode; // 已经参加过
+  }
+
+  async getOneCode(actId) {
+    const codeModel = load.loadModel(this.ctx, 'code');
+    const ticketCode = await codeModel.lpopCode(actId);
+    if(ticketCode == null) {
+      return 1; // 票已经抢完
+    }
+    if(!ticketCode) {
+      this.log('error', 'redis error');
+      return -1; // 系统错误
+    }
+
+    let setRet = await cache.get(ACT_USER_JOIN_RESULT.replace('{actId}', actId).replace('{userId}', this.ctx.userId), ticketCode, 0);
+    if(!setRet) {
+      // 请注意这里，
+      // 可以实时的进行lpush,也可以后续离线再进行 lpush
+      this.log('error', 'set redis error, need reget this code', { setRet, ticketCode });
+      return -1;
+    }
+
+    return ticketCode;
+  }
 }
 
 

@@ -45,6 +45,21 @@ class ActService extends Service {
     return actInfo;
   }
 
+  
+  async checkCanJoin(actId) {
+    if(!actId) {
+      return -1; // 错误参数
+    }
+    const actInfo = await this.getDetail(actId);
+    if(!actInfo) {
+      this.log('error', 'wrong act id', { actId });
+      return -1; // 错误参数
+    }
+
+    const codeService = load.loadService(this.ctx, 'code');
+    return await codeService.getUserJoinCode(actId);
+  }
+
   async cacheList(cacheSize = 5) {
     const actModel = load.loadModel(this.ctx, 'act');
 
