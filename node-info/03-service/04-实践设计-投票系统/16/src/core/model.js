@@ -6,7 +6,7 @@ class Model {
         this.ctx = ctx;
         this.db = 'nodejs_cloumn';
         this.baseMongo = baseMongo;
-        this.collectionName;
+        this.collectionName = '';
     }
 
     async get() {

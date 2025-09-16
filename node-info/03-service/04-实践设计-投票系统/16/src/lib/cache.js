@@ -12,10 +12,17 @@ class Cache {
 
         if(redisEnable) {
             this.client = redis.createClient({
-                host: 'localhost',
+                //host: 'redis-17353.c245.us-east-1-3.ec2.cloud.redislabs.com',
+                host: '127.0.0.1',
+                //port: 17353,
                 port: 6379,
-                password: 'root',
-                db: 0
+                //password: 'nodejs@2021',
+                db: 0,
+                connect_timeout: 60
+            });
+            this.client.on("error", function (err) {
+                console.log(err);
+                return;
             });
         }
     }
@@ -29,15 +36,21 @@ class Cache {
         let value;
         if(this.localCacheEnable) {
             value = this.myCache.get(key);
-            console.log(`local value is ${value}`);
         }
         if(!value && this.redisEnable) {
+            if(!this.client){
+                return false;
+            }
             try {
                 value = await promisify(this.client.get).bind(this.client)(key);
-                console.log(`redis value is ${value}`)
             } catch (err){
                 console.log(err);
             }
+        }
+        try {
+            value = JSON.parse(value);
+        } catch (error) {
+            return value;
         }
         return value;
     }
@@ -52,12 +65,22 @@ class Cache {
      */
     async set(key, value, expire=10, cacheLocal=false) {
         let localCacheRet, redisRet;
+
+        value = typeof value == 'object' ? JSON.stringify(value) : value;
+
         if(this.localCacheEnable && cacheLocal) {
             localCacheRet = this.myCache.set(key, value, expire);
         }
         if(this.redisEnable) { 
+            if(!this.client){
+                return false;
+            }
             try {
-                redisRet = await promisify(this.client.set).bind(this.client)(key, value, 'EX', expire);
+                if(expire == 0 || expire < 0){
+                    redisRet = await promisify(this.client.set).bind(this.client)(key, value);
+                } else {
+                    redisRet = await promisify(this.client.set).bind(this.client)(key, value, 'EX', expire);
+                }
             } catch (err){
                 console.log(err);
             }
@@ -65,7 +88,7 @@ class Cache {
         return localCacheRet || redisRet;
     }
 
-    async getRedis() {
+    getRedis() {
         if(!this.redisEnable){
             return null;
         }

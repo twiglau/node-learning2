@@ -47,7 +47,7 @@ class Load {
      * @description 基础加载方法
      * @param {string} name 
      * @param {string} type model ｜ service ｜ lib
-     * @param  {...any} params 
+     * @param  {params} params 
      */
     static loadBase(name, type, params, ctx) {
         name = this.filterName(name);

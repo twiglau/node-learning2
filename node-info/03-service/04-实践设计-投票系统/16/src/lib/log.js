@@ -36,20 +36,21 @@ class Log {
      * @description 写入日志
      * @param {string} logType 日志类型 info | error | warning | debug
      * @param {string}} fileType 日志模块
+     * @param {string} message 日志消息
      * @param {string|json} logInfo 日志信息
      */
-    add(logType, fileType, logInfo) {
+    add(logType, fileType, message, logInfo='') {
         fileType = fileType.replace(/\//ig, '_');
 
         if(!['info', 'error', 'warning', 'debug'].includes(logType)) {
             logType = 'info';
         }
-        if(!fileType || !logInfo){
+        if(!fileType){
             return;
         }
         let otherInfo = typeof logInfo == 'object' ? JSON.stringify(logInfo) : logInfo;
 
-        let logStr = `${moment().format('YYYY-MM-DD HH:mm:ss')}\t${logType}\t${otherInfo}`;
+        let logStr = `${moment().format('YYYY-MM-DD HH:mm:ss')}\t${logType}\t${message}\t${otherInfo}`;
 
         this._flush(fileType, logStr);
     }
