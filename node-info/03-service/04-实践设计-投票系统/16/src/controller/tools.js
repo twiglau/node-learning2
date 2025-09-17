@@ -7,6 +7,31 @@ const Controller = require('../core/controller');
 const load = require('../core/load');
 
 class Tools extends Controller {
+
+  async lpop() {
+    let actId = this.getParams('actId');
+    if(!actId) {
+      return this.resApi(false, 'params error');
+    }
+
+    const codeModel = load.loadModel(this.ctx, 'code');
+    const ticketCode = await codeModel.lpopCode(actId);
+
+    return this.resApi(true, 'success', ticketCode);
+  }
+
+  async delete() {
+    let actId = this.getParams('actId');
+    if(!actId) {
+      return this.resApi(false, 'params error');
+    }
+
+    const codeModel = load.loadModel(this.ctx, 'code');
+    const ticketCode = await codeModel.lpopCode(actId);
+    return this.resApi(true, 'success', ticketCode);
+  }
+
+
   async test() {
     try {
       const cache = load.loadLib('cache');

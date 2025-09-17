@@ -23,6 +23,7 @@ class CodeModel extends Model {
 
     let successList = [];
     for(const ticketCode of codes) {
+      // 从头到尾，0 = 删除全部的  ticketCode, lremRet == 0 ， 说明之前没有存储
       const lremRet = await promisify(redisClient.lrem).bind(redisClient)(key, 0, ticketCode);
       const lpushRet = await promisify(redisClient.lpush).bind(redisClient)(key, ticketCode);
       if(lremRet == 0 && lpushRet) {
@@ -35,6 +36,7 @@ class CodeModel extends Model {
   async lpopCode(actId) {
     let redisClient = cache.getRedis();
     let key = ACT_TICKET_CODES.replace('{actId}', actId);
+    // 从头部 pop 出一个 值。
     const ret = await promisify(redisClient.lpop).bind(redisClient)(key);
     return ret;
   }

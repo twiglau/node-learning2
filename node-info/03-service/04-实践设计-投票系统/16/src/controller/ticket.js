@@ -57,6 +57,65 @@ class Ticket extends Controller {
       code: ticketCode
     });
   }
+
+  /**
+   * @description 票详情数据
+   */
+  async detail() {
+    let ticketCode = this.getParams('code');
+    if(!ticketCode) {
+      return this.resApi(false, 'params error');
+    }
+    const ticketService = load.loadService(this.ctx, 'ticket');
+    const ticketInfo = await ticketService.getTicketIdByCode(ticketCode);
+    if(!ticketInfo) {
+      return this.resApi(true, 'success');
+    }
+
+    return this.resApi(true, 'success', ticketInfo);
+  }
+
+
+  /**
+   * @description 查看用户所获得过的票列表
+   */
+  async list() {
+    let page = parseInt(this.getParams('page'));
+    if(!page || page < 0) {
+      page = 0;
+    }
+    const ticketService = load.loadService(this.ctx, 'ticket');
+    const ticketList = await ticketService.getUserTicketList(page);
+    if(!ticketList || ticketList.length < 1) {
+      return this.resApi(true, 'success', []);
+    }
+
+    return this.resApi(true, 'success', ticketList);
+  }
+
+
+  /**
+   * @description 手动导入活动相关的票信息
+   */
+  async importCode() {
+    let actId = this.getParams('actId');
+    let codeStr = this.getParams('codeList');
+    let ticketId = this.getParams('ticketId');
+
+    const codeList = codeStr.split(',');
+    if(!codeList || !ticketId || !actId) {
+      return this.resApi(false, 'params error', { codeStr, ticketId, actId });
+    }
+
+    const codeService = load.loadService(this.ctx, 'code');
+
+    const ret = await codeService.import(actId, ticketId, codeList);
+    if(!ret) {
+      return this.resApi(true, 'failed');
+    }
+
+    return this.resApi(true, 'success');
+  }
 }
 
 module.exports = Ticket;
