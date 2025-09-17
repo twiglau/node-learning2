@@ -36,7 +36,7 @@ class TicketService extends Service {
     page = parseInt(page);
 
     const historyModel = load.loadModel(this.ctx, 'history');
-    const ticketList = await historyModel.getMyTickList(page);
+    const ticketList = await historyModel.getMyTicketList(page);
     if(!ticketList || ticketList.length < 1) {
       return [];
     }

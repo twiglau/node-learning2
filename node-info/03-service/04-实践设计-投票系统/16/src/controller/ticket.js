@@ -59,6 +59,7 @@ class Ticket extends Controller {
   }
 
   /**
+   * 个人票券详情
    * @description 票详情数据
    */
   async detail() {
@@ -77,6 +78,7 @@ class Ticket extends Controller {
 
 
   /**
+   * 个人票券码列表
    * @description 查看用户所获得过的票列表
    */
   async list() {
