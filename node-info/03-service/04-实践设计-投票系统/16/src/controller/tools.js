@@ -5,6 +5,7 @@ const moment = require('moment');
 
 const Controller = require('../core/controller');
 const load = require('../core/load');
+const path = require('path');
 
 class Tools extends Controller {
 
@@ -64,8 +65,9 @@ class Tools extends Controller {
    */
   async init() {
     let activityInfos = [];
+    
     try {
-      activityInfos = JSON.parse(fs.readFileSync('./config/activity.json'));
+      activityInfos = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../config/activity.json')));
     } catch (error) {
       this.log('error', 'read config file error', error);
       return this.resApi(false, 'failed')

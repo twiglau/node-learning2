@@ -1,8 +1,9 @@
 const fsPromise = require('fs').promises;
 const fs = require('fs');
 const moment = require('moment');
+const path = require('path');
 
-const logFilePath = `${__dirname}/../../log`;
+const logFilePath = path.resolve(__dirname, '../../log');
 const fileStreams = {};
 const cacheLogStr = {};
 

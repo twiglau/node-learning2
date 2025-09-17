@@ -22,7 +22,7 @@ class ActModel extends Model {
     return await this.getList(queryOption, {'start_time': -1},pageSize, page*pageSize);
   }
 
-  async getOneById(aid) {
+  async getOneByAid(aid) {
     if(!aid) {
       return false;
     }
