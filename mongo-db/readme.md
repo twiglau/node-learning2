@@ -34,3 +34,5 @@ tar -xvf dump.tar.gz
 
 mongorestore -h localhost:27017
 ```
+
+## [MongoDB 复制集,分片集,备份与恢复](https://www.cnblogs.com/you-men/p/14675290.html)
