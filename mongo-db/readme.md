@@ -24,3 +24,13 @@ show collections
 db.ff.drop(); # 删除 ff 表
 show collections
 ```
+
+## 导入样本数据
+
+```sh
+curl -O -k https://raw.githubusercontent.com/tapdata/geektime-mongodb-course/master/aggregation/dump.tar.gz
+
+tar -xvf dump.tar.gz
+
+mongorestore -h localhost:27017
+```
