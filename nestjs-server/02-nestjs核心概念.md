@@ -1,6 +1,6 @@
 # nestjs 架构： 控制器，服务，数据访问
 
-## Nestjs核心概念
+## Nestjs 核心概念
 
 ```lua
           请求              使用服务              数据库
@@ -26,7 +26,7 @@
 - 守卫：全局守卫，控制器守卫，路由守卫
 - 拦截器： 全局拦截器 pre, 控制器拦截器 pre, 路由拦截器 pre
 - 管道： 全局管道，控制器管道，路由管道，路由参数管道
-- 拦截器： 路由拦截器post, 控制器拦截器post, 全局拦截器post
+- 拦截器： 路由拦截器 post, 控制器拦截器 post, 全局拦截器 post
 - 过滤器： 路由过滤器，控制器过滤器，全局过滤器
 
 ## Nestjs 用模块来组织代码
@@ -40,8 +40,8 @@ Users Module         Orders Module             Chat Module
 ```
 
 - 使用 Module 来组织应用程序
-- @Module装饰器来描述模块
-- 模块中有4大属性：imports, providers, controllers, exports
+- @Module 装饰器来描述模块
+- 模块中有 4 大属性：imports, providers, controllers, exports
 
 ```lua
 功能模块  - 功能模块与共享模块是一回事，只是叫法不一样
@@ -49,3 +49,66 @@ Users Module         Orders Module             Chat Module
 全局模块  - 全局模块通常应用在配置，数据库连接，日志上
 动态模块  - 动态模块是在使用到模块的时候才初始化
 ```
+
+## MVC 是什么？DTO ? DAO?
+
+- Data Transfer Object 数据传输对象
+- Data Access Object 数据访问对象
+
+```lua
+
+请求 - -> DTO  <- - - > 逻辑 < - - - - > DAO  - - - > 数据库
+        接受部分数据，                 对接数据库接口
+        对数据进行筛选                 不暴露数据库的内部信息
+        不对应实体                     对应实体
+        属性是小于等于实体
+```
+
+```lua
+# Nestjs中的DTO
+src
+| - cats
+|    | - dto
+|    |    |- create-cat.dto.ts
+|    | - interfaces
+|    |    |- cat.interface.ts
+|    |- cats.service.ts
+|    |- cats.controller.ts
+|    |- - cats.module.ts
+|- app.module.ts
+|- main.ts
+```
+
+```ts
+# 约定了数据字段，属性
+# 方便数据校验 (类型)
+export class CreateCatDto {
+  name: string;
+  age: number;
+  breed: string;
+}
+```
+
+```ts
+// Nestjs 中实体类
+@@filename(user.entity)
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+
+@Entity()
+export class User {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column()
+  firstName: string;
+
+  @Column()
+  lastName: string;
+
+  @Column({ default: true })
+  isActive: boolean;
+}
+```
+
+- DAO 是一层逻辑：包含实体类，数据库操作(CURD),数据校验，错误处理等。
+- Nestjs 做了一层更高级的封装，通过 ORM 库与种类数据库对接，而这些 ORM 库就是 DAO 层。
