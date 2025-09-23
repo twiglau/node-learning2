@@ -1,0 +1,4 @@
+token_secret: long-token_secret
+db:
+  host: "localhost"
+  port: 5432

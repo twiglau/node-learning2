@@ -1,0 +1,4 @@
+token_secret: long-token_secret_production
+db:
+  host: "lueying.online"
+  port: 54320

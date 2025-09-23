@@ -1,0 +1,9 @@
+{
+  "token_secret": "long-secret",
+  "db": {
+    "host": "localhost",
+    "port": 5483,
+    "username": "toimc",
+    "password": "123456"
+  }
+}
