@@ -1,0 +1,19 @@
+# Use root/example as user/password credentials
+# 等价于：
+# docker run --restart=always -e MYSQL_ROOT_PASSWORD=example -d mysql:tag --default-authentication-plugin=mysql_native_password
+# docker run --restart=always -p 8080:8080 adminer
+
+services:
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+    ports:
+      - 3090:3306
+  adminer:
+    image: adminer
+    restart: always 
+    ports:
+      - 8090:8080

@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as dotenv from 'dotenv';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 // import Configuration from './configuration';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import Joi from 'joi';
+import { ConfigEnum } from './enum/config.enum';
 import { UserModule } from './user/user.module';
 
 // 1. 配置文件 方法一
@@ -31,6 +33,35 @@ const envFilePath = `.env.${process.env.NODE_ENV || `development`}`;
         DB_HOST: Joi.string().ip(),
       }),
     }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => {
+        return {
+          host: config.get(ConfigEnum.DB_HOST),
+          port: 3306,
+          username: 'root',
+          password: 'root',
+          database: 'testdb',
+          entities: [],
+          // 同步本地的 schema 与 数据库 -> 初始化的时候去使用
+          synchronize: true,
+          logging: ['error'],
+        };
+      },
+    }),
+    // TypeOrmModule.forRoot({
+    //   type: 'mysql',
+    //   host: 'localhost',
+    //   port: 3306,
+    //   username: 'root',
+    //   password: 'root',
+    //   database: 'testdb',
+    //   entities: [],
+    //   // 同步本地的 schema 与 数据库 -> 初始化的时候去使用
+    //   synchronize: true,
+    //   logging: ['error'],
+    // }),
     UserModule,
   ],
   controllers: [AppController],
