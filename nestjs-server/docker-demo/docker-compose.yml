@@ -8,6 +8,8 @@ services:
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
+    hostname: localhost
+    network_mode: host
     environment:
       MYSQL_ROOT_PASSWORD: "123456"
     ports:
