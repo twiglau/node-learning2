@@ -1,11 +1,12 @@
-import { Controller, Delete, Get, Logger, Patch, Post } from '@nestjs/common';
+import * as common from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 // 1. pino 使用
 // import { Logger } from 'nestjs-pino';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { User } from './user.entity';
 import { UserService } from './user.service';
 
-@Controller('user')
+@common.Controller('user')
 export class UserController {
   constructor(
     private userService: UserService,
@@ -18,10 +19,14 @@ export class UserController {
     // 2.1 写法
     // @Inject(Logger) private readonly logger: LoggerService
     // 2.2 写法
-    private readonly logger: Logger,
+    // private readonly logger: Logger,
+
+    // 3. winston 封装
+    @common.Inject(WINSTON_MODULE_NEST_PROVIDER)
+    private readonly logger: common.LoggerService,
   ) {}
 
-  @Get()
+  @common.Get()
   getUsers() {
     // // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     // const db = this.configService.get(ConfigEnum.DB);
@@ -37,37 +42,37 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  @Post()
+  @common.Post()
   addUser(): any {
     const user = { username: 'toimc', password: '123456' } as User;
 
     return this.userService.create(user);
   }
 
-  @Patch()
+  @common.Patch()
   updateUser(): any {
     // todo 传递参数 id
     const user = { username: 'newname' } as User;
     return this.userService.update(1, user);
   }
 
-  @Delete()
+  @common.Delete()
   deleteUser(): any {
     // todo 传递参数id
     return this.userService.remove(1);
   }
 
-  @Get('/profile')
+  @common.Get('/profile')
   getUserProfile(): any {
     return this.userService.findProfile(2);
   }
 
-  @Get('/logs')
+  @common.Get('/logs')
   getUserLogs(): any {
     return this.userService.findUserLogs(2);
   }
 
-  @Get('/logsByGroup')
+  @common.Get('/logsByGroup')
   async getLogsByGroup(): Promise<any> {
     const res = await this.userService.findLogsByGroup(2);
     return res;

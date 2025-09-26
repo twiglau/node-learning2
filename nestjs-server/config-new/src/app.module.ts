@@ -13,6 +13,7 @@ import { Roles } from './roles/roles.entity';
 import { Profile } from './user/profile.entity';
 import { User } from './user/user.entity';
 import { UserModule } from './user/user.module';
+import { LogsModule } from './logs/logs.module';
 
 // 1. 配置文件 方法一
 const envFilePath = `.env.${process.env.NODE_ENV || `development`}`;
@@ -79,6 +80,7 @@ const envFilePath = `.env.${process.env.NODE_ENV || `development`}`;
     //   logging: ['error'],
     // }),
     UserModule,
+    LogsModule,
   ],
   controllers: [AppController],
   // 从@nestjs/common 进行导入，因为在 main.ts 中重构了 官方的 logger 示例
