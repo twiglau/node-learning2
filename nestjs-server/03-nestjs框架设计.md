@@ -51,3 +51,37 @@ Repositories
 | 日志  |        |
 |- - - - - - - - |
 ```
+
+## DI 容器，工作原理, 按顺序调用
+
+- 所有 @Injectable 与 Providers 里面的类
+
+1. 注册所有 有@Injectable() 注解的类
+2. 通过 Constructor 了解 类与类之间的 依赖关系
+
+- Nestjs 自动完成
+
+3. Nestjs 自动创建 @Injectable() 注解的类实例
+4. Nestjs 自动创建 依赖关系 的实例
+5. 按需进行调用
+
+## TypeORM 容器 工作原理
+
+```lua
+                        Nestjs DI 容器
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  -
+ User   - - >    User            TypeORM    - - >  TypeORM
+Module          Service           Module          Repository
+
+                                  TypeORM
+                                   Entity
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                         所有实例
+- - - -  - - - - -  - - - - - - - - - - - - - - - - - - - -  - -
+userService                    typeORMRepo
+- - - - - -      - - - - - - - - - - - - - - - - - - - - - - - -
+  getAll()         create()  |     save()  |    find()
+                 - - - - - -  - -  - - - - - - - - - - -  - - -
+   . . .           findOne() |   remove()  |
+- - - - - -
+```
