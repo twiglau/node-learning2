@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 // 1. pino 使用
 // import { Logger } from 'nestjs-pino';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
+import * as userDto from './dto/get-user.dto';
 import { User } from './user.entity';
 import { UserService } from './user.service';
 
@@ -26,45 +27,46 @@ export class UserController {
     private readonly logger: common.LoggerService,
   ) {}
 
+  @common.Get('/:id')
+  getUser() {
+    return 'hello user';
+  }
+
   @common.Get()
-  getUsers() {
-    // // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    // const db = this.configService.get(ConfigEnum.DB);
-    // // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    // const url = this.configService.get('DB_URL');
-    // console.log('db:', db, url);
+  getUsers(@common.Query() query: userDto.getUserDto) {
+    // page 页码，limit 每页条数, condition - 查询条件
+    // (username, role, gender), sort 排序
 
     // 2. winston 需要显式调用
     this.logger.log(`请求getUsers成功`);
 
     // 方法二 yaml
 
-    return this.userService.findAll();
+    return this.userService.findAll(query);
   }
 
   @common.Post()
-  addUser(): any {
-    const user = { username: 'toimc', password: '123456' } as User;
+  addUser(@common.Body() dto: any): any {
+    const user = dto as User;
 
     return this.userService.create(user);
   }
 
-  @common.Patch()
-  updateUser(): any {
+  @common.Patch('/:id')
+  updateUser(@common.Body() dto: any, @common.Param('id') id: number): any {
     // todo 传递参数 id
-    const user = { username: 'newname' } as User;
-    return this.userService.update(1, user);
+    const user = dto as User;
+    return this.userService.update(id, user);
   }
 
-  @common.Delete()
-  deleteUser(): any {
-    // todo 传递参数id
-    return this.userService.remove(1);
+  @common.Delete('/:id')
+  deleteUser(@common.Param('id') id: number): any {
+    return this.userService.remove(id);
   }
 
   @common.Get('/profile')
-  getUserProfile(): any {
-    return this.userService.findProfile(2);
+  getUserProfile(@common.Query('id') id: number): any {
+    return this.userService.findProfile(id);
   }
 
   @common.Get('/logs')

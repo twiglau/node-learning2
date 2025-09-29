@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Logs } from 'src/logs/logs.entity';
 import { Repository } from 'typeorm';
+import * as userDto from './dto/get-user.dto';
 import { User } from './user.entity';
 
 @Injectable()
@@ -11,8 +12,33 @@ export class UserService {
     @InjectRepository(Logs) private readonly logsRepository: Repository<Logs>,
   ) {}
 
-  findAll() {
-    return this.userRepository.find();
+  findAll(query: userDto.getUserDto) {
+    const { limit = 10, page, username, gender, role } = query;
+
+    // SELECT * FROM user u, profile p, role r WHERE u.id = p.uid AND
+    // u.id = r.uid AND ...
+
+    // SELECT * FROM user u LEFT JOIN profile p ON u.id = p.uid LEFT JOIN
+    // role r ON u.id = r.uid WHERE ...
+
+    // 分页 SQL -> LIMIT 10 OFFSET 10
+    // 方法一：
+    // return this.userRepository.find({
+    //   select: { id: true, username: true, profile: { gender: true } },
+    //   relations: {
+    //     profile: true,
+    //     roles: true,
+    //   },
+    //   where: {
+    //     username,
+    //     profile: { gender },
+    //     roles: { id: role },
+    //   },
+    //   take: limit,
+    //   skip: (page - 1) * limit,
+    // });
+
+    // 方法二：
   }
   find(username: string) {
     return this.userRepository.findOne({ where: { username } });
