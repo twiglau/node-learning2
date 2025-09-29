@@ -3,11 +3,13 @@ import { ConfigService } from '@nestjs/config';
 // 1. pino 使用
 // import { Logger } from 'nestjs-pino';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
+import { TypeormFilter } from 'src/filters/typeorm.filter';
 import * as userDto from './dto/get-user.dto';
 import { User } from './user.entity';
 import { UserService } from './user.service';
 
 @common.Controller('user')
+@common.UseFilters(new TypeormFilter())
 export class UserController {
   constructor(
     private userService: UserService,
@@ -48,7 +50,6 @@ export class UserController {
   @common.Post()
   addUser(@common.Body() dto: any): any {
     const user = dto as User;
-
     return this.userService.create(user);
   }
 
