@@ -26,22 +26,147 @@ export class UsersController {}
 
 2. 变量
 
+- 创建 class 类，即 Entity,DTO
+
 ```ts
-@Controller()
-export class UsersController {
-  @Get('/users')
-  findAllUsers(@Query('username', somePipe))
+// signin-user.dto.ts
+import {
+  IsNotEmpty,
+  IsString,
+  Length,
+  ValidationArguments,
+} from "class-validator";
+
+export class SigninUserDto {
+  @IsString()
+  @IsNotEmpty()
+  @Length(6, 20, {
+    // message?: string | (validationArguments: ValidationArguments) -> string
+    message: (validationArguments: ValidationArguments) => {
+      const { value, property, targetName, constraints } = validationArguments;
+      /**
+       * value: 当前用户传入的值
+       * property: 当前属性名
+       * targetName: 当前类
+       * constraints: 校验长度范围
+       */
+      return `用户名长度必须在${constraints}`;
+    },
+  })
+  username: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @Length(6, 20)
+  password: string;
+}
+```
+
+```ts
+@Controller("auth")
+export class AuthController {
+  @Post("signup")
+  signup(@Body() dto: SigninUserDto) {
+    const { username, password } = dto;
+    return this.authService.signup(username, password);
+  }
 }
 ```
 
 3. 全局
 
 ```ts
+import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(ApplicationModule);
-  app.useGlobalPipes(MyPipe);
+  // 配置全局 拦截器
+  app.useGlobalPipes({
+    new ValidationPipe({
+      // 去除在类上不存在的字段
+      whitelist: true
+    })
+  });
   await app.listen(3000);
 }
 
 bootstrap();
+```
+
+## 校验类管道(DTO 参数校验)
+
+- 创建基于 装饰器的校验的类管道，校验参数
+  > dto 使用 PartialType, 跟 ts 中的 Partial 一样，变为可选参数
+
+```ts
+import { PartialType } from "@nestjs/mapped-types";
+import { CreateRoleDto } from "./create-role.dto";
+
+export class UpdateRoleDto extends PartialType(CreateRoleDto) {}
+```
+
+- 类验证器
+  > `class-transformer`: 转化请求数据为 DTO 类的实例
+  > `class-validator`: 使用正则等逻辑进行校验
+
+```sh
+npm i --save class-validator class-transformer
+```
+
+## 内置管道
+
+- `ValidationPipe`,`ParseIntPipe`, `ParseFloatPipe`, `ParseBoolPipe`, `ParseArrayPipe`
+- `ParseUUIDPipe`, `ParseEnumPipe`, `DefaultValuePipe`, `ParseFilePipe`
+
+```ts
+import { Controller, Get, Param, ParseIntPipe } from "@nestjs/common";
+
+@Controller("user")
+export class UserController {
+  @Get(":id")
+  async findOne(@Param("id", ParseIntPipe) id: number) {
+    return { id };
+  }
+}
+```
+
+## 自定义 pipe (多参数转换)
+
+```lua
+src
+ |- pipes
+      |- create-user.pipe.ts
+```
+
+```ts
+import { ArgumentMetadata, Injectable, PipeTransform } from "@nestjs/common";
+import { CreateUserDto } from "../dto/create-user.dto";
+
+@Injectable()
+export class CreateUserPipe implements PipeTransform {
+  transform(value: CreateUserDto, metadata: ArgumentMetadata) {
+    console.log(value); // { username: 'xxxx', password: '123456' }
+    console.log(metadata); // { metatype: [class CreateUserDto], type: 'body', data: undefined }
+
+    // 对数据进行判断操作
+
+    return value;
+  }
+}
+
+// user.controller.ts 中使用
+import { Body, Controller, Post } from "@nestjs/common";
+import { UserService } from "./user.service";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { CreateUserPipe } from "./pipes/create-user.pipe";
+
+@Controller("user")
+export class UserController {
+  constructor(private userService: UserService) {}
+
+  @Post("create")
+  // 在Body装饰器中 传递pipe
+  createUser(@Body(CreateUserPipe) dto: CreateUserDto) {
+    return "ok";
+  }
+}
 ```
