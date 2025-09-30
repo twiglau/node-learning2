@@ -1,5 +1,6 @@
-import { InjectRedis, Redis } from '@nestjs-modules/ioredis';
+import { InjectRedis } from '@nestjs-modules/ioredis';
 import { Body, Controller, Post, UseFilters } from '@nestjs/common';
+import Redis from 'ioredis';
 import { TypeormFilter } from 'src/filters/typeorm.filter';
 import { AuthService } from './auth.service';
 import { SigninUserDto } from './dto/signin-user.dto';
