@@ -1,20 +1,25 @@
+import { InjectRedis, Redis } from '@nestjs-modules/ioredis';
 import { Body, Controller, Post, UseFilters } from '@nestjs/common';
 import { TypeormFilter } from 'src/filters/typeorm.filter';
 import { AuthService } from './auth.service';
+import { SigninUserDto } from './dto/signin-user.dto';
 
 @Controller('auth')
 @UseFilters(new TypeormFilter())
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    @InjectRedis() private readonly redis: Redis,
+  ) {}
 
   @Post('/signin')
-  signin(@Body() dto: any) {
+  signin(@Body() dto: SigninUserDto) {
     const { username, password } = dto;
     return this.authService.signin(username, password);
   }
 
   @Post('/signup')
-  signup(@Body() dto: any) {
+  signup(@Body() dto: SigninUserDto) {
     const { username, password } = dto;
 
     // if (!username || !password) {
