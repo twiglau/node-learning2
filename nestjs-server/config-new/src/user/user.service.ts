@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Logs } from 'src/logs/logs.entity';
-import { Repository } from 'typeorm';
+import { Roles } from 'src/roles/roles.entity';
+import { In, Repository } from 'typeorm';
 import { conditionUtils } from '../utils/db.helper';
 import * as userDto from './dto/get-user.dto';
 import { User } from './user.entity';
@@ -11,6 +12,8 @@ export class UserService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
     @InjectRepository(Logs) private readonly logsRepository: Repository<Logs>,
+    @InjectRepository(Roles)
+    private readonly rolesRepository: Repository<Roles>,
   ) {}
 
   findAll(query: userDto.getUserDto) {
@@ -71,7 +74,7 @@ export class UserService {
     //   queryBuilder.where('roles.id IS NOT NULL');
     // }
 
-    return newQuery.take(limit).skip(skip).getRawMany();
+    return newQuery.take(take).skip(skip).getRawMany();
   }
   find(username: string) {
     return this.userRepository.findOne({ where: { username } });
@@ -79,11 +82,28 @@ export class UserService {
   findOne(id: number) {
     return this.userRepository.findOne({ where: { id } });
   }
-  create(user: User) {
+  async create(user: User) {
+    if (user.roles instanceof Array && typeof user.roles[0] === 'number') {
+      // 查询所有的 用户角色
+      user.roles = await this.rolesRepository.find({
+        where: { id: In(user.roles) },
+      });
+    }
     return this.userRepository.save(user);
   }
-  update(id: number, user: User) {
-    return this.userRepository.update(id, user);
+  async update(id: number, user: Partial<User>) {
+    const userTemp = await this.findProfile(id);
+    const newUser = this.userRepository.merge(userTemp!, user);
+    // 联合模型更新，需要使用save方法或者queryBuilder
+    return this.userRepository.save(newUser);
+
+    // preload - 从给定的普通 javascript 对象创建一个新实体，如果实体已存在于数据库中，
+    // 则它将加载它（以及与之相关的所有内容），并将所有值替换为给定对象中的新值
+    // 并返回所有实体。新实体实际上是从数据库加载所有属性都替换为新对象的实体。
+    // const user = await repository.preload(partialUser);
+
+    // 下面的update方法，只适合单模型的更新，不适合有关系的模型更新
+    // return this.userRepository.update(id, user);
   }
   remove(id: number) {
     return this.userRepository.delete(id);

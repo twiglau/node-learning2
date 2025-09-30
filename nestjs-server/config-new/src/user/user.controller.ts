@@ -54,8 +54,15 @@ export class UserController {
   }
 
   @common.Patch('/:id')
-  updateUser(@common.Body() dto: any, @common.Param('id') id: number): any {
-    // todo 传递参数 id
+  updateUser(
+    @common.Body() dto: any,
+    @common.Param('id') id: number,
+    @common.Headers('Authorization') headers: any,
+  ): any {
+    // todo
+    // 权限1： 判断用户是否是自己
+    // 权限2： 判断用户是否有更新user的权限
+    // 返回数据： 不能包含敏感的 password 等信息
     const user = dto as User;
     return this.userService.update(id, user);
   }

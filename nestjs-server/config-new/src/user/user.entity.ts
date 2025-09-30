@@ -1,6 +1,8 @@
 import { Logs } from 'src/logs/logs.entity';
 import { Roles } from 'src/roles/roles.entity';
 import {
+  AfterInsert,
+  AfterRemove,
   Column,
   Entity,
   JoinTable,
@@ -23,13 +25,24 @@ export class User {
   password: string;
 
   // typescript -> 数据库  关联关系  Mapping
-  @OneToMany(() => Logs, (logs) => logs.user)
+  @OneToMany(() => Logs, (logs) => logs.user, { cascade: true })
   logs: Logs[];
 
-  @ManyToMany(() => Roles, (roles) => roles.users)
+  @ManyToMany(() => Roles, (roles) => roles.users, { cascade: ['insert'] })
   @JoinTable({ name: 'users_roles' })
   roles: Roles[];
 
-  @OneToOne(() => Profile, (profile) => profile.user)
+  // cascade 为 true, 将自动插入数据库
+  @OneToOne(() => Profile, (profile) => profile.user, { cascade: true })
   profile: Profile;
+
+  @AfterInsert()
+  afterInsert() {
+    console.log('afterInsert', this.id, this.username);
+  }
+
+  @AfterRemove()
+  afterRemove() {
+    console.log('afterRemove');
+  }
 }

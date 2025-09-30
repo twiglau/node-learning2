@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Logs } from 'src/logs/logs.entity';
+import { Roles } from 'src/roles/roles.entity';
 import { UserController } from './user.controller';
 import { User } from './user.entity';
 import { UserService } from './user.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User, Logs]),
+    TypeOrmModule.forFeature([User, Logs, Roles]),
     // LoggerModule.forRoot({
     //   pinoHttp: {
     //     transport: {
