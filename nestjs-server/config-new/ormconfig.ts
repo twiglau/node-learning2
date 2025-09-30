@@ -4,14 +4,21 @@ import fs from 'fs';
 import { ConfigEnum } from 'src/enum/config.enum';
 import { DataSource, DataSourceOptions } from 'typeorm';
 
-function getEnv(env: string): Record<string, unknown> {
+export function getEnv(env: string): Record<string, unknown> {
   if (fs.existsSync(env)) {
     return dotenv.parse(fs.readFileSync(env));
   }
   return {};
 }
 
-function buildConnectionOptions() {
+export function getServerConfig() {
+  const defaultConfig = getEnv('.env');
+  const envConfig = getEnv(`.env.${process.env.NODE_ENV || 'development'}`);
+  // configService
+  const config = { ...defaultConfig, ...envConfig };
+  return config;
+}
+export function buildConnectionOptions() {
   const defaultConfig = getEnv('.env');
   const envConfig = getEnv(`.env.${process.env.NODE_ENV || 'development'}`);
 

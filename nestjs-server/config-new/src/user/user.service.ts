@@ -74,7 +74,7 @@ export class UserService {
     //   queryBuilder.where('roles.id IS NOT NULL');
     // }
 
-    return newQuery.take(take).skip(skip).getRawMany();
+    return newQuery.take(take).skip(skip).getMany();
   }
   find(username: string) {
     return this.userRepository.findOne({ where: { username } });
@@ -82,14 +82,16 @@ export class UserService {
   findOne(id: number) {
     return this.userRepository.findOne({ where: { id } });
   }
-  async create(user: User) {
+  async create(user: Partial<User>) {
     if (user.roles instanceof Array && typeof user.roles[0] === 'number') {
       // 查询所有的 用户角色
       user.roles = await this.rolesRepository.find({
         where: { id: In(user.roles) },
       });
     }
-    return this.userRepository.save(user);
+    const userTmp = this.userRepository.create(user);
+    const res = await this.userRepository.save(userTmp);
+    return res;
   }
   async update(id: number, user: Partial<User>) {
     const userTemp = await this.findProfile(id);
