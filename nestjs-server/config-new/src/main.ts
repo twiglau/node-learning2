@@ -24,5 +24,6 @@ async function bootstrap() {
       : 3000;
 
   await app.listen(port);
+  await app.init();
 }
 void bootstrap();

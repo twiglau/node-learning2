@@ -20,7 +20,7 @@ import { RolesService } from './roles/roles.service';
 const envFilePath = `.env.${process.env.NODE_ENV || `development`}`;
 const schema = Joi.object({
   NODE_ENV: Joi.string()
-    .valid('development', 'production')
+    .valid('development', 'production', 'test')
     .default('development'),
   DB_PORT: Joi.number().default(3306),
   DB_HOST: Joi.alternatives().try(Joi.string().ip(), Joi.string().domain()),
@@ -46,6 +46,7 @@ const schema = Joi.object({
       load: [
         () => {
           const values = dotenv.config({ path: '.env' });
+
           const { error } = schema.validate(values?.parsed, {
             // 允许未知的环境变量
             allowUnknown: true,
@@ -70,15 +71,17 @@ const schema = Joi.object({
         const port = configService.get(ConfigEnum.REDIS_PORT);
         const password = configService.get(ConfigEnum.REDIS_PASSWORD);
 
-        const url = password
-          ? `redis://${password}@${host}:${port}`
-          : `redis://${host}:${port}`;
+        // const url = password
+        //   ? `redis://${password}@${host}:${port}`
+        //   : `redis://${host}:${port}`;
+
+        const url = `redis://${host}:${port}`;
         return {
-          type: 'single',
-          url,
-          options: {
+          config: {
+            url,
+            password,
             reconnectOnError: (err) => {
-              logger.error(`Redis Connnection error: ${err}`);
+              logger.error(`Redis Connection error: ${err}`);
               return true;
             },
           },

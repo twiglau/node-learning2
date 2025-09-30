@@ -23,6 +23,7 @@ export function buildConnectionOptions() {
   const envConfig = getEnv(`.env.${process.env.NODE_ENV || 'development'}`);
 
   const config = { ...defaultConfig, ...envConfig };
+  const logFlag = config['LOG_ON'] === 'true';
 
   const entitiesDir =
     process.env.NODE_ENV === 'test'
@@ -40,7 +41,7 @@ export function buildConnectionOptions() {
     // 同步本地的schema与数据库 -> 初始化的时候去使用
     synchronize: true,
     // logging: process.env.NODE_ENV === 'development',
-    logging: false,
+    logging: logFlag && process.env.NODE_ENV === 'development',
   } as TypeOrmModuleOptions;
 }
 export const connectionParams = buildConnectionOptions();
