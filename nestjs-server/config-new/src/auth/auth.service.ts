@@ -41,7 +41,7 @@ export class AuthService {
     });
 
     // 返回数据：删除密码
-    delete res.password;
+    // delete res.password;
     return res;
   }
 }

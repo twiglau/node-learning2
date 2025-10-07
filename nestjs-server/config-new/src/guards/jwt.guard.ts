@@ -29,7 +29,7 @@ export class JwtGuard extends AuthGuard('jwt') {
     }
     const payload = await verify(
       token,
-      this.configService.get(ConfigEnum.SECRET),
+      this.configService.get(ConfigEnum.SECRET) || '',
     );
     console.log('token:', payload);
     const username = payload['username'];
