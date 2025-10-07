@@ -12,5 +12,11 @@ export class AuthService {
     } as getUserDto);
     return res;
   }
-  signup(username: string, password: string) {}
+  async signup(username: string, password: string) {
+    const res = await this.userService.create({
+      username,
+      password,
+    });
+    return res;
+  }
 }

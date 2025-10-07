@@ -4,7 +4,9 @@ import { ConfigService } from '@nestjs/config';
 // import { Logger } from 'nestjs-pino';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { TypeormFilter } from 'src/filters/typeorm.filter';
+import { CreateUserDto } from './dto/create-user.dto';
 import * as userDto from './dto/get-user.dto';
+import { CreateUserPipe } from './pipes/create-user.pipe';
 import { User } from './user.entity';
 import { UserService } from './user.service';
 
@@ -48,7 +50,7 @@ export class UserController {
   }
 
   @common.Post()
-  addUser(@common.Body() dto: any): any {
+  addUser(@common.Body(CreateUserPipe) dto: CreateUserDto): any {
     const user = dto as User;
     return this.userService.create(user);
   }
@@ -73,7 +75,7 @@ export class UserController {
   }
 
   @common.Get('/profile')
-  getUserProfile(@common.Query('id') id: number): any {
+  getUserProfile(@common.Query('id', common.ParseIntPipe) id: number): any {
     return this.userService.findProfile(id);
   }
 

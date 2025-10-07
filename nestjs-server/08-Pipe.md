@@ -14,6 +14,26 @@ Nest 会在调用这个方法之前插入一个管道，管道会先拦截方法
 
 - 当在 Pipe 中发生异常， controller 不会继续执行任何方法。
 
+## 验证
+
+```lua
+    请求
+  - - - - -                   |   DateTransferObject |           |  Controller     |
+    POST            - - - - > |       DTO            |  - - - >  |  Route Handler  |
+  /auth/signin                |                      |           |                 |
+  - - - - - -                            |
+  {                                      |
+    "username": "toimc",                 |
+    "password": "123456"                 |
+  }                                      |
+  - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                                Validation  Pipe
+  - - - - - -  - - - - - - -  - - - - - - - -  - - - - - - - - -  - - - - - -  - - - -
+  | class-transformer     |        |  class-validator      |      |    return 结果      |
+  |   转化请求数据为       |        |   使用正则等逻辑进行    |      |  如果校验失败，立即  |
+  |    DTO类的实例         |        |      校验             |      |     响应前端         |
+```
+
 ## 管道类型
 
 1. 控制器级别
@@ -132,9 +152,11 @@ export class UserController {
 ## 自定义 pipe (多参数转换)
 
 ```lua
+# nest g pi user/pipes/create-user -d
 src
- |- pipes
-      |- create-user.pipe.ts
+ |- user
+     | - pipes
+           |- create-user.pipe.ts
 ```
 
 ```ts
@@ -170,3 +192,10 @@ export class UserController {
   }
 }
 ```
+
+## Nestjs 中创建的管道的过程
+
+1. 全局配置管道
+2. 创建 class 类，即 Entity,DTO
+3. 设置校验规则
+4. 使用该实体类或者 DTO
