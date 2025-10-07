@@ -4,6 +4,8 @@ import { ConfigService } from '@nestjs/config';
 // import { Logger } from 'nestjs-pino';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { TypeormFilter } from 'src/filters/typeorm.filter';
+import { AdminGuard } from 'src/guards/admin.guard';
+import { JwtGuard } from 'src/guards/jwt.guard';
 import { CreateUserDto } from './dto/create-user.dto';
 import * as userDto from './dto/get-user.dto';
 import { CreateUserPipe } from './pipes/create-user.pipe';
@@ -12,6 +14,7 @@ import { UserService } from './user.service';
 
 @common.Controller('user')
 @common.UseFilters(new TypeormFilter())
+@common.UseGuards(JwtGuard)
 export class UserController {
   constructor(
     private userService: UserService,
@@ -37,12 +40,19 @@ export class UserController {
   }
 
   @common.Get()
+  // 非常重要的知识点
+  // 1. 装饰器的执行顺序，方法的装饰器如果有多个，则是从下往上执行
+  // @UseGuards(AdminGuard)
+  // @UseGuards(AuthGuard('jwt'))
+  // 2. 如果使用UseGuard传递多个守卫，则从前往后执行，
+  // 如果前面的Guard没有通过，则后面的Guard不会执行
+  @common.UseGuards(AdminGuard)
   getUsers(@common.Query() query: userDto.getUserDto) {
     // page 页码，limit 每页条数, condition - 查询条件
     // (username, role, gender), sort 排序
 
     // 2. winston 需要显式调用
-    this.logger.log(`请求getUsers成功`);
+    // this.logger.log(`请求getUsers成功`);
 
     // 方法二 yaml
 
@@ -75,7 +85,13 @@ export class UserController {
   }
 
   @common.Get('/profile')
-  getUserProfile(@common.Query('id', common.ParseIntPipe) id: number): any {
+  getUserProfile(
+    @common.Query('id', common.ParseIntPipe) id: number,
+    // 这里req中的user是通过AuthGuard('jwt')中的validate方法返回的
+    // PassportModule来添加的
+    // @common.Req() req,
+  ): any {
+    console.log('aaaa', typeof id);
     return this.userService.findProfile(id);
   }
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import * as argon2 from 'argon2';
 import { Logs } from 'src/logs/logs.entity';
 import { Roles } from 'src/roles/roles.entity';
 import { In, Repository } from 'typeorm';
@@ -77,7 +78,10 @@ export class UserService {
     return newQuery.take(take).skip(skip).getMany();
   }
   find(username: string) {
-    return this.userRepository.findOne({ where: { username } });
+    return this.userRepository.findOne({
+      where: { username },
+      relations: ['roles'],
+    });
   }
   findOne(id: number) {
     return this.userRepository.findOne({ where: { id } });
@@ -94,6 +98,8 @@ export class UserService {
       });
     }
     const userTmp = this.userRepository.create(user);
+
+    userTmp.password = await argon2.hash(userTmp.password);
     const res = await this.userRepository.save(userTmp);
     return res;
   }

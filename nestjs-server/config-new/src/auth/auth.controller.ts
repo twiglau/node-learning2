@@ -14,9 +14,14 @@ export class AuthController {
   ) {}
 
   @Post('/signin')
-  signin(@Body() dto: SigninUserDto) {
+  async signin(@Body() dto: SigninUserDto) {
     const { username, password } = dto;
-    return this.authService.signin(username, password);
+    const token = await this.authService.signin(username, password);
+    // 设置token
+    await this.redis.set(username, token);
+    return {
+      access_token: token,
+    };
   }
 
   @Post('/signup')
