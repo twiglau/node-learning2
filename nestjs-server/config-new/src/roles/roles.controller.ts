@@ -6,12 +6,19 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
 } from '@nestjs/common';
+import { Roles } from 'src/decorators/roles.decorator';
+import { Role } from 'src/enum/roles.enum';
+import { JwtGuard } from 'src/guards/jwt.guard';
+import { RoleGuard } from 'src/guards/role.guard';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { RolesService } from './roles.service';
 
 @Controller('roles')
+@Roles(Role.Admin)
+@UseGuards(JwtGuard, RoleGuard)
 export class RolesController {
   constructor(private readonly rolesService: RolesService) {}
 

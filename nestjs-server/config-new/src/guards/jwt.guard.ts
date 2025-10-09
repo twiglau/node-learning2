@@ -27,10 +27,9 @@ export class JwtGuard extends AuthGuard('jwt') {
     if (!token) {
       throw new UnauthorizedException();
     }
-    const payload = await verify(
-      token,
-      this.configService.get(ConfigEnum.SECRET) || '',
-    );
+    const key = this.configService.get(ConfigEnum.SECRET);
+    console.log('token1:', token, key);
+    const payload = verify(token, key);
     console.log('token:', payload);
     const username = payload['username'];
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
