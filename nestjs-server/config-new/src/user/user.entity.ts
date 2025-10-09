@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { Logs } from 'src/logs/logs.entity';
 import { Roles } from 'src/roles/roles.entity';
 import {
@@ -22,6 +23,7 @@ export class User {
   username: string;
 
   @Column()
+  @Exclude() // 不暴露该字段
   password: string;
 
   // typescript -> 数据库  关联关系  Mapping

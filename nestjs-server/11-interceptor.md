@@ -16,3 +16,23 @@
 请求 ->  全局(Interceptor) - |                                                                                                            |
                             | - - > Controller - - - - - - - - -  - - -     -  > 路由(Interceptor) - Route Handler - 路由(Interceptor) - -|
 ```
+
+```sh
+nest g itc interceptors/serialize --no-spec
+```
+
+## 作用
+
+```lua
+请求 ->      Pipe                Dto              Interceptors           Dto               - - > 响应
+         ValidationPipe      class-transformer     serialization      class-transformer
+           whitelist:true     class-validator                         class-validator
+        - - - - - - - - -    - - - -  - - -  -    - - - -  - - -     - - - - - -  - - -
+              |                                          |                   |
+         防止用户传入一些不                          自定义拦截器          定制需要返回的
+         需要的数据，导致安全                                             数据格式与类型
+         性的问题                                                        完成数据的序列化
+
+         比如：save, update
+         等敏感操作的接口
+```

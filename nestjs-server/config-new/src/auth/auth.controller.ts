@@ -1,11 +1,19 @@
 import { InjectRedis } from '@nestjs-modules/ioredis';
-import { Body, Controller, Post, UseFilters } from '@nestjs/common';
+import {
+  Body,
+  ClassSerializerInterceptor,
+  Controller,
+  Post,
+  UseFilters,
+  UseInterceptors,
+} from '@nestjs/common';
 import Redis from 'ioredis';
 import { TypeormFilter } from 'src/filters/typeorm.filter';
 import { AuthService } from './auth.service';
 import { SigninUserDto } from './dto/signin-user.dto';
 
 @Controller('auth')
+@UseInterceptors(ClassSerializerInterceptor)
 @UseFilters(new TypeormFilter())
 export class AuthController {
   constructor(

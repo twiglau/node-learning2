@@ -3,8 +3,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
 import Joi from 'joi';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { LogsModule } from './logs/logs.module';
 import { UserModule } from './user/user.module';
 
@@ -12,9 +10,7 @@ import { RedisModule } from '@nestjs-modules/ioredis';
 import { connectionParams } from '../ormconfig';
 import { AuthModule } from './auth/auth.module';
 import { ConfigEnum } from './enum/config.enum';
-import { RolesController } from './roles/roles.controller';
 import { RolesModule } from './roles/roles.module';
-import { RolesService } from './roles/roles.service';
 
 // 1. 配置文件 方法一
 const envFilePath = `.env.${process.env.NODE_ENV || `development`}`;
@@ -95,8 +91,8 @@ const schema = Joi.object({
     RolesModule,
     AuthModule,
   ],
-  controllers: [AppController, RolesController],
-  providers: [AppService, Logger, RolesService],
+  controllers: [],
+  providers: [Logger],
   exports: [Logger],
 })
 export class AppModule {}

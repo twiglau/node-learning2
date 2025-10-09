@@ -1,19 +1,17 @@
 import { Global, Logger, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as dotenv from 'dotenv';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 // import Configuration from './configuration';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import Joi from 'joi';
 // import { Logger } from 'nestjs-pino';
 import { ConfigEnum } from './enum/config.enum';
 import { Logs } from './logs/logs.entity';
+import { LogsModule } from './logs/logs.module';
 import { Roles } from './roles/roles.entity';
 import { Profile } from './user/profile.entity';
 import { User } from './user/user.entity';
 import { UserModule } from './user/user.module';
-import { LogsModule } from './logs/logs.module';
 
 // 1. 配置文件 方法一
 const envFilePath = `.env.${process.env.NODE_ENV || `development`}`;
@@ -82,10 +80,9 @@ const envFilePath = `.env.${process.env.NODE_ENV || `development`}`;
     UserModule,
     LogsModule,
   ],
-  controllers: [AppController],
   // 从@nestjs/common 进行导入，因为在 main.ts 中重构了 官方的 logger 示例
   // 全局提供 logger
-  providers: [AppService, Logger],
+  providers: [Logger],
   exports: [Logger],
 })
 export class AppModule {}
