@@ -7,3 +7,12 @@
   - 转换从函数抛出的异常
   - 扩展基本函数行为
   - 根据所选条件完全重写函数(例如，缓存目的)
+
+```lua
+                                                                                             | - > Route Handler - 路由(Interceptor) - - |
+                            |- - > 控制器(Interceptor) - Controller - 控制器(Interceptor) - - |                                           |
+                            |                                                                | - > Route Handler - 路由(Interceptor) - - |
+                            |                                                                                                            | - > 全局后置(Interceptor) - > 响应
+请求 ->  全局(Interceptor) - |                                                                                                            |
+                            | - - > Controller - - - - - - - - -  - - -     -  > 路由(Interceptor) - Route Handler - 路由(Interceptor) - -|
+```
