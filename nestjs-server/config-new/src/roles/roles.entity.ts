@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import { Expose } from 'class-transformer';
+import { Menus } from 'src/menus/menus.entity';
 import { User } from 'src/user/user.entity';
 
 @Entity()
@@ -16,4 +17,7 @@ export class Roles {
   @ManyToMany(() => User, (user) => user.roles)
   @Expose()
   users: User[];
+
+  @ManyToMany(() => Menus, (menus) => menus.role)
+  menus: Menus[];
 }

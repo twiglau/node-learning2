@@ -11,6 +11,7 @@ import { connectionParams } from '../ormconfig';
 import { AuthModule } from './auth/auth.module';
 import { ConfigEnum } from './enum/config.enum';
 import { RolesModule } from './roles/roles.module';
+import { MenusModule } from './menus/menus.module';
 
 // 1. 配置文件 方法一
 const envFilePath = `.env.${process.env.NODE_ENV || `development`}`;
@@ -90,6 +91,7 @@ const schema = Joi.object({
     LogsModule,
     RolesModule,
     AuthModule,
+    MenusModule,
   ],
   controllers: [],
   providers: [Logger],
