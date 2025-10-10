@@ -15,6 +15,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   validate(payload: any) {
+    console.log('validate payload:', payload);
     // req.user
     // cache中的token
     return { userId: payload.sub, username: payload.username };
