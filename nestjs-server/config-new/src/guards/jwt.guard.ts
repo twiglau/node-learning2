@@ -39,7 +39,7 @@ export class JwtGuard extends AuthGuard('jwt') {
       throw new UnauthorizedException();
     }
     const parentCanActivate = (await super.canActivate(context)) as boolean;
-    console.log('parentCanActivate:', parentCanActivate);
-    return true; // parentCanActivate;
+
+    return parentCanActivate;
   }
 }

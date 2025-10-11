@@ -28,6 +28,7 @@
     "schema:drop": "npm run typeorm schema:drop"
   },
   "dependencies": {
+    "@casl/ability": "^6.7.3",
     "@nestjs-modules/ioredis": "^1.0.1",
     "@nestjs/common": "^11.0.1",
     "@nestjs/config": "^4.0.2",

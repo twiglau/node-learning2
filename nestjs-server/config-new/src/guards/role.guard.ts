@@ -26,6 +26,7 @@ export class RoleGuard implements CanActivate {
     const user = await this.userService.find(req.user.username);
 
     const roleIds = user?.roles.map((o) => o.id);
+
     const flag = requireRoles.some((role) => roleIds?.includes(role));
     return flag;
   }
