@@ -2,9 +2,11 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from './common/config/config.module';
 import { LogsModule } from './common/logger/logs.module';
 import { CacheModule } from './common/cache/cache.module';
+import { AppController } from './app.controller';
+import { MailModule } from './common/mail/mail.module';
 @Module({
-  imports: [ConfigModule, LogsModule, CacheModule],
-  controllers: [],
+  imports: [ConfigModule, LogsModule, CacheModule, MailModule],
+  controllers: [AppController],
   providers: [],
 })
 export class AppModule {}
