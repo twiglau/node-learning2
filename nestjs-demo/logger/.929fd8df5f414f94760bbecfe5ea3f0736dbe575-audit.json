@@ -34,6 +34,16 @@
             "date": 1760529973466,
             "name": "logger/error-2025-10-15-20.log",
             "hash": "94d9904f3abd73cc82c4d4fc4ba13f51420c89df869f45ebd4f9d4c0b0c936d8"
+        },
+        {
+            "date": 1760595370366,
+            "name": "logger/error-2025-10-16-14.log",
+            "hash": "260cfce9d337092400a199bd6de6ae8f376fdcb6976d66e27b278a3c3f8d80b4"
+        },
+        {
+            "date": 1760601332130,
+            "name": "logger/error-2025-10-16-15.log",
+            "hash": "b08aa62bd9e8ce069274b04cff0749c09b8ee8c2cb47faeb9814ff009a71e440"
         }
     ],
     "hashType": "sha256"
