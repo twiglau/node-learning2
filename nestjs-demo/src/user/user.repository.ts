@@ -3,6 +3,7 @@ import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { Inject } from '@nestjs/common';
 import { REQUEST } from '@nestjs/core';
+import type { Request } from 'express';
 
 export class UserRepository {
   constructor(
