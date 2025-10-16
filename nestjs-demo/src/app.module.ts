@@ -4,9 +4,11 @@ import { LogsModule } from './common/logger/logs.module';
 import { CacheModule } from './common/cache/cache.module';
 import { AppController } from './app.controller';
 import { MailModule } from './common/mail/mail.module';
-import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { ConfigService } from '@nestjs/config';
-import { User } from './user/user.entity';
+// import { MongooseModule } from '@nestjs/mongoose';
+// import { UserSchema } from './user/user.schema';
+// import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
+// import { ConfigService } from '@nestjs/config';
+// import { User } from './user/user.entity';
 // import { PrismaModule } from './database/prisma/prisma.module';
 @Module({
   imports: [
@@ -14,21 +16,24 @@ import { User } from './user/user.entity';
     LogsModule,
     CacheModule,
     MailModule,
-    TypeOrmModule.forRootAsync({
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService) =>
-        ({
-          type: configService.get('DB_TYPE'),
-          host: configService.get('DB_HOST'),
-          port: configService.get('DB_PROT'),
-          username: configService.get('DB_USERNAME'),
-          password: configService.get('DB_PASSWORD'),
-          database: configService.get('DB_DATABASE'),
-          autoLoadEntities: Boolean(configService.get('DB_AUTOLOAD')) || false,
-          synchronize: Boolean(configService.get('DB_SYNC')) || false,
-        }) as TypeOrmModuleOptions,
-    }),
-    TypeOrmModule.forFeature([User]),
+    // MongooseModule.forRoot('mongodb://root:example@localhost:27017/nest'),
+    // MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
+
+    // TypeOrmModule.forRootAsync({
+    //   inject: [ConfigService],
+    //   useFactory: (configService: ConfigService) =>
+    //     ({
+    //       type: configService.get('DB_TYPE'),
+    //       host: configService.get('DB_HOST'),
+    //       port: configService.get('DB_PROT'),
+    //       username: configService.get('DB_USERNAME'),
+    //       password: configService.get('DB_PASSWORD'),
+    //       database: configService.get('DB_DATABASE'),
+    //       autoLoadEntities: Boolean(configService.get('DB_AUTOLOAD')) || false,
+    //       synchronize: Boolean(configService.get('DB_SYNC')) || false,
+    //     }) as TypeOrmModuleOptions,
+    // }),
+    // TypeOrmModule.forFeature([User]),
   ],
   controllers: [AppController],
   providers: [],
