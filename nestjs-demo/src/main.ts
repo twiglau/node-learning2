@@ -37,6 +37,8 @@ async function bootstrap() {
     app.useGlobalFilters(new AllExceptionFilter(httpAdapter));
   }
 
+  app.enableShutdownHooks();
+
   await app.listen(port);
 }
 void bootstrap();

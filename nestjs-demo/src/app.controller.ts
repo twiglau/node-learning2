@@ -1,12 +1,11 @@
 // import { InjectRedis } from '@nestjs-modules/ioredis';
 import { MailerService } from '@nestjs-modules/mailer';
 import { Controller, Get, Version } from '@nestjs/common';
-import { UserRepository } from './user/user.repository';
 // import { InjectModel } from '@nestjs/mongoose';
 // import { Model } from 'mongoose';
-// import { InjectRepository } from '@nestjs/typeorm';
-// import { User } from './user/user.entity';
-// import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from './user/user.entity';
+import { Repository } from 'typeorm';
 // import { PrismaService } from './database/prisma/prisma.service';
 // import Redis from 'ioredis';
 
@@ -16,9 +15,8 @@ export class AppController {
   constructor(
     private readonly mailerService: MailerService,
     // private readonly prismaService: PrismaService,
-    // @InjectRepository(User) private userRepository: Repository<User>,
+    @InjectRepository(User) private userRepository: Repository<User>,
     // @InjectModel('User') private userModel: Model<'User'>,
-    private userRepository: UserRepository,
   ) {}
 
   @Get('/prisma')
@@ -28,8 +26,8 @@ export class AppController {
     // const res = this.prismaService.user.findMany();
     // return res;
     // 2. typeorm
-    // const res = await this.userRepository.find();
-    // return res;
+    const res = await this.userRepository.find();
+    return res;
     // 3. mongoose
     // const userModel = await this.userModel.find();
     // return userModel;
@@ -40,9 +38,8 @@ export class AppController {
   async getHelloV2() {
     // const res = await this.redis.get('token');
     // return res;
-    const userRepository = this.userRepository.getRepository();
-    const users = await userRepository.find();
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    const users = await this.userRepository.find();
+
     return users;
   }
   @Get('/mail')
