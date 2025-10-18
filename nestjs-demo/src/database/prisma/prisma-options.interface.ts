@@ -1,6 +1,6 @@
-import { Prisma } from 'generated/prisma';
+import { PrismaClientOptions } from '@prisma/client';
 
 export interface PrismaModuleOptions {
   url?: string;
-  options?: Prisma.PrismaClientOptions;
+  options?: PrismaClientOptions;
 }

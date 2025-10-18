@@ -9,6 +9,7 @@ import { PrismaModuleOptions } from './prisma-options.interface';
 import { PrismaClient as MysqlClient } from 'prisma/client/mysql';
 import { PrismaClient as PostgresqlClient } from 'prisma/client/postgresql';
 import { getDBType } from './prisma-utils';
+import { PRISMA_CLIENT } from './prisma.constants';
 
 @Module({})
 @Global()
@@ -19,7 +20,7 @@ export class PrismaCoreModule implements OnApplicationShutdown {
 
   static forRoot(options: PrismaModuleOptions) {
     const prismaClientProvider: Provider = {
-      provide: 'PRISMA_CLIENT',
+      provide: PRISMA_CLIENT,
       useFactory: () => {
         const url = options.url;
         const dbType = getDBType(url!);
