@@ -6,9 +6,9 @@ import { Controller, Get, Version } from '@nestjs/common';
 // import { InjectRepository } from '@nestjs/typeorm';
 // import { User } from './user/user.entity';
 // import { Repository } from 'typeorm';
-import { PrismaClient } from 'generated/prisma';
 // import { PrismaService } from './database/prisma/prisma.service';
 // import Redis from 'ioredis';
+import { PrismaClient } from '@prisma/client';
 
 @Controller()
 export class AppController {

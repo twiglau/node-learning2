@@ -65,6 +65,12 @@ importers:
       nodemailer:
         specifier: ^7.0.9
         version: 7.0.9
+      prisma-mysql:
+        specifier: link:link./prisma/client/mysql
+        version: link:link./prisma/client/mysql
+      prisma-postgresql:
+        specifier: link:link./prisma/client/postgresql
+        version: link:link./prisma/client/postgresql
       request-ip:
         specifier: ^3.3.0
         version: 3.3.0
