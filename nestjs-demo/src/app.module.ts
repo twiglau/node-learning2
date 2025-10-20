@@ -46,7 +46,14 @@ import { PrismaModule } from './database/prisma/prisma.module';
     // }),
     // TypeOrmModule.forFeature([User]),
     // 3. prisma
-    PrismaModule.forRoot({ url: 'mysql://root:example@localhost:3306/testdb' }),
+    PrismaModule.forRoot(
+      'postgresql://pguser:example@localhost:5432/testdb',
+      'prisma1',
+    ),
+    PrismaModule.forRoot(
+      'mysql://root:example@localhost:3306/testdb',
+      'prisma2',
+    ),
   ],
   controllers: [AppController],
   // providers: [

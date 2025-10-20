@@ -1,6 +1,32 @@
-import { PrismaClientOptions } from '@prisma/client';
+import { ModuleMetadata, Type } from '@nestjs/common';
+import { Prisma } from 'prisma/client/postgresql';
 
 export interface PrismaModuleOptions {
   url?: string;
-  options?: PrismaClientOptions;
+  options?: Prisma.PrismaClientOptions;
+  name?: string;
+  retryAttempts?: number;
+  retryDelay?: number;
+  connectionFactory?: (connection: any, name: string) => any;
+  connectionErrorFactory?: (
+    error: Prisma.PrismaClientKnownRequestError,
+  ) => Prisma.PrismaClientKnownRequestError;
+}
+
+export interface PrismaOptionsFactory {
+  createPrismaModuleOptions():
+    | Promise<PrismaModuleOptions>
+    | PrismaModuleOptions;
+}
+
+export type PrismaModuleOptionsFactory = Omit<PrismaModuleOptions, 'name'>;
+
+export interface PrismaModuleAsyncOptions
+  extends Pick<ModuleMetadata, 'imports'> {
+  name?: string;
+  useExisting?: Type<PrismaOptionsFactory>;
+  useClass?: Type<PrismaOptionsFactory>;
+  useFactory?: (
+    ...args: any[]
+  ) => Promise<PrismaModuleOptionsFactory> | PrismaModuleOptionsFactory;
 }
