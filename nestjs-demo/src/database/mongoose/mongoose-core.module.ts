@@ -118,12 +118,35 @@ export class MongooseCoreModule implements OnApplicationShutdown {
       ): Promise<any> => {},
       inject: [MONGOOSE_MODULE_OPTIONS],
     };
+
+    const asyncProviders = this.createAsyncProviders(options);
+    return {
+      module: MongooseCoreModule,
+      imports: options.imports,
+      providers: [
+        ...asyncProviders,
+        connectionProvider,
+        mongooseConnectionNameProvider,
+      ],
+      exports: [connectionProvider],
+    };
   }
 
   private static createAsyncProviders(
     options: MongooseModuleAsyncOptions,
   ): Provider[] {
-    return [];
+    if (options.useExisting || options.useFactory) {
+      return [this.createAsyncOptionsProvider(options)];
+    }
+
+    const useClass = options.useClass as Type<MongooseOptionsFactory>;
+    return [
+      this.createAsyncOptionsProvider(options),
+      {
+        provide: useClass,
+        useClass,
+      },
+    ];
   }
 
   private static createAsyncOptionsProvider(
