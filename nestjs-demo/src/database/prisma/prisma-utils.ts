@@ -16,13 +16,18 @@ export function handleRetry(retryAttempts: number, retryDelay: number) {
   return (source) =>
     source.pipe(
       retry({
-        count: retryAttempts,
+        // 重试次数
+        count: retryAttempts < 0 ? Infinity : retryAttempts,
+        // 重试延迟逻辑
         delay: (error, retryCount) => {
-          if (retryCount <= retryAttempts || retryAttempts === -1) {
+          // 根据重试次数计算最大重试次数
+          const attempts = retryAttempts < 0 ? Infinity : retryAttempts;
+          if (retryCount <= attempts) {
             logger.error(
               `Unable to connect to the database, Retrying (${retryCount})...`,
               error.stack,
             );
+            // 返回延迟时间
             return timer(retryDelay);
           } else {
             return throwError(() => new Error('Reached max retries'));

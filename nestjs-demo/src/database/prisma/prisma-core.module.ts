@@ -4,15 +4,21 @@ import {
   Module,
   OnApplicationShutdown,
   Provider,
+  Type,
 } from '@nestjs/common';
 import {
   PrismaModuleAsyncOptions,
   PrismaModuleOptions,
+  PrismaOptionsFactory,
 } from './prisma-options.interface';
 import { PrismaClient as MysqlClient } from 'prisma/client/mysql';
 import { PrismaClient as PostgresqlClient } from 'prisma/client/postgresql';
 import { getDBType } from './prisma-utils';
-import { PRISMA_CONNECTION_NAME, PRISMA_CONNECTIONS } from './prisma.constants';
+import {
+  PRISMA_CONNECTION_NAME,
+  PRISMA_CONNECTIONS,
+  PRISMA_MODULE_OPTIONS,
+} from './prisma.constants';
 import { catchError, defer, lastValueFrom } from 'rxjs';
 import { handleRetry } from './prisma-utils';
 
@@ -38,7 +44,7 @@ export class PrismaCoreModule implements OnApplicationShutdown {
 
   static forRoot(_options: PrismaModuleOptions) {
     const {
-      url,
+      url = '',
       options = {},
       name,
       retryAttempts,
@@ -54,7 +60,7 @@ export class PrismaCoreModule implements OnApplicationShutdown {
       newOptions = { ...newOptions, ...options };
     }
 
-    const dbType = getDBType(url!);
+    const dbType = getDBType(url);
     let _prismaClient;
     if (dbType === 'mysql') {
       _prismaClient = MysqlClient;
@@ -75,11 +81,11 @@ export class PrismaCoreModule implements OnApplicationShutdown {
       provide: providerName,
       useFactory: async () => {
         // 加入错误重试
-        if (this.connections[url!]) {
-          return this.connections[url!];
+        if (this.connections[url]) {
+          return this.connections[url];
         }
-        const client = await prismaConnectionFactory(newOptions, name ?? '');
-        this.connections[url!] = client;
+        const client = await prismaConnectionFactory(newOptions);
+        this.connections[url] = client;
 
         return lastValueFrom(
           defer(() => client.$connect()).pipe(
@@ -138,13 +144,77 @@ export class PrismaCoreModule implements OnApplicationShutdown {
         const prismaConnectionFactory =
           connectionFactory ||
           (async (clientOptions) => await new _prismaClient(clientOptions));
+        return lastValueFrom(
+          defer(async () => {
+            const url = newOptions.datasourceUrl || '';
+            if (this.connections[url]) {
+              return this.connections[url];
+            }
+            const client = await prismaConnectionFactory(newOptions);
+            this.connections[url] = client;
+            return client;
+          }).pipe(
+            handleRetry(retryAttempts, retryDelay),
+            catchError((err) => {
+              throw prismaConnectionErrorFactory(err);
+            }),
+          ),
+        );
       },
+      inject: [PRISMA_MODULE_OPTIONS],
+    };
+    // 异步provider 获取，providers: [] 加入
+    // 以便于 useFactory 中使用
+    const asyncProviders = this.createAsyncProviders(_options);
+    const connectionProvider = {
+      provide: PRISMA_CONNECTIONS,
+      useValue: this.connections,
     };
 
     return {
       module: PrismaCoreModule,
-      providers: [],
-      exports: [],
+      providers: [...asyncProviders, prismaClientProvider, connectionProvider],
+      exports: [prismaClientProvider, connectionProvider],
+    };
+  }
+
+  // DI 系统注入
+  private static createAsyncProviders(options: PrismaModuleAsyncOptions) {
+    if (options.useExisting || options.useFactory) {
+      return [this.createAsyncOptionsProvider(options)];
+    }
+    const useClass = options.useClass as Type<PrismaOptionsFactory>;
+
+    return [
+      this.createAsyncOptionsProvider(options),
+      {
+        provide: useClass,
+        useClass,
+      },
+    ];
+  }
+
+  // 创建 PRISMA_MODULE_OPTIONS的Provide,来源
+  private static createAsyncOptionsProvider(
+    options: PrismaModuleAsyncOptions,
+  ): Provider {
+    if (options.useFactory) {
+      return {
+        provide: PRISMA_MODULE_OPTIONS,
+        useFactory: options.useFactory,
+        inject: options.inject || [],
+      };
+    }
+
+    const inject = [
+      (options.useClass || options.useExisting) as Type<PrismaOptionsFactory>,
+    ];
+    // 没有设置 useFactory 的场景
+    return {
+      provide: PRISMA_MODULE_OPTIONS,
+      inject,
+      useFactory: async (optionsFactory: PrismaOptionsFactory) =>
+        optionsFactory.createPrismaModuleOptions(),
     };
   }
 }

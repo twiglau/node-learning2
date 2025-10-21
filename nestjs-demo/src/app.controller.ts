@@ -1,6 +1,7 @@
 // import { InjectRedis } from '@nestjs-modules/ioredis';
 import { MailerService } from '@nestjs-modules/mailer';
-import { Controller, Get, Version } from '@nestjs/common';
+import { Controller, Get, Inject, Version } from '@nestjs/common';
+import { PrismaClient } from 'prisma/client/mysql';
 // import { InjectModel } from '@nestjs/mongoose';
 // import { Model } from 'mongoose';
 // import { InjectRepository } from '@nestjs/typeorm';
@@ -14,6 +15,7 @@ export class AppController {
   //   constructor(@InjectRedis() private readonly redis: Redis) {}
   constructor(
     private readonly mailerService: MailerService,
+    @Inject('prisma1') private prismaService: PrismaClient,
     // private readonly prismaService: PrismaService,
     // @InjectRepository(User) private userRepository: Repository<User>,
     // @InjectModel('User') private userModel: Model<'User'>,
@@ -23,8 +25,8 @@ export class AppController {
   @Version('1')
   async getHello() {
     // 1. prisma
-    // const res = this.prismaService.user.findMany();
-    // return res;
+    const res = this.prismaService.user.findMany();
+    return res;
     // const res = this.prismaClient.user.findMany();
     // return res;
     // 2. typeorm

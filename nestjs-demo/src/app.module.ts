@@ -5,6 +5,7 @@ import { CacheModule } from './common/cache/cache.module';
 import { AppController } from './app.controller';
 import { MailModule } from './common/mail/mail.module';
 import { PrismaModule } from './database/prisma/prisma.module';
+import { PrismaService } from './database/prisma/prisma.service';
 
 // import { TypeOrmModule } from '@nestjs/typeorm';
 // import { User } from './user/user.entity';
@@ -46,14 +47,10 @@ import { PrismaModule } from './database/prisma/prisma.module';
     // }),
     // TypeOrmModule.forFeature([User]),
     // 3. prisma
-    PrismaModule.forRoot(
-      'postgresql://pguser:example@localhost:5432/testdb',
-      'prisma1',
-    ),
-    PrismaModule.forRoot(
-      'mysql://root:example@localhost:3306/testdb',
-      'prisma2',
-    ),
+    PrismaModule.forRootAsync({
+      name: 'prisma1',
+      useClass: PrismaService,
+    }),
   ],
   controllers: [AppController],
   // providers: [

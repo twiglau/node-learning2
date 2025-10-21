@@ -7,7 +7,7 @@ export interface PrismaModuleOptions {
   name?: string;
   retryAttempts?: number;
   retryDelay?: number;
-  connectionFactory?: (connection: any, name: string) => any;
+  connectionFactory?: (connection: any, name?: string) => any;
   connectionErrorFactory?: (
     error: Prisma.PrismaClientKnownRequestError,
   ) => Prisma.PrismaClientKnownRequestError;
@@ -19,7 +19,7 @@ export interface PrismaOptionsFactory {
     | PrismaModuleOptions;
 }
 
-export type PrismaModuleOptionsFactory = Omit<PrismaModuleOptions, 'name'>;
+export type PrismaModuleFactoryOptions = Omit<PrismaModuleOptions, 'name'>;
 
 export interface PrismaModuleAsyncOptions
   extends Pick<ModuleMetadata, 'imports'> {
@@ -28,5 +28,6 @@ export interface PrismaModuleAsyncOptions
   useClass?: Type<PrismaOptionsFactory>;
   useFactory?: (
     ...args: any[]
-  ) => Promise<PrismaModuleOptionsFactory> | PrismaModuleOptionsFactory;
+  ) => Promise<PrismaModuleFactoryOptions> | PrismaModuleFactoryOptions;
+  inject?: any[];
 }
