@@ -2,6 +2,7 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { Controller, Get, Inject, Version } from '@nestjs/common';
 import { PrismaClient } from 'prisma-mysql';
+import { PRISMA_CONNECTIONS } from './database/prisma/prisma.constants';
 // import { InjectModel } from '@nestjs/mongoose';
 // import { Model } from 'mongoose';
 // import { InjectRepository } from '@nestjs/typeorm';
@@ -16,6 +17,8 @@ export class AppController {
   constructor(
     private readonly mailerService: MailerService,
     @Inject('prisma1') private prismaService: PrismaClient,
+    @Inject(PRISMA_CONNECTIONS)
+    private connections: Record<string, PrismaClient>,
     // private readonly prismaService: PrismaService,
     // @InjectRepository(User) private userRepository: Repository<User>,
     // @InjectModel('User') private userModel: Model<'User'>,

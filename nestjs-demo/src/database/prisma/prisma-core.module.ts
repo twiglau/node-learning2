@@ -48,8 +48,8 @@ export class PrismaCoreModule implements OnApplicationShutdown {
       url = '',
       options = {},
       name,
-      retryAttempts,
-      retryDelay,
+      retryAttempts = 10,
+      retryDelay = 3000,
       connectionErrorFactory,
       connectionFactory,
     } = _options;
@@ -85,12 +85,12 @@ export class PrismaCoreModule implements OnApplicationShutdown {
         if (this.connections[url]) {
           return this.connections[url];
         }
-        const client = await prismaConnectionFactory(newOptions);
+        const client = await prismaConnectionFactory(newOptions, _prismaClient);
         this.connections[url] = client;
 
         return lastValueFrom(
           defer(() => client.$connect()).pipe(
-            handleRetry(retryAttempts!, retryDelay!),
+            handleRetry(retryAttempts, retryDelay),
             catchError((err) => {
               throw prismaConnectionErrorFactory(err);
             }),
@@ -151,7 +151,10 @@ export class PrismaCoreModule implements OnApplicationShutdown {
             if (this.connections[url]) {
               return this.connections[url];
             }
-            const client = await prismaConnectionFactory(newOptions);
+            const client = await prismaConnectionFactory(
+              newOptions,
+              _prismaClient,
+            );
             this.connections[url] = client;
             return client;
           }).pipe(
