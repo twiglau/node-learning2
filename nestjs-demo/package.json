@@ -42,6 +42,8 @@
     "mysql2": "^3.15.2",
     "nest-winston": "^1.10.2",
     "nodemailer": "^7.0.9",
+    "prisma-mysql": "link:prisma/client/mysql",
+    "prisma-postgresql": "link:prisma/client/postgresql",
     "request-ip": "^3.3.0",
     "rxjs": "^7.8.1",
     "typeorm": "^0.3.27",

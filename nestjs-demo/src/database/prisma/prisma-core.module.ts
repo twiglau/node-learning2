@@ -11,8 +11,8 @@ import {
   PrismaModuleOptions,
   PrismaOptionsFactory,
 } from './prisma-options.interface';
-import { PrismaClient as MysqlClient } from 'prisma/client/mysql';
-import { PrismaClient as PostgresqlClient } from 'prisma/client/postgresql';
+import { PrismaClient as MysqlClient } from 'prisma-mysql';
+import { PrismaClient as PostgresqlClient } from 'prisma-postgresql';
 import { getDBType } from './prisma-utils';
 import {
   PRISMA_CONNECTION_NAME,
@@ -35,8 +35,9 @@ export class PrismaCoreModule implements OnApplicationShutdown {
     ) {
       for (const key of Object.keys(PrismaCoreModule.connections)) {
         const connection = PrismaCoreModule.connections[key];
-        if (connection && typeof connection.$disconnect === 'function') {
+        if (connection && typeof connection.$disconnect == 'function') {
           connection.$disconnect();
+          console.log('******* release ********');
         }
       }
     }

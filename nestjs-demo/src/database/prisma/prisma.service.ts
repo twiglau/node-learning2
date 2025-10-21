@@ -19,7 +19,7 @@ export class PrismaService implements OnModuleInit, PrismaOptionsFactory {
     | PrismaModuleOptions {
     const headers = this.request.headers;
     const tenantId = headers['x-tenant-id'] || 'default';
-    console.log(tenantId, headers);
+
     if (tenantId === 'prisma1') {
       return {
         url: 'mysql://root:example@localhost:3307/testdb',

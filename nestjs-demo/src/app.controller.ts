@@ -1,7 +1,7 @@
 // import { InjectRedis } from '@nestjs-modules/ioredis';
 import { MailerService } from '@nestjs-modules/mailer';
 import { Controller, Get, Inject, Version } from '@nestjs/common';
-import { PrismaClient } from 'prisma/client/mysql';
+import { PrismaClient } from 'prisma-mysql';
 // import { InjectModel } from '@nestjs/mongoose';
 // import { Model } from 'mongoose';
 // import { InjectRepository } from '@nestjs/typeorm';
@@ -25,8 +25,12 @@ export class AppController {
   @Version('1')
   async getHello() {
     // 1. prisma
-    const res = this.prismaService.user.findMany();
-    return res;
+    try {
+      const res = await this.prismaService.user.findMany();
+      return res;
+    } catch (error) {
+      console.log('error:', error);
+    }
     // const res = this.prismaClient.user.findMany();
     // return res;
     // 2. typeorm
