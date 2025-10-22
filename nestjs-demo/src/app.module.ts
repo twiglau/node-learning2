@@ -18,9 +18,5 @@ import { DatabaseModule } from './database/database.module';
     // 3. prisma
   ],
   controllers: [AppController],
-  // providers: [
-  //   AppService,
-  //   { provide: 'TYPEORM_CONNECTIONS', useValue: connections },
-  // ],
 })
 export class AppModule {}
