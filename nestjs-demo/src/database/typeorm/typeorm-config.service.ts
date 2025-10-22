@@ -12,10 +12,9 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
   createTypeOrmOptions(
     connectionName?: string,
   ): Promise<TypeOrmModuleOptions> | TypeOrmModuleOptions {
-    console.log('createTypeOrmOptions connectionName:', connectionName);
-
     const headers = this.request.headers;
-    const tenantId = headers['x-tenant-id'];
+    const tenantId = headers['x-tenant-id'] || connectionName || 'default';
+
     let config: TypeOrmModuleOptions = { port: 3306 };
     const envConfig = {
       type: this.configService.get('DB_TYPE'),
@@ -29,9 +28,9 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       tenantId,
     };
 
-    if (tenantId === 'mysql1') {
+    if (tenantId === 'typeorm2') {
       config = { port: 3307 };
-    } else if (tenantId === 'postgresql') {
+    } else if (tenantId === 'typeorm3') {
       config = {
         type: 'postgres',
         port: 5432,
