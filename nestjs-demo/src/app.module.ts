@@ -13,8 +13,9 @@ import { PrismaService } from './database/prisma/prisma.service';
 // import { DataSource } from 'typeorm';
 // import { AppService } from './app.service';
 
-// import { MongooseModule } from '@nestjs/mongoose';
-// import { UserSchema } from './user/user.schema';
+import { MongooseModule } from './database/mongoose/mongoose.module';
+import { UserSchema } from './user/user.schema';
+import { MongooseConfigService } from './database/mongoose/mongoose-config.service';
 // import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 // import { ConfigService } from '@nestjs/config';
 // import { User } from './user/user.entity';
@@ -27,8 +28,10 @@ import { PrismaService } from './database/prisma/prisma.service';
     CacheModule,
     MailModule,
     // 1. mongoose
-    // MongooseModule.forRoot('mongodb://root:example@localhost:27017/nest'),
-    // MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
+    MongooseModule.forRootAsync({
+      useClass: MongooseConfigService,
+    }),
+    MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
     // 2. typeorm
     // TypeOrmModule.forRootAsync({
     //   useClass: TypeOrmConfigService,
