@@ -5,6 +5,8 @@ import { TYPEORM_DATABASE } from '@/database/database-constants';
 import { Repository } from 'typeorm';
 
 export class UserTypeormRepository implements UserAbstractRepository {
+  // 需要指定 TYPEORM_DATABASE
+  // Typeorm 异步初始化，不指定，会找不到对应实例
   constructor(
     @InjectRepository(User, TYPEORM_DATABASE)
     private readonly user: Repository<User>,

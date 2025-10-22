@@ -5,6 +5,7 @@ import { TYPEORM_DATABASE } from '../database-constants';
 import { TypeOrmConfigService } from './typeorm-config.service';
 import { TypeormProvider } from './typeorm.provider';
 import { TYPEORM_CONNECTIONS } from './typeorm.constants';
+import { User } from '@/user/user.entity';
 
 const connections = new Map<string, DataSource>();
 
@@ -26,6 +27,8 @@ const connections = new Map<string, DataSource>();
       inject: [],
       extraProviders: [],
     }),
+    // 如果不指定 name, 就会找不到 对应的实例
+    TypeOrmModule.forFeature([User], TYPEORM_DATABASE),
   ],
   providers: [
     TypeormProvider,
