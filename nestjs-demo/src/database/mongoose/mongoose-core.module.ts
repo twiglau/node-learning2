@@ -115,7 +115,43 @@ export class MongooseCoreModule implements OnApplicationShutdown {
       provide: mongooseConnectionName,
       useFactory: async (
         mongooseModuleOptions: MongooseModuleFactoryOptions,
-      ): Promise<any> => {},
+      ): Promise<any> => {
+        if (!mongooseModuleOptions) return;
+
+        const {
+          retryAttempts,
+          retryDelay,
+          uri,
+          connectionFactory,
+          connectionErrorFactory,
+          lazyConnection,
+          onConnectionCreate,
+          ...mongooseOptions
+        } = mongooseModuleOptions;
+
+        const mongooseConnectionFactory =
+          connectionFactory || ((connection) => connection);
+        const mongooseConnectionError =
+          connectionErrorFactory || ((error) => error);
+
+        return await lastValueFrom(
+          defer(async () =>
+            mongooseConnectionFactory(
+              await this.createMongooseConnection(
+                uri as string,
+                mongooseOptions,
+                { lazyConnection, onConnectionCreate },
+              ),
+              mongooseConnectionName,
+            ),
+          ).pipe(
+            handleRetry(retryAttempts, retryDelay),
+            catchError((error) => {
+              throw mongooseConnectionError(error);
+            }),
+          ),
+        );
+      },
       inject: [MONGOOSE_MODULE_OPTIONS],
     };
 

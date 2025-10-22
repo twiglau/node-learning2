@@ -1,27 +1,32 @@
-import { DynamicModule, Module } from '@nestjs/common';
+import { Inject } from '@nestjs/common';
+import { REQUEST } from '@nestjs/core';
 import {
-  MongooseModuleAsyncOptions,
   MongooseModuleOptions,
-  MongooseModule as NestMongooseModule,
+  MongooseOptionsFactory,
 } from '@nestjs/mongoose';
-import { MongooseCoreModule } from './mongoose-core.module';
+import type { Request } from 'express';
 
-@Module({})
-export class MongooseModule extends NestMongooseModule {
-  static forRoot(
-    uri: string,
-    options: MongooseModuleOptions = {},
-  ): DynamicModule {
-    return {
-      module: MongooseModule,
-      imports: [MongooseCoreModule.forRoot(uri, options)],
-    };
-  }
+export class MongooseConfigService implements MongooseOptionsFactory {
+  constructor(@Inject(REQUEST) private request: Request) {}
 
-  static forRootAsync(options: MongooseModuleAsyncOptions): DynamicModule {
-    return {
-      module: MongooseModule,
-      imports: [MongooseCoreModule.forRootAsync(options)],
-    };
+  createMongooseOptions():
+    | Promise<MongooseModuleOptions>
+    | MongooseModuleOptions {
+    const headers = this.request.headers;
+    const tenantId = headers['x-tenant-id'] || 'default';
+
+    console.log('tenantId', tenantId);
+
+    let url: string;
+    const defaultUrl = 'mongodb://root:example@localhost:27017/user';
+    if (tenantId === 'mongo') {
+      url = defaultUrl;
+    } else if (tenantId === 'mongo1') {
+      url = 'mongodb://root.example@localhost:27018/user';
+    } else {
+      url = defaultUrl;
+    }
+
+    return { uri: url } as MongooseModuleOptions;
   }
 }
