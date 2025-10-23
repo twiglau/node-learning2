@@ -7,6 +7,7 @@ import { MailModule } from './common/mail/mail.module';
 
 import { DatabaseModule } from './database/database.module';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { UserModule } from './user/user.module';
     MailModule,
     DatabaseModule,
     UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
 })

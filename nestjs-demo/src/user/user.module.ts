@@ -55,6 +55,6 @@ const providers = tenantMode
   imports,
   providers: [...providers, UserRepository],
   controllers: [UserController],
-  exports: [UserRepository],
+  exports: [UserRepository], // 导出后，可以在 Auth 等其他模块中使用
 })
 export class UserModule {}

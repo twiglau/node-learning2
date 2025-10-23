@@ -20,7 +20,11 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "typeorm-ts-node-commonjs -d ormconfig.ts",
-    "typeorm:sync": "npm run typeorm schema:sync"
+    "typeorm:sync": "npm run typeorm schema:sync",
+    "prisma:generate": "prisma generate",
+    "prisma:db:push": "prisma db push",
+    "prisma:db:reset": "prisma migrate reset",
+    "prisma:db:deploy": "prisma migrate deploy"
   },
   "dependencies": {
     "@keyv/redis": "^5.1.3",
