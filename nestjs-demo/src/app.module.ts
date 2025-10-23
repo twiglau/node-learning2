@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import { MailModule } from './common/mail/mail.module';
 
 import { DatabaseModule } from './database/database.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -13,9 +14,8 @@ import { DatabaseModule } from './database/database.module';
     LogsModule,
     CacheModule,
     MailModule,
-    // 1. mongoose
     DatabaseModule,
-    // 3. prisma
+    UserModule,
   ],
   controllers: [AppController],
 })

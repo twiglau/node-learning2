@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
+export function getTest() {}
 
-export function genEnvs() {
+export function getEnvs() {
   const parsedConfig = {};
   const envFilePaths = ['.env', `.env.${process.env.NODE_ENV}`];
 

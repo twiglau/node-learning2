@@ -9,7 +9,7 @@ import type { Request } from 'express';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
-export class PrismaService implements OnModuleInit, PrismaOptionsFactory {
+export class PrismaConfigService implements OnModuleInit, PrismaOptionsFactory {
   constructor(
     @Inject(REQUEST) private request: Request,
     private readonly configService: ConfigService,
