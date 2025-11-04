@@ -3,7 +3,11 @@ import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { AllExceptionFilter } from './common/filters/all-exception.filter';
-import { VERSION_NEUTRAL, VersioningType } from '@nestjs/common';
+import {
+  ValidationPipe,
+  VERSION_NEUTRAL,
+  VersioningType,
+} from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -37,7 +41,23 @@ async function bootstrap() {
     app.useGlobalFilters(new AllExceptionFilter(httpAdapter));
   }
 
+  // 启用 NestJS 应用的关闭钩子 (shutdown hooks)
+  // 在关闭时，执行必要的清理工作，1.关闭数据库连接 2.释放资源 等等。
   app.enableShutdownHooks();
+
+  // 启用全局管道
+  app.useGlobalPipes(
+    new ValidationPipe({
+      // true => 移除额外的属性， false => 不移除
+      whitelist: true,
+      // 自动转换实体到 dto, 例如将字符串转换为数字
+      transform: true,
+      transformOptions: {
+        // 启用隐式转换，例如将字符串转换为数字
+        enableImplicitConversion: true,
+      },
+    }),
+  );
 
   await app.listen(port);
 }

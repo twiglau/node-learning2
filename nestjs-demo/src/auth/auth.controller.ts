@@ -1,19 +1,24 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { CreateUserPipe } from './pipes/create-user.pipe';
+import { SignupDto } from './dto/signup-dto';
+import { PublicUserDto } from './dto/public-dto';
+import { Serialize } from '@/common/decorators/serialize.decorator';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Post('/signin')
-  signin(@Body() dto: any) {
-    const { username, password } = dto;
-    return this.authService.signin(username, password);
+  @Post('/signup')
+  @Serialize(PublicUserDto)
+  async signup(@Body(CreateUserPipe) dto: SignupDto): Promise<PublicUserDto> {
+    const user = await this.authService.signup(dto.username, dto.password);
+    return new PublicUserDto({ ...user });
   }
 
-  @Post('/signup')
-  signup(@Body() dto: any) {
+  @Post('/signin')
+  signin(@Body() dto: SignupDto) {
     const { username, password } = dto;
-    return this.authService.signup(username, password);
+    return this.authService.signin(username, password);
   }
 }

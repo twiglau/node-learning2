@@ -8,15 +8,27 @@ import { MailModule } from './common/mail/mail.module';
 import { DatabaseModule } from './database/database.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { getEnvs } from './utils/get-envs';
+import { toBoolean } from './utils/format';
+
+const conditionalImports = () => {
+  const imports: any[] = [];
+  const parsedConfig = getEnvs();
+  if (toBoolean(parsedConfig['MAIL_ON'])) {
+    imports.push(MailModule);
+  }
+
+  return imports;
+};
 
 @Module({
   imports: [
     ConfigModule,
     LogsModule,
     CacheModule,
-    MailModule,
     DatabaseModule,
     UserModule,
+    ...conditionalImports(),
     AuthModule,
   ],
   controllers: [AppController],

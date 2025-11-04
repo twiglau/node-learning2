@@ -1,12 +1,21 @@
-import { Controller, Get, Version } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { UserRepository } from './user.repository';
+import { CreateUserDto } from './dto/create-user.dto';
+import { Serialize } from '@/common/decorators/serialize.decorator';
+import { PublicUserDto } from '@/auth/dto/public-dto';
 
 @Controller('user')
 export class UserController {
   constructor(private userRepository: UserRepository) {}
 
+  @Post()
+  @Serialize(PublicUserDto)
+  create(@Body() createUserDto: CreateUserDto) {
+    // 该参数没有校验，是因为变为 可选的了
+    return this.userRepository.create(createUserDto);
+  }
+
   @Get('/multi')
-  @Version('1')
   async getHello() {
     // 1. prisma
     // try {

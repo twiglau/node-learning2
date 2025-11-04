@@ -4,6 +4,7 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+// mysql, postgresql
 generator client {
   provider = "prisma-client-js"
   output   = "./client/postgresql"
@@ -19,7 +20,7 @@ model User {
   username  String     @unique
   password  String
   createdAt DateTime   @default(now())
-  updatedAt DateTime   @unique
+  updatedAt DateTime   @updatedAt
   UserRole  UserRole[]
 
   @@map("users")

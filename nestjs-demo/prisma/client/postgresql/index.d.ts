@@ -6276,14 +6276,14 @@ export namespace Prisma {
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: number
     username?: string
-    updatedAt?: Date | string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
     password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
     UserRole?: UserRoleListRelationFilter
-  }, "id" | "username" | "updatedAt">
+  }, "id" | "username">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
@@ -6507,7 +6507,7 @@ export namespace Prisma {
     username: string
     password: string
     createdAt?: Date | string
-    updatedAt: Date | string
+    updatedAt?: Date | string
     UserRole?: UserRoleCreateNestedManyWithoutUserInput
   }
 
@@ -6516,7 +6516,7 @@ export namespace Prisma {
     username: string
     password: string
     createdAt?: Date | string
-    updatedAt: Date | string
+    updatedAt?: Date | string
     UserRole?: UserRoleUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -6542,7 +6542,7 @@ export namespace Prisma {
     username: string
     password: string
     createdAt?: Date | string
-    updatedAt: Date | string
+    updatedAt?: Date | string
   }
 
   export type UserUpdateManyMutationInput = {
@@ -7550,7 +7550,7 @@ export namespace Prisma {
     username: string
     password: string
     createdAt?: Date | string
-    updatedAt: Date | string
+    updatedAt?: Date | string
   }
 
   export type UserUncheckedCreateWithoutUserRoleInput = {
@@ -7558,7 +7558,7 @@ export namespace Prisma {
     username: string
     password: string
     createdAt?: Date | string
-    updatedAt: Date | string
+    updatedAt?: Date | string
   }
 
   export type UserCreateOrConnectWithoutUserRoleInput = {
