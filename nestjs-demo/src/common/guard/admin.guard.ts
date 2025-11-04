@@ -13,6 +13,13 @@ export class AdminGuard implements CanActivate {
     if (user) {
       const userInfo = await this.userRepository.find(user.username);
       console.log(userInfo, 'userInfo');
+      if (
+        userInfo.length &&
+        userInfo[0].roles.filter((o) => o.id === 1).length > 0
+      ) {
+        // 角色id === 1,是管理员
+        return true;
+      }
     }
     console.log('AdminGuard', user, 'user');
 

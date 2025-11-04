@@ -9,6 +9,7 @@ export class UserPrismaRepository implements UserAdapter {
     @Inject(PRISMA_DATABASE) private readonly prismaClient: PrismaClient,
     private configService: ConfigService,
   ) {}
+
   find(username: string): Promise<any[]> {
     return this.prismaClient.user.findMany({ where: { username } });
   }

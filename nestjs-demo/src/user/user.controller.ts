@@ -1,8 +1,10 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { UserRepository } from './user.repository';
 import { CreateUserDto } from './dto/create-user.dto';
 import { Serialize } from '@/common/decorators/serialize.decorator';
 import { PublicUserDto } from '@/auth/dto/public-dto';
+import { AuthGuard } from '@nestjs/passport';
+import { AdminGuard } from '@/common/guard/admin.guard';
 
 @Controller('user')
 export class UserController {
@@ -32,5 +34,11 @@ export class UserController {
     // 3. mongoose
     // const userModel = await this.userModel.find();
     // return userModel;
+  }
+
+  @UseGuards(AuthGuard('jwt'), AdminGuard) // 从左到右执行
+  @Get('test')
+  getTest() {
+    return 'ok';
   }
 }
