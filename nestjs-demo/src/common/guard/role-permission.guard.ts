@@ -21,9 +21,10 @@ export class RolePermissionGuard implements CanActivate {
     );
 
     console.log(
-      'RolePermissionGuard',
+      'RolePermissionGuard =>',
+      'classPermissions',
       classPermissions,
-      '-----',
+      'handlerPermissions',
       handlerPermissions,
     );
 

@@ -11,7 +11,16 @@ export class UserPrismaRepository implements UserAdapter {
   ) {}
 
   find(username: string): Promise<any[]> {
-    return this.prismaClient.user.findMany({ where: { username } });
+    return this.prismaClient.user.findMany({
+      where: { username },
+      include: {
+        UserRole: {
+          select: {
+            roleId: true,
+          },
+        },
+      },
+    });
   }
 
   async create(userObj: any): Promise<any> {

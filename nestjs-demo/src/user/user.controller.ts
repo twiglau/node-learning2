@@ -3,10 +3,19 @@ import { UserRepository } from './user.repository';
 import { CreateUserDto } from './dto/create-user.dto';
 import { Serialize } from '@/common/decorators/serialize.decorator';
 import { PublicUserDto } from '@/auth/dto/public-dto';
-import { AuthGuard } from '@nestjs/passport';
-import { AdminGuard } from '@/common/guard/admin.guard';
+// import { AuthGuard } from '@nestjs/passport';
+// import { AdminGuard } from '@/common/guard/admin.guard';
+import { RolePermissionGuard } from '@/common/guard/role-permission.guard';
+import { Public } from '@/common/decorators/public.decorator';
+import {
+  Permission,
+  Read,
+  Update,
+} from '@/common/decorators/role-permission.decorator';
 
 @Controller('user')
+@Permission('user')
+@UseGuards(RolePermissionGuard)
 export class UserController {
   constructor(private userRepository: UserRepository) {}
 
@@ -36,7 +45,20 @@ export class UserController {
     // return userModel;
   }
 
-  @UseGuards(AuthGuard('jwt'), AdminGuard) // 从左到右执行
+  // 增加权限配置
+  @Get('permission')
+  @Public()
+  @Read()
+  @Update()
+  getPermission() {
+    return 'permission is ok?';
+  }
+
+  // 1. 多个Guard 执行顺序：从下而上
+  // 2. 如果前面的Guard,返回false. 那么后面的就不会执行了
+  // @UseGuards(AuthGuard('jwt'), AdminGuard) // 3. 从左到右执行
+  // @UseGuards(AdminGuard)
+  // @UseGuards(AuthGuard('jwt'))
   @Get('test')
   getTest() {
     return 'ok';
