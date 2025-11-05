@@ -10,6 +10,8 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { getEnvs } from './utils/get-envs';
 import { toBoolean } from './utils/format';
+import { RoleModule } from './role/role.module';
+import { PermissionModule } from './permission/permission.module';
 
 const conditionalImports = () => {
   const imports: any[] = [];
@@ -30,6 +32,8 @@ const conditionalImports = () => {
     UserModule,
     ...conditionalImports(),
     AuthModule,
+    RoleModule,
+    PermissionModule,
   ],
   controllers: [AppController],
 })
