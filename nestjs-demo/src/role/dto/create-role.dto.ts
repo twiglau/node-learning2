@@ -1,3 +1,4 @@
+import { CreatePermissionDto } from '@/permission/dto/create-premission.dto';
 import { Type } from 'class-transformer';
 import { IsArray, IsOptional } from 'class-validator';
 
@@ -14,5 +15,7 @@ export class CreateRoleDto {
 
   @IsOptional()
   @IsArray()
+  //TODO
+  @Type(() => CreatePermissionDto)
   permissions?: PermissionType[];
 }
