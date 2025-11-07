@@ -59,6 +59,12 @@ async function bootstrap() {
     }),
   );
 
+  // 1. 全局守卫 - 无法使用 ID系统的实例
+  // 无法来使用UserService - 之类的依赖注入的实例
+  // 2. 如果使用全局守卫，并且需要使用 某些实例，该怎么处理？
+  // > 在app.module.ts 中另外一种写法
+  // app.useGlobalGuards();
+
   await app.listen(port);
 }
 void bootstrap();

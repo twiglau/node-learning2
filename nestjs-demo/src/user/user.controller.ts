@@ -12,10 +12,12 @@ import {
   Read,
   Update,
 } from '@/common/decorators/role-permission.decorator';
+import { JwtGuard } from '@/common/guard/jwt.guard';
 
 @Controller('user')
 @Permission('user')
 @UseGuards(RolePermissionGuard)
+@UseGuards(JwtGuard)
 export class UserController {
   constructor(private userRepository: UserRepository) {}
 
@@ -47,9 +49,9 @@ export class UserController {
 
   // 增加权限配置
   @Get('permission')
-  @Public()
   @Read()
   @Update()
+  @Public()
   getPermission() {
     return 'permission is ok?';
   }

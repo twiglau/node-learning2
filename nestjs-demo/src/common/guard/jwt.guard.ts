@@ -1,0 +1,25 @@
+import { ExecutionContext } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
+import { AuthGuard } from '@nestjs/passport';
+import { Observable } from 'rxjs';
+
+export class JwtGuard extends AuthGuard('jwt') {
+  constructor(private reflector: Reflector) {
+    super(); // 执行 AuthGuard 所有逻辑
+  }
+
+  canActivate(
+    context: ExecutionContext,
+  ): boolean | Promise<boolean> | Observable<boolean> {
+    const isPublic = this.reflector.get<boolean>(
+      'isPublic',
+      context.getHandler(),
+    );
+
+    if (isPublic) {
+      return true;
+    }
+    // 调用父类的 canActivate 方法
+    return super.canActivate(context);
+  }
+}

@@ -12,6 +12,8 @@ import { getEnvs } from './utils/get-envs';
 import { toBoolean } from './utils/format';
 import { RoleModule } from './role/role.module';
 import { PermissionModule } from './permission/permission.module';
+// import { APP_GUARD } from '@nestjs/core';
+// import { JwtGuard } from './common/guard/jwt.guard';
 
 const conditionalImports = () => {
   const imports: any[] = [];
@@ -36,5 +38,11 @@ const conditionalImports = () => {
     PermissionModule,
   ],
   controllers: [AppController],
+  providers: [
+    // {
+    //   provide: APP_GUARD,
+    //   useClass: JwtGuard, // 在自定义的guard中，引入某些实例
+    // },
+  ],
 })
 export class AppModule {}
