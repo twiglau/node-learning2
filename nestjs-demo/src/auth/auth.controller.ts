@@ -1,4 +1,10 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  Body,
+  // ClassSerializerInterceptor,
+  Controller,
+  Post,
+  // UseInterceptors,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserPipe } from './pipes/create-user.pipe';
 import { SignupDto } from './dto/signup-dto';
@@ -10,10 +16,18 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('/signup')
+  // 实践 2
   @Serialize(PublicUserDto)
+  // 实践 1
+  // @UseInterceptors(ClassSerializerInterceptor)
   async signup(@Body(CreateUserPipe) dto: SignupDto): Promise<PublicUserDto> {
     const user = await this.authService.signup(dto.username, dto.password);
-    return new PublicUserDto({ ...user });
+
+    // 实践 2
+    return user;
+
+    // 实践 1
+    // return new PublicUserDto({ ...user });
   }
 
   @Post('/signin')

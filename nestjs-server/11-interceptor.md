@@ -30,7 +30,7 @@ nest g itc interceptors/serialize --no-spec
         - - - - - - - - -    - - - -  - - -  -    - - - -  - - -     - - - - - -  - - -
               |                                          |                   |
          防止用户传入一些不                          自定义拦截器          定制需要返回的
-         需要的数据，导致安全                                             数据格式与类型
+         需要的数据，导致安全                        Serialization       数据格式与类型
          性的问题                                                        完成数据的序列化
 
          比如：save, update
