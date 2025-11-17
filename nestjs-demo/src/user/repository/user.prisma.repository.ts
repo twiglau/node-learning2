@@ -43,7 +43,9 @@ export class UserPrismaRepository implements UserAdapter {
       if (validateRoleIds.length === 0) {
         validateRoleIds.push(defaultRoleId);
       }
-      delete userObj.roleIds;
+      if (userObj.roleIds) {
+        delete userObj.roleIds;
+      }
 
       return prisma.user.create({
         data: {
@@ -65,6 +67,6 @@ export class UserPrismaRepository implements UserAdapter {
     });
   }
   delete(id: string): Promise<any> {
-    return this.prismaClient.user.delete({ where: { id } });
+    return this.prismaClient.user.delete({ where: { id: +id } });
   }
 }

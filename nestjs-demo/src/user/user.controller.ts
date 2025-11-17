@@ -17,7 +17,7 @@ import { JwtGuard } from '@/common/guard/jwt.guard';
 @Controller('user')
 @Permission('user')
 @UseGuards(RolePermissionGuard)
-@UseGuards(JwtGuard)
+// @UseGuards(JwtGuard)
 export class UserController {
   constructor(private userRepository: UserRepository) {}
 

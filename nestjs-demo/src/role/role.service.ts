@@ -8,6 +8,7 @@ export class RoleService {
   constructor(@Inject(PRISMA_DATABASE) private prismaClient: PrismaClient) {}
   async create(createRoleDto: CreateRoleDto) {
     // TODO
+
     return await this.prismaClient.$transaction(
       async (prisma: PrismaClient) => {
         const { permissions, ...restData } = createRoleDto;
@@ -17,6 +18,8 @@ export class RoleService {
             RolePermissions: {
               create: permissions?.map((permission) => ({
                 permission: {
+                  // 先查询是否存在，如果通过唯一name查询存在，直接使用；
+                  // 如果不存在，则创建；
                   connectOrCreate: {
                     where: {
                       name: permission.name,

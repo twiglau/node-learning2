@@ -48,8 +48,8 @@ model UserRole {
 
 model Permission {
   id              Int               @id @default(autoincrement())
-  name            String            @unique
-  action          String
+  name            String            @unique // Controller name + Route name : user:create
+  action          String // action: READ, CREATE, UPDATE, DELETE, MANAGE
   description     String?
   RolePermissions RolePermissions[]
 

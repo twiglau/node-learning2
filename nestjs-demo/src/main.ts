@@ -49,7 +49,7 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       // true => 移除额外的属性， false => 不移除
-      whitelist: true,
+      whitelist: false,
       // 自动转换实体到 dto, 例如将字符串转换为数字
       transform: true,
       transformOptions: {

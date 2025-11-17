@@ -10,6 +10,7 @@ export class RolePermissionGuard implements CanActivate {
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
+    // 拿到自定义的权限，元信息
     const classPermissions = this.reflector.get<string[]>(
       PERMISSION_KEY,
       context.getClass(),

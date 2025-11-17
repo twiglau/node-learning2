@@ -15,6 +15,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   password: string;
 
+  // 用户 -> 既可以是 普通用户，也可以是管理员
   @IsArray()
   @IsInt({ each: true })
   @IsOptional()

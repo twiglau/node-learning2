@@ -1,6 +1,6 @@
 import { CreatePermissionDto } from '@/permission/dto/create-premission.dto';
 import { Type } from 'class-transformer';
-import { IsArray, IsOptional } from 'class-validator';
+import { IsArray, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 interface PermissionType {
   id?: number;
@@ -10,12 +10,17 @@ interface PermissionType {
 }
 
 export class CreateRoleDto {
+  @IsString()
+  @IsNotEmpty()
   name: string;
+
+  @IsString()
+  @IsNotEmpty()
   description?: string;
 
   @IsOptional()
   @IsArray()
-  //TODO
+  //隐式类型转换时，转换为 CreatePermissionDto
   @Type(() => CreatePermissionDto)
   permissions?: PermissionType[];
 }

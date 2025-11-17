@@ -12,6 +12,8 @@ import {
 import { RoleService } from './role.service';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
+import { Serialize } from '@/common/decorators/serialize.decorator';
+import { PublicRoleDto } from './dto/public-role.dto';
 
 @Controller('role')
 export class RoleController {
@@ -22,6 +24,7 @@ export class RoleController {
     return this.roleService.create(createRoleDto);
   }
 
+  @Get()
   findAll(
     @Query(
       'page',
@@ -43,6 +46,8 @@ export class RoleController {
   }
 
   @Get(':id')
+  // 对响应部分 RolePermissions 进行格式化
+  @Serialize(PublicRoleDto)
   findOne(@Param('id') id: string) {
     return this.roleService.findOne(+id);
   }
