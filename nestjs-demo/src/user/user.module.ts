@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { getEnvs } from '@/utils/get-envs';
 import { toBoolean } from '@/utils/format';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -51,6 +51,7 @@ const providers = tenantMode
       ?.filter(Boolean)
   : [UserPrismaRepository];
 
+@Global()
 @Module({
   imports,
   providers: [...providers, UserRepository],

@@ -25,6 +25,7 @@ import {
 } from '@/common/decorators/role-permission.decorator';
 import { JwtGuard } from '@/common/guard/jwt.guard';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { PublicUpdateUserDto } from './dto/public-update-user.dto';
 
 @Controller('user')
 @Permission('user')
@@ -41,6 +42,7 @@ export class UserController {
   }
 
   @Get()
+  @Read()
   findAll(
     @Query(
       'page',
@@ -67,7 +69,7 @@ export class UserController {
   }
 
   @Patch()
-  @Serialize(PublicUserDto)
+  @Serialize(PublicUpdateUserDto)
   update(@Body() updateUserDto: UpdateUserDto) {
     return this.userRepository.update(updateUserDto);
   }

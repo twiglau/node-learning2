@@ -127,15 +127,7 @@ export class UserPrismaRepository implements UserAdapter {
             },
           },
           include: {
-            UserRole: {
-              include: {
-                role: {
-                  include: {
-                    RolePermissions: true,
-                  },
-                },
-              },
-            },
+            UserRole: true,
           },
         });
 
