@@ -99,7 +99,7 @@ export class UserPrismaRepository implements UserAdapter {
               data: {
                 ...restRole,
                 RolePermissions: {
-                  deleteMany: {}, // 先删除所有数据
+                  deleteMany: {}, // 先删除该角色之前所拥有的权限
                   create: (permissions || []).map((permission) => ({
                     permission: {
                       connectOrCreate: {
@@ -127,7 +127,15 @@ export class UserPrismaRepository implements UserAdapter {
             },
           },
           include: {
-            UserRole: true,
+            UserRole: {
+              include: {
+                role: {
+                  include: {
+                    RolePermissions: true,
+                  },
+                },
+              },
+            },
           },
         });
 

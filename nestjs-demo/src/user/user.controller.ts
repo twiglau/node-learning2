@@ -67,6 +67,7 @@ export class UserController {
   }
 
   @Patch()
+  @Serialize(PublicUserDto)
   update(@Body() updateUserDto: UpdateUserDto) {
     return this.userRepository.update(updateUserDto);
   }

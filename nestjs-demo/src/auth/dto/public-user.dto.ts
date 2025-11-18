@@ -14,7 +14,6 @@ export class PublicUserDto extends SignupDto {
   id: string;
 
   @Transform(({ value }) => {
-    console.log('publicUserDto', value);
     return value.map((item) => ({
       name: item.role.name,
       permissions: item.role.RolePermissions,
