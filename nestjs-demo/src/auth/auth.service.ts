@@ -12,7 +12,7 @@ export class AuthService {
   ) {}
 
   async signin(username: string, password: string) {
-    const user = await this.userRepository.find(username);
+    const user = await this.userRepository.findOne(username);
     if (!user) {
       throw new ForbiddenException('用户不存在');
     }
@@ -33,7 +33,7 @@ export class AuthService {
     };
   }
   async signup(username: string, password: string) {
-    const user = await this.userRepository.find(username);
+    const user = await this.userRepository.findOne(username);
     if (user?.[0]) {
       throw new ForbiddenException('用户已存在');
     }

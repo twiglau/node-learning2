@@ -1,8 +1,19 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  ParseIntPipe,
+  Post,
+  Query,
+  Param,
+  UseGuards,
+  Patch,
+  Delete,
+} from '@nestjs/common';
 import { UserRepository } from './user.repository';
 import { CreateUserDto } from './dto/create-user.dto';
 import { Serialize } from '@/common/decorators/serialize.decorator';
-import { PublicUserDto } from '@/auth/dto/public-dto';
+import { PublicUserDto } from '@/auth/dto/public-user.dto';
 // import { AuthGuard } from '@nestjs/passport';
 // import { AdminGuard } from '@/common/guard/admin.guard';
 import { RolePermissionGuard } from '@/common/guard/role-permission.guard';
@@ -13,6 +24,7 @@ import {
   Update,
 } from '@/common/decorators/role-permission.decorator';
 import { JwtGuard } from '@/common/guard/jwt.guard';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('user')
 @Permission('user')
@@ -28,6 +40,42 @@ export class UserController {
     return this.userRepository.create(createUserDto);
   }
 
+  @Get()
+  findAll(
+    @Query(
+      'page',
+      new ParseIntPipe({
+        optional: true,
+      }),
+    )
+    page,
+    @Query(
+      'limit',
+      new ParseIntPipe({
+        optional: true,
+      }),
+    )
+    limit,
+  ) {
+    return this.userRepository.findAll(page, limit);
+  }
+
+  @Get(':username')
+  @Serialize(PublicUserDto)
+  findOne(@Param('username') username: string) {
+    return this.userRepository.findOne(username);
+  }
+
+  @Patch()
+  update(@Body() updateUserDto: UpdateUserDto) {
+    return this.userRepository.update(updateUserDto);
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: string) {
+    return this.userRepository.delete(id);
+  }
+
   @Get('/multi')
   async getHello() {
     // 1. prisma
@@ -40,7 +88,7 @@ export class UserController {
     // const res = this.prismaClient.user.findMany();
     // return res;
     // 2. typeorm
-    const res = await this.userRepository.find('ass');
+    const res = await this.userRepository.findOne('twiger-001');
     return res;
     // 3. mongoose
     // const userModel = await this.userModel.find();

@@ -7,8 +7,8 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserPipe } from './pipes/create-user.pipe';
-import { SignupDto } from './dto/signup-dto';
-import { PublicUserDto } from './dto/public-dto';
+import { SignupDto } from './dto/signup-user.dto';
+import { PublicUserDto } from './dto/public-user.dto';
 import { Serialize } from '@/common/decorators/serialize.decorator';
 
 @Controller('auth')

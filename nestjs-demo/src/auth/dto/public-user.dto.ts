@@ -1,5 +1,5 @@
-import { Exclude } from 'class-transformer';
-import { SignupDto } from './signup-dto';
+import { Exclude, Expose, Transform } from 'class-transformer';
+import { SignupDto } from './signup-user.dto';
 
 // 测试序列化 隐式转换
 // enableImplicitConversion: true
@@ -12,6 +12,17 @@ export class PublicUserDto extends SignupDto {
 
   @Exclude()
   id: string;
+
+  @Transform(({ value }) => {
+    console.log('publicUserDto', value);
+    return value.map((item) => ({
+      name: item.role.name,
+      permissions: item.role.RolePermissions,
+    }));
+  })
+  // 输出别名
+  @Expose({ name: 'UserRole' })
+  roles: any;
 
   constructor(partial: Partial<PublicUserDto>) {
     // 复用先前 SignupDto 中属性，及判断。

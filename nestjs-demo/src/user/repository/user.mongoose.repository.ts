@@ -1,13 +1,20 @@
 import { InjectModel } from '@nestjs/mongoose';
-import { UserAbstractRepository } from '../user.abstract.repository';
 import { User } from '../user.schema';
 import { Model } from 'mongoose';
+import { UserAdapter } from '../user.interface';
 
-export class UserMongooseRepository implements UserAbstractRepository {
+export class UserMongooseRepository implements UserAdapter {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
-  find(): Promise<any[]> {
-    return this.userModel.find();
+  findAll(page: number = 1, limit: number = 10): Promise<any[]> {
+    return this.userModel
+      .find()
+      .limit(limit)
+      .skip((page - 1) * limit)
+      .exec();
+  }
+  findOne(username: string): Promise<any> {
+    return this.userModel.findOne({ username });
   }
   create(userObj: any): Promise<any> {
     return this.userModel.create(userObj);

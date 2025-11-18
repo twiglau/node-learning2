@@ -15,9 +15,13 @@ export class UserRepository implements UserAdapter {
     @Optional() private userTypeormRepository: UserTypeormRepository,
     @Optional() private userPrismaRepository: UserPrismaRepository,
   ) {}
-  find(username: string): Promise<any[]> {
+  findAll(page: number = 1, limit: number = 10): Promise<any[]> {
     const client = this.getRepository();
-    return client.find(username);
+    return client.findAll(page, limit);
+  }
+  findOne(username: string): Promise<any> {
+    const client = this.getRepository();
+    return client.findOne(username);
   }
   async create(userObj: any): Promise<any> {
     const client = this.getRepository();
