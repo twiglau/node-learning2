@@ -18,14 +18,14 @@ export class AuthService {
     }
 
     const isPasswordValid =
-      user.length && argon2.verify(user[0].password, password);
+      user.length && argon2.verify(user.password, password);
     if (!isPasswordValid) {
-      throw new ForbiddenException('用户名或密码错误');
+      throw new ForbiddenException('密码错误');
     }
 
     const token = await this.jwt.signAsync({
-      id: user[0].id,
-      username: user[0].username,
+      id: user.id,
+      username: user.username,
     });
 
     return {

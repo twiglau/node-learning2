@@ -29,8 +29,7 @@ import { PublicUpdateUserDto } from './dto/public-update-user.dto';
 
 @Controller('user')
 @Permission('user')
-@UseGuards(RolePermissionGuard)
-// @UseGuards(JwtGuard)
+@UseGuards(JwtGuard, RolePermissionGuard)
 export class UserController {
   constructor(private userRepository: UserRepository) {}
 
