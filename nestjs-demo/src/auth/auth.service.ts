@@ -34,7 +34,7 @@ export class AuthService {
   }
   async signup(username: string, password: string) {
     const user = await this.userRepository.findOne(username);
-    if (user?.[0]) {
+    if (user) {
       throw new ForbiddenException('用户已存在');
     }
     return this.userRepository.create({
