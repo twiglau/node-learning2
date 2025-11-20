@@ -3,6 +3,7 @@ import { Reflector } from '@nestjs/core';
 import { PERMISSION_KEY } from '../decorators/role-permission.decorator';
 import { UserRepository } from '@/user/user.repository';
 import { RoleService } from '@/role/role.service';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class RolePermissionGuard implements CanActivate {
@@ -10,6 +11,7 @@ export class RolePermissionGuard implements CanActivate {
     private reflector: Reflector,
     private userRepository: UserRepository,
     private roleService: RoleService,
+    private configService: ConfigService,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -43,6 +45,16 @@ export class RolePermissionGuard implements CanActivate {
     if (!user) {
       return false;
     }
+    // 如果是 whiteList 中的用户对应的roleId,直接返回true
+    const roleIds = user.UserRole.map((o) => o.roleId);
+    const whiteList = this.configService.get('ROLE_ID_WHITELIST');
+    if (whiteList) {
+      const whiteListArr = whiteList.split(',');
+      if (whiteListArr.some((o) => roleIds.includes(+o))) {
+        return true;
+      }
+    }
+    // 再对照权限
     const permissions = await this.roleService.findAllByIds(
       user.UserRole.map((ele) => ele.roleId),
     );
