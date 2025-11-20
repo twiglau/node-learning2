@@ -35,12 +35,12 @@ export const Permission = (permission: string) =>
 // export const Create = () =>
 //   SetMetadata(PERMISSION_KEY, Action.Create.toLocaleUpperCase());
 export const Create = () =>
-  accumulateMetadata(PERMISSION_KEY, Action.Create.toLocaleUpperCase());
+  accumulateMetadata(PERMISSION_KEY, Action.Create.toLocaleLowerCase());
 export const Read = () =>
-  accumulateMetadata(PERMISSION_KEY, Action.Read.toLocaleUpperCase());
+  accumulateMetadata(PERMISSION_KEY, Action.Read.toLocaleLowerCase());
 export const Update = () =>
-  accumulateMetadata(PERMISSION_KEY, Action.Update.toLocaleUpperCase());
+  accumulateMetadata(PERMISSION_KEY, Action.Update.toLocaleLowerCase());
 export const Delete = () =>
-  accumulateMetadata(PERMISSION_KEY, Action.Delete.toLocaleUpperCase());
+  accumulateMetadata(PERMISSION_KEY, Action.Delete.toLocaleLowerCase());
 export const Manage = () =>
-  accumulateMetadata(PERMISSION_KEY, Action.Manage.toLocaleUpperCase());
+  accumulateMetadata(PERMISSION_KEY, Action.Manage.toLocaleLowerCase());

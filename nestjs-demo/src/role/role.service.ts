@@ -69,6 +69,23 @@ export class RoleService {
     });
   }
 
+  findAllByIds(ids: number[]) {
+    return this.prismaClient.role.findMany({
+      where: {
+        id: {
+          in: ids,
+        },
+      },
+      include: {
+        RolePermissions: {
+          include: {
+            permission: true,
+          },
+        },
+      },
+    });
+  }
+
   update(id: number, updateRoleDto: any) {
     return this.prismaClient.role.update({
       where: { id },

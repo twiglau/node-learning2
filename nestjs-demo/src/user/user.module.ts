@@ -11,6 +11,7 @@ import { UserMongooseRepository } from './repository/user.mongoose.repository';
 import { UserPrismaRepository } from './repository/user.prisma.repository';
 import { UserRepository } from './user.repository';
 import { UserController } from './user.controller';
+import { RoleModule } from '@/role/role.module';
 
 const parseConfig = getEnvs();
 const tenantMode = toBoolean(parseConfig['TENANT_MODE']);
@@ -53,7 +54,7 @@ const providers = tenantMode
 
 @Global()
 @Module({
-  imports,
+  imports: [...imports, RoleModule],
   providers: [...providers, UserRepository],
   controllers: [UserController],
   exports: [UserRepository], // 导出后，可以在 Auth 等其他模块中使用（ID 依赖注入方式）
