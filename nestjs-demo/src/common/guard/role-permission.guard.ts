@@ -65,8 +65,6 @@ export class RolePermissionGuard implements CanActivate {
         return [...new Set([...acc, ...cur])];
       }, []);
 
-    console.log(personal_right, permissionsArr);
-
     return permissionsArr.includes(personal_right);
   }
 }

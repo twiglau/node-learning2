@@ -26,10 +26,11 @@ import {
 import { JwtGuard } from '@/common/guard/jwt.guard';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { PublicUpdateUserDto } from './dto/public-update-user.dto';
+import { PolicyGuard } from '@/common/guard/policy.guard';
 
 @Controller('user')
 @Permission('user')
-@UseGuards(JwtGuard, RolePermissionGuard)
+@UseGuards(JwtGuard, RolePermissionGuard, PolicyGuard)
 export class UserController {
   constructor(private userRepository: UserRepository) {}
 

@@ -14,6 +14,7 @@ import { RoleModule } from './role/role.module';
 import { PermissionModule } from './permission/permission.module';
 // import { APP_GUARD } from '@nestjs/core';
 // import { JwtGuard } from './common/guard/jwt.guard';
+import { PolicyModule } from './policy/policy.module';
 
 const conditionalImports = () => {
   const imports: any[] = [];
@@ -36,6 +37,7 @@ const conditionalImports = () => {
     AuthModule,
     RoleModule,
     PermissionModule,
+    PolicyModule,
   ],
   controllers: [AppController],
   providers: [
