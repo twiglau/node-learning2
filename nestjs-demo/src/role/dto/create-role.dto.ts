@@ -1,4 +1,5 @@
 import { CreatePermissionDto } from '@/permission/dto/create-premission.dto';
+import { CreatePolicyDto } from '@/policy/dto/create-policy.dto';
 import { plainToInstance, Transform, Type } from 'class-transformer';
 import { IsArray, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
@@ -41,4 +42,9 @@ export class CreateRoleDto {
     });
   })
   permissions?: PermissionType[] | string[];
+
+  @IsOptional()
+  @IsArray()
+  @Type(() => CreatePolicyDto)
+  policies?: any;
 }

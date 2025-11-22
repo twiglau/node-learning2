@@ -153,9 +153,36 @@ exports.Prisma.RolePermissionsScalarFieldEnum = {
   permissionId: 'permissionId'
 };
 
+exports.Prisma.PolicyScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  effect: 'effect',
+  action: 'action',
+  subject: 'subject',
+  fields: 'fields',
+  conditions: 'conditions',
+  args: 'args',
+  encode: 'encode'
+};
+
+exports.Prisma.RolePolicyScalarFieldEnum = {
+  roleId: 'roleId',
+  policyId: 'policyId'
+};
+
+exports.Prisma.PermissionPolicyScalarFieldEnum = {
+  permissionId: 'permissionId',
+  policyId: 'policyId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -168,13 +195,22 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
   Role: 'Role',
   UserRole: 'UserRole',
   Permission: 'Permission',
-  RolePermissions: 'RolePermissions'
+  RolePermissions: 'RolePermissions',
+  Policy: 'Policy',
+  RolePolicy: 'RolePolicy',
+  PermissionPolicy: 'PermissionPolicy'
 };
 
 /**

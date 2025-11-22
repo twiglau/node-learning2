@@ -8,10 +8,44 @@ import { updatePermissionDto } from './dto/update-permission.dto';
 export class PermissionService {
   constructor(@Inject(PRISMA_DATABASE) private prismaClient: PrismaClient) {}
 
-  create(createPermissionDto: CreatePermissionDto) {
-    return this.prismaClient.permission.create({
-      data: createPermissionDto,
-    });
+  async create(createPermissionDto: CreatePermissionDto) {
+    const createPermissionPolicy = (policies) => {
+      return {
+        create: policies?.map((policy) => {
+          let whereCondition;
+          if (policy.id) {
+            whereCondition = { id: policy.id };
+          } else {
+            const encode = Buffer.from(JSON.stringify(policy)).toString(
+              'base64',
+            );
+            whereCondition = { encode };
+            policy.encode = encode;
+          }
+          return {
+            policy: {
+              connectOrCreate: {
+                where: whereCondition,
+                create: {
+                  ...policy,
+                },
+              },
+            },
+          };
+        }),
+      };
+    };
+    return await this.prismaClient.$transaction(
+      async (prisma: PrismaClient) => {
+        const { policies, ...restData } = createPermissionDto;
+        return prisma.permission.create({
+          data: {
+            ...restData,
+            PermissionPolicy: createPermissionPolicy(policies),
+          },
+        });
+      },
+    );
   }
 
   findAll(page: number = 1, limit: number = 10) {
@@ -28,11 +62,54 @@ export class PermissionService {
     });
   }
 
-  update(id: number, updatePermissionDto: updatePermissionDto) {
-    return this.prismaClient.permission.update({
-      where: { id },
-      data: updatePermissionDto,
-    });
+  async update(id: number, updatePermissionDto: updatePermissionDto) {
+    const { policies, ...restData } = updatePermissionDto;
+    const createPermissionPolicy = () => {
+      return {
+        // 删除的是 PermissionPolicy 关联表中历史关系，先全部删除
+        deleteMany: {},
+        create: policies?.map((policy) => {
+          let whereCondition;
+          if (policy.id) {
+            whereCondition = { id };
+          } else {
+            const encode = Buffer.from(JSON.stringify(policy)).toString(
+              'base64',
+            );
+            whereCondition = { encode };
+            policy.encode = encode;
+          }
+          return {
+            policy: {
+              connectOrCreate: {
+                where: whereCondition,
+                create: {
+                  ...policy,
+                },
+              },
+            },
+          };
+        }),
+      };
+    };
+    return await this.prismaClient.$transaction(
+      (prismaClient: PrismaClient) => {
+        return prismaClient.permission.update({
+          where: { id },
+          data: {
+            ...restData,
+            PermissionPolicy: createPermissionPolicy(),
+          },
+          include: {
+            PermissionPolicy: {
+              include: {
+                policy: true,
+              },
+            },
+          },
+        });
+      },
+    );
   }
 
   remove(id: number) {

@@ -32,6 +32,7 @@ model Role {
   description     String?
   users           UserRole[]
   RolePermissions RolePermissions[]
+  RolePolicy      RolePolicy[]
 
   @@map("roles")
 }
@@ -47,11 +48,12 @@ model UserRole {
 }
 
 model Permission {
-  id              Int               @id @default(autoincrement())
-  name            String            @unique
-  action          String
-  description     String?
-  RolePermissions RolePermissions[]
+  id               Int                @id @default(autoincrement())
+  name             String             @unique // Controller name + Route name : user:create
+  action           String // action: READ, CREATE, UPDATE, DELETE, MANAGE
+  description      String?
+  RolePermissions  RolePermissions[]
+  PermissionPolicy PermissionPolicy[]
 
   @@map("permissions")
 }
@@ -64,4 +66,45 @@ model RolePermissions {
 
   @@id([roleId, permissionId])
   @@map("role_permissions")
+}
+
+model Policy {
+  id         Int    @id @default(autoincrement())
+  type       Int // 类型标识， 0 -json, 1 -mongo, 2 -function
+  effect     String // 'can' | cannot'
+  action     String // CURD + manage
+  subject    String // Class 类
+  fields     Json? // 字段列表，{type: data}
+  conditions Json?
+  args       Json?
+
+  // base64编码字段
+  encode String @unique
+
+  RolePolicy       RolePolicy[]
+  PermissionPolicy PermissionPolicy[]
+
+  @@map("policies")
+}
+
+// Role 和 Policy 角色所拥有的策略权限
+model RolePolicy {
+  roleId   Int
+  policyId Int
+  role     Role   @relation(fields: [roleId], references: [id])
+  policy   Policy @relation(fields: [policyId], references: [id])
+
+  @@id([roleId, policyId]) // 联合主键
+  @@map("role_policies")
+}
+
+// Permission 和 Policy 路由级别所需要的策略权限
+model PermissionPolicy {
+  permissionId Int
+  policyId     Int
+  permission   Permission @relation(fields: [permissionId], references: [id])
+  policy       Policy     @relation(fields: [policyId], references: [id])
+
+  @@id([permissionId, policyId])
+  @@map("permission_policies")
 }

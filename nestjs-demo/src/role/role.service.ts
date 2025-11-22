@@ -9,29 +9,59 @@ export class RoleService {
   async create(createRoleDto: CreateRoleDto) {
     // TODO
 
+    const createRolePermissions = (permissions) => {
+      return {
+        create: permissions?.map((permission) => ({
+          permission: {
+            // 先查询是否存在，如果通过唯一name查询存在，直接使用；
+            // 如果不存在，则创建；
+            connectOrCreate: {
+              where: {
+                name: permission.name,
+              },
+              create: {
+                ...permission,
+              },
+            },
+          },
+        })),
+      };
+    };
+    const createRolePolicies = (policies) => {
+      return {
+        create: policies?.map((policy) => {
+          let whereCondition;
+          if (policy.id) {
+            whereCondition = { id: policy.id };
+          } else {
+            const encode = Buffer.from(JSON.stringify(policy)).toString(
+              'base64',
+            );
+            whereCondition = { encode };
+            policy.encode = encode;
+          }
+          return {
+            policy: {
+              connectOrCreate: {
+                where: whereCondition,
+                create: {
+                  ...policy,
+                },
+              },
+            },
+          };
+        }),
+      };
+    };
     return await this.prismaClient.$transaction(
       async (prisma: PrismaClient) => {
-        const { permissions, ...restData } = createRoleDto;
+        const { permissions, policies, ...restData } = createRoleDto;
         return prisma.role.create({
           data: {
             ...restData,
-            RolePermissions: {
-              create: permissions?.map((permission) => ({
-                permission: {
-                  // 先查询是否存在，如果通过唯一name查询存在，直接使用；
-                  // 如果不存在，则创建；
-                  connectOrCreate: {
-                    where: {
-                      name: permission.name,
-                    },
-                    create: {
-                      ...permission,
-                    },
-                  },
-                },
-              })),
-            }, // RolePermissions_End
-          }, // data_End
+            RolePermissions: createRolePermissions(permissions), // data_End
+            RolePolicy: createRolePolicies(policies),
+          },
         });
       },
     );

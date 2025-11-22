@@ -1,4 +1,12 @@
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { CreatePolicyDto } from '@/policy/dto/create-policy.dto';
+import { Type } from 'class-transformer';
+import {
+  IsArray,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
 
 export class CreatePermissionDto {
   @IsNotEmpty()
@@ -12,4 +20,10 @@ export class CreatePermissionDto {
   @IsOptional()
   @IsString()
   description?: string;
+
+  @IsOptional()
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => CreatePolicyDto)
+  policies?: any;
 }

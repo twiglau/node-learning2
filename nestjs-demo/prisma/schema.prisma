@@ -77,6 +77,14 @@ model Policy {
   fields     Json? // 字段列表，{type: data}
   conditions Json?
   args       Json?
+
+  // base64编码字段
+  encode String @unique
+
+  RolePolicy       RolePolicy[]
+  PermissionPolicy PermissionPolicy[]
+
+  @@map("policies")
 }
 
 // Role 和 Policy 角色所拥有的策略权限

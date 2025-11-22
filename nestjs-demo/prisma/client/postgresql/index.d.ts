@@ -38,6 +38,21 @@ export type Permission = $Result.DefaultSelection<Prisma.$PermissionPayload>
  * 
  */
 export type RolePermissions = $Result.DefaultSelection<Prisma.$RolePermissionsPayload>
+/**
+ * Model Policy
+ * 
+ */
+export type Policy = $Result.DefaultSelection<Prisma.$PolicyPayload>
+/**
+ * Model RolePolicy
+ * 
+ */
+export type RolePolicy = $Result.DefaultSelection<Prisma.$RolePolicyPayload>
+/**
+ * Model PermissionPolicy
+ * 
+ */
+export type PermissionPolicy = $Result.DefaultSelection<Prisma.$PermissionPolicyPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -211,6 +226,36 @@ export class PrismaClient<
     * ```
     */
   get rolePermissions(): Prisma.RolePermissionsDelegate<ExtArgs>;
+
+  /**
+   * `prisma.policy`: Exposes CRUD operations for the **Policy** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Policies
+    * const policies = await prisma.policy.findMany()
+    * ```
+    */
+  get policy(): Prisma.PolicyDelegate<ExtArgs>;
+
+  /**
+   * `prisma.rolePolicy`: Exposes CRUD operations for the **RolePolicy** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RolePolicies
+    * const rolePolicies = await prisma.rolePolicy.findMany()
+    * ```
+    */
+  get rolePolicy(): Prisma.RolePolicyDelegate<ExtArgs>;
+
+  /**
+   * `prisma.permissionPolicy`: Exposes CRUD operations for the **PermissionPolicy** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PermissionPolicies
+    * const permissionPolicies = await prisma.permissionPolicy.findMany()
+    * ```
+    */
+  get permissionPolicy(): Prisma.PermissionPolicyDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -656,7 +701,10 @@ export namespace Prisma {
     Role: 'Role',
     UserRole: 'UserRole',
     Permission: 'Permission',
-    RolePermissions: 'RolePermissions'
+    RolePermissions: 'RolePermissions',
+    Policy: 'Policy',
+    RolePolicy: 'RolePolicy',
+    PermissionPolicy: 'PermissionPolicy'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -672,7 +720,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "role" | "userRole" | "permission" | "rolePermissions"
+      modelProps: "user" | "role" | "userRole" | "permission" | "rolePermissions" | "policy" | "rolePolicy" | "permissionPolicy"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1026,6 +1074,216 @@ export namespace Prisma {
           }
         }
       }
+      Policy: {
+        payload: Prisma.$PolicyPayload<ExtArgs>
+        fields: Prisma.PolicyFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PolicyFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PolicyPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PolicyFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PolicyPayload>
+          }
+          findFirst: {
+            args: Prisma.PolicyFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PolicyPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PolicyFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PolicyPayload>
+          }
+          findMany: {
+            args: Prisma.PolicyFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PolicyPayload>[]
+          }
+          create: {
+            args: Prisma.PolicyCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PolicyPayload>
+          }
+          createMany: {
+            args: Prisma.PolicyCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PolicyCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PolicyPayload>[]
+          }
+          delete: {
+            args: Prisma.PolicyDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PolicyPayload>
+          }
+          update: {
+            args: Prisma.PolicyUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PolicyPayload>
+          }
+          deleteMany: {
+            args: Prisma.PolicyDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PolicyUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.PolicyUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PolicyPayload>
+          }
+          aggregate: {
+            args: Prisma.PolicyAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePolicy>
+          }
+          groupBy: {
+            args: Prisma.PolicyGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PolicyGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PolicyCountArgs<ExtArgs>
+            result: $Utils.Optional<PolicyCountAggregateOutputType> | number
+          }
+        }
+      }
+      RolePolicy: {
+        payload: Prisma.$RolePolicyPayload<ExtArgs>
+        fields: Prisma.RolePolicyFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RolePolicyFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePolicyPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RolePolicyFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePolicyPayload>
+          }
+          findFirst: {
+            args: Prisma.RolePolicyFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePolicyPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RolePolicyFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePolicyPayload>
+          }
+          findMany: {
+            args: Prisma.RolePolicyFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePolicyPayload>[]
+          }
+          create: {
+            args: Prisma.RolePolicyCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePolicyPayload>
+          }
+          createMany: {
+            args: Prisma.RolePolicyCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RolePolicyCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePolicyPayload>[]
+          }
+          delete: {
+            args: Prisma.RolePolicyDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePolicyPayload>
+          }
+          update: {
+            args: Prisma.RolePolicyUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePolicyPayload>
+          }
+          deleteMany: {
+            args: Prisma.RolePolicyDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RolePolicyUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.RolePolicyUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RolePolicyPayload>
+          }
+          aggregate: {
+            args: Prisma.RolePolicyAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRolePolicy>
+          }
+          groupBy: {
+            args: Prisma.RolePolicyGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RolePolicyGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RolePolicyCountArgs<ExtArgs>
+            result: $Utils.Optional<RolePolicyCountAggregateOutputType> | number
+          }
+        }
+      }
+      PermissionPolicy: {
+        payload: Prisma.$PermissionPolicyPayload<ExtArgs>
+        fields: Prisma.PermissionPolicyFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PermissionPolicyFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPolicyPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PermissionPolicyFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPolicyPayload>
+          }
+          findFirst: {
+            args: Prisma.PermissionPolicyFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPolicyPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PermissionPolicyFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPolicyPayload>
+          }
+          findMany: {
+            args: Prisma.PermissionPolicyFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPolicyPayload>[]
+          }
+          create: {
+            args: Prisma.PermissionPolicyCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPolicyPayload>
+          }
+          createMany: {
+            args: Prisma.PermissionPolicyCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PermissionPolicyCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPolicyPayload>[]
+          }
+          delete: {
+            args: Prisma.PermissionPolicyDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPolicyPayload>
+          }
+          update: {
+            args: Prisma.PermissionPolicyUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPolicyPayload>
+          }
+          deleteMany: {
+            args: Prisma.PermissionPolicyDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PermissionPolicyUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.PermissionPolicyUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PermissionPolicyPayload>
+          }
+          aggregate: {
+            args: Prisma.PermissionPolicyAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePermissionPolicy>
+          }
+          groupBy: {
+            args: Prisma.PermissionPolicyGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PermissionPolicyGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PermissionPolicyCountArgs<ExtArgs>
+            result: $Utils.Optional<PermissionPolicyCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1220,11 +1478,13 @@ export namespace Prisma {
   export type RoleCountOutputType = {
     users: number
     RolePermissions: number
+    RolePolicy: number
   }
 
   export type RoleCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | RoleCountOutputTypeCountUsersArgs
     RolePermissions?: boolean | RoleCountOutputTypeCountRolePermissionsArgs
+    RolePolicy?: boolean | RoleCountOutputTypeCountRolePolicyArgs
   }
 
   // Custom InputTypes
@@ -1252,6 +1512,13 @@ export namespace Prisma {
     where?: RolePermissionsWhereInput
   }
 
+  /**
+   * RoleCountOutputType without action
+   */
+  export type RoleCountOutputTypeCountRolePolicyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RolePolicyWhereInput
+  }
+
 
   /**
    * Count Type PermissionCountOutputType
@@ -1259,10 +1526,12 @@ export namespace Prisma {
 
   export type PermissionCountOutputType = {
     RolePermissions: number
+    PermissionPolicy: number
   }
 
   export type PermissionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     RolePermissions?: boolean | PermissionCountOutputTypeCountRolePermissionsArgs
+    PermissionPolicy?: boolean | PermissionCountOutputTypeCountPermissionPolicyArgs
   }
 
   // Custom InputTypes
@@ -1281,6 +1550,53 @@ export namespace Prisma {
    */
   export type PermissionCountOutputTypeCountRolePermissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RolePermissionsWhereInput
+  }
+
+  /**
+   * PermissionCountOutputType without action
+   */
+  export type PermissionCountOutputTypeCountPermissionPolicyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PermissionPolicyWhereInput
+  }
+
+
+  /**
+   * Count Type PolicyCountOutputType
+   */
+
+  export type PolicyCountOutputType = {
+    RolePolicy: number
+    PermissionPolicy: number
+  }
+
+  export type PolicyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    RolePolicy?: boolean | PolicyCountOutputTypeCountRolePolicyArgs
+    PermissionPolicy?: boolean | PolicyCountOutputTypeCountPermissionPolicyArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PolicyCountOutputType without action
+   */
+  export type PolicyCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PolicyCountOutputType
+     */
+    select?: PolicyCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PolicyCountOutputType without action
+   */
+  export type PolicyCountOutputTypeCountRolePolicyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RolePolicyWhereInput
+  }
+
+  /**
+   * PolicyCountOutputType without action
+   */
+  export type PolicyCountOutputTypeCountPermissionPolicyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PermissionPolicyWhereInput
   }
 
 
@@ -2454,6 +2770,7 @@ export namespace Prisma {
     description?: boolean
     users?: boolean | Role$usersArgs<ExtArgs>
     RolePermissions?: boolean | Role$RolePermissionsArgs<ExtArgs>
+    RolePolicy?: boolean | Role$RolePolicyArgs<ExtArgs>
     _count?: boolean | RoleCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["role"]>
 
@@ -2472,6 +2789,7 @@ export namespace Prisma {
   export type RoleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | Role$usersArgs<ExtArgs>
     RolePermissions?: boolean | Role$RolePermissionsArgs<ExtArgs>
+    RolePolicy?: boolean | Role$RolePolicyArgs<ExtArgs>
     _count?: boolean | RoleCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type RoleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2481,6 +2799,7 @@ export namespace Prisma {
     objects: {
       users: Prisma.$UserRolePayload<ExtArgs>[]
       RolePermissions: Prisma.$RolePermissionsPayload<ExtArgs>[]
+      RolePolicy: Prisma.$RolePolicyPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2852,6 +3171,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     users<T extends Role$usersArgs<ExtArgs> = {}>(args?: Subset<T, Role$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserRolePayload<ExtArgs>, T, "findMany"> | Null>
     RolePermissions<T extends Role$RolePermissionsArgs<ExtArgs> = {}>(args?: Subset<T, Role$RolePermissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePermissionsPayload<ExtArgs>, T, "findMany"> | Null>
+    RolePolicy<T extends Role$RolePolicyArgs<ExtArgs> = {}>(args?: Subset<T, Role$RolePolicyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePolicyPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3235,6 +3555,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: RolePermissionsScalarFieldEnum | RolePermissionsScalarFieldEnum[]
+  }
+
+  /**
+   * Role.RolePolicy
+   */
+  export type Role$RolePolicyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePolicy
+     */
+    select?: RolePolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePolicyInclude<ExtArgs> | null
+    where?: RolePolicyWhereInput
+    orderBy?: RolePolicyOrderByWithRelationInput | RolePolicyOrderByWithRelationInput[]
+    cursor?: RolePolicyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RolePolicyScalarFieldEnum | RolePolicyScalarFieldEnum[]
   }
 
   /**
@@ -4384,6 +4724,7 @@ export namespace Prisma {
     action?: boolean
     description?: boolean
     RolePermissions?: boolean | Permission$RolePermissionsArgs<ExtArgs>
+    PermissionPolicy?: boolean | Permission$PermissionPolicyArgs<ExtArgs>
     _count?: boolean | PermissionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["permission"]>
 
@@ -4403,6 +4744,7 @@ export namespace Prisma {
 
   export type PermissionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     RolePermissions?: boolean | Permission$RolePermissionsArgs<ExtArgs>
+    PermissionPolicy?: boolean | Permission$PermissionPolicyArgs<ExtArgs>
     _count?: boolean | PermissionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PermissionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -4411,6 +4753,7 @@ export namespace Prisma {
     name: "Permission"
     objects: {
       RolePermissions: Prisma.$RolePermissionsPayload<ExtArgs>[]
+      PermissionPolicy: Prisma.$PermissionPolicyPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -4782,6 +5125,7 @@ export namespace Prisma {
   export interface Prisma__PermissionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     RolePermissions<T extends Permission$RolePermissionsArgs<ExtArgs> = {}>(args?: Subset<T, Permission$RolePermissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePermissionsPayload<ExtArgs>, T, "findMany"> | Null>
+    PermissionPolicy<T extends Permission$PermissionPolicyArgs<ExtArgs> = {}>(args?: Subset<T, Permission$PermissionPolicyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PermissionPolicyPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5146,6 +5490,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: RolePermissionsScalarFieldEnum | RolePermissionsScalarFieldEnum[]
+  }
+
+  /**
+   * Permission.PermissionPolicy
+   */
+  export type Permission$PermissionPolicyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PermissionPolicy
+     */
+    select?: PermissionPolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionPolicyInclude<ExtArgs> | null
+    where?: PermissionPolicyWhereInput
+    orderBy?: PermissionPolicyOrderByWithRelationInput | PermissionPolicyOrderByWithRelationInput[]
+    cursor?: PermissionPolicyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PermissionPolicyScalarFieldEnum | PermissionPolicyScalarFieldEnum[]
   }
 
   /**
@@ -6105,6 +6469,2934 @@ export namespace Prisma {
 
 
   /**
+   * Model Policy
+   */
+
+  export type AggregatePolicy = {
+    _count: PolicyCountAggregateOutputType | null
+    _avg: PolicyAvgAggregateOutputType | null
+    _sum: PolicySumAggregateOutputType | null
+    _min: PolicyMinAggregateOutputType | null
+    _max: PolicyMaxAggregateOutputType | null
+  }
+
+  export type PolicyAvgAggregateOutputType = {
+    id: number | null
+    type: number | null
+  }
+
+  export type PolicySumAggregateOutputType = {
+    id: number | null
+    type: number | null
+  }
+
+  export type PolicyMinAggregateOutputType = {
+    id: number | null
+    type: number | null
+    effect: string | null
+    action: string | null
+    subject: string | null
+    encode: string | null
+  }
+
+  export type PolicyMaxAggregateOutputType = {
+    id: number | null
+    type: number | null
+    effect: string | null
+    action: string | null
+    subject: string | null
+    encode: string | null
+  }
+
+  export type PolicyCountAggregateOutputType = {
+    id: number
+    type: number
+    effect: number
+    action: number
+    subject: number
+    fields: number
+    conditions: number
+    args: number
+    encode: number
+    _all: number
+  }
+
+
+  export type PolicyAvgAggregateInputType = {
+    id?: true
+    type?: true
+  }
+
+  export type PolicySumAggregateInputType = {
+    id?: true
+    type?: true
+  }
+
+  export type PolicyMinAggregateInputType = {
+    id?: true
+    type?: true
+    effect?: true
+    action?: true
+    subject?: true
+    encode?: true
+  }
+
+  export type PolicyMaxAggregateInputType = {
+    id?: true
+    type?: true
+    effect?: true
+    action?: true
+    subject?: true
+    encode?: true
+  }
+
+  export type PolicyCountAggregateInputType = {
+    id?: true
+    type?: true
+    effect?: true
+    action?: true
+    subject?: true
+    fields?: true
+    conditions?: true
+    args?: true
+    encode?: true
+    _all?: true
+  }
+
+  export type PolicyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Policy to aggregate.
+     */
+    where?: PolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Policies to fetch.
+     */
+    orderBy?: PolicyOrderByWithRelationInput | PolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Policies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Policies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Policies
+    **/
+    _count?: true | PolicyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PolicyAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PolicySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PolicyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PolicyMaxAggregateInputType
+  }
+
+  export type GetPolicyAggregateType<T extends PolicyAggregateArgs> = {
+        [P in keyof T & keyof AggregatePolicy]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePolicy[P]>
+      : GetScalarType<T[P], AggregatePolicy[P]>
+  }
+
+
+
+
+  export type PolicyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PolicyWhereInput
+    orderBy?: PolicyOrderByWithAggregationInput | PolicyOrderByWithAggregationInput[]
+    by: PolicyScalarFieldEnum[] | PolicyScalarFieldEnum
+    having?: PolicyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PolicyCountAggregateInputType | true
+    _avg?: PolicyAvgAggregateInputType
+    _sum?: PolicySumAggregateInputType
+    _min?: PolicyMinAggregateInputType
+    _max?: PolicyMaxAggregateInputType
+  }
+
+  export type PolicyGroupByOutputType = {
+    id: number
+    type: number
+    effect: string
+    action: string
+    subject: string
+    fields: JsonValue | null
+    conditions: JsonValue | null
+    args: JsonValue | null
+    encode: string
+    _count: PolicyCountAggregateOutputType | null
+    _avg: PolicyAvgAggregateOutputType | null
+    _sum: PolicySumAggregateOutputType | null
+    _min: PolicyMinAggregateOutputType | null
+    _max: PolicyMaxAggregateOutputType | null
+  }
+
+  type GetPolicyGroupByPayload<T extends PolicyGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PolicyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PolicyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PolicyGroupByOutputType[P]>
+            : GetScalarType<T[P], PolicyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PolicySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    effect?: boolean
+    action?: boolean
+    subject?: boolean
+    fields?: boolean
+    conditions?: boolean
+    args?: boolean
+    encode?: boolean
+    RolePolicy?: boolean | Policy$RolePolicyArgs<ExtArgs>
+    PermissionPolicy?: boolean | Policy$PermissionPolicyArgs<ExtArgs>
+    _count?: boolean | PolicyCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["policy"]>
+
+  export type PolicySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    type?: boolean
+    effect?: boolean
+    action?: boolean
+    subject?: boolean
+    fields?: boolean
+    conditions?: boolean
+    args?: boolean
+    encode?: boolean
+  }, ExtArgs["result"]["policy"]>
+
+  export type PolicySelectScalar = {
+    id?: boolean
+    type?: boolean
+    effect?: boolean
+    action?: boolean
+    subject?: boolean
+    fields?: boolean
+    conditions?: boolean
+    args?: boolean
+    encode?: boolean
+  }
+
+  export type PolicyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    RolePolicy?: boolean | Policy$RolePolicyArgs<ExtArgs>
+    PermissionPolicy?: boolean | Policy$PermissionPolicyArgs<ExtArgs>
+    _count?: boolean | PolicyCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PolicyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $PolicyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Policy"
+    objects: {
+      RolePolicy: Prisma.$RolePolicyPayload<ExtArgs>[]
+      PermissionPolicy: Prisma.$PermissionPolicyPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      type: number
+      effect: string
+      action: string
+      subject: string
+      fields: Prisma.JsonValue | null
+      conditions: Prisma.JsonValue | null
+      args: Prisma.JsonValue | null
+      encode: string
+    }, ExtArgs["result"]["policy"]>
+    composites: {}
+  }
+
+  type PolicyGetPayload<S extends boolean | null | undefined | PolicyDefaultArgs> = $Result.GetResult<Prisma.$PolicyPayload, S>
+
+  type PolicyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<PolicyFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: PolicyCountAggregateInputType | true
+    }
+
+  export interface PolicyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Policy'], meta: { name: 'Policy' } }
+    /**
+     * Find zero or one Policy that matches the filter.
+     * @param {PolicyFindUniqueArgs} args - Arguments to find a Policy
+     * @example
+     * // Get one Policy
+     * const policy = await prisma.policy.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PolicyFindUniqueArgs>(args: SelectSubset<T, PolicyFindUniqueArgs<ExtArgs>>): Prisma__PolicyClient<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Policy that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {PolicyFindUniqueOrThrowArgs} args - Arguments to find a Policy
+     * @example
+     * // Get one Policy
+     * const policy = await prisma.policy.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PolicyFindUniqueOrThrowArgs>(args: SelectSubset<T, PolicyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PolicyClient<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Policy that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PolicyFindFirstArgs} args - Arguments to find a Policy
+     * @example
+     * // Get one Policy
+     * const policy = await prisma.policy.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PolicyFindFirstArgs>(args?: SelectSubset<T, PolicyFindFirstArgs<ExtArgs>>): Prisma__PolicyClient<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Policy that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PolicyFindFirstOrThrowArgs} args - Arguments to find a Policy
+     * @example
+     * // Get one Policy
+     * const policy = await prisma.policy.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PolicyFindFirstOrThrowArgs>(args?: SelectSubset<T, PolicyFindFirstOrThrowArgs<ExtArgs>>): Prisma__PolicyClient<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Policies that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PolicyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Policies
+     * const policies = await prisma.policy.findMany()
+     * 
+     * // Get first 10 Policies
+     * const policies = await prisma.policy.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const policyWithIdOnly = await prisma.policy.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PolicyFindManyArgs>(args?: SelectSubset<T, PolicyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Policy.
+     * @param {PolicyCreateArgs} args - Arguments to create a Policy.
+     * @example
+     * // Create one Policy
+     * const Policy = await prisma.policy.create({
+     *   data: {
+     *     // ... data to create a Policy
+     *   }
+     * })
+     * 
+     */
+    create<T extends PolicyCreateArgs>(args: SelectSubset<T, PolicyCreateArgs<ExtArgs>>): Prisma__PolicyClient<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Policies.
+     * @param {PolicyCreateManyArgs} args - Arguments to create many Policies.
+     * @example
+     * // Create many Policies
+     * const policy = await prisma.policy.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PolicyCreateManyArgs>(args?: SelectSubset<T, PolicyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Policies and returns the data saved in the database.
+     * @param {PolicyCreateManyAndReturnArgs} args - Arguments to create many Policies.
+     * @example
+     * // Create many Policies
+     * const policy = await prisma.policy.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Policies and only return the `id`
+     * const policyWithIdOnly = await prisma.policy.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PolicyCreateManyAndReturnArgs>(args?: SelectSubset<T, PolicyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Policy.
+     * @param {PolicyDeleteArgs} args - Arguments to delete one Policy.
+     * @example
+     * // Delete one Policy
+     * const Policy = await prisma.policy.delete({
+     *   where: {
+     *     // ... filter to delete one Policy
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PolicyDeleteArgs>(args: SelectSubset<T, PolicyDeleteArgs<ExtArgs>>): Prisma__PolicyClient<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Policy.
+     * @param {PolicyUpdateArgs} args - Arguments to update one Policy.
+     * @example
+     * // Update one Policy
+     * const policy = await prisma.policy.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PolicyUpdateArgs>(args: SelectSubset<T, PolicyUpdateArgs<ExtArgs>>): Prisma__PolicyClient<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Policies.
+     * @param {PolicyDeleteManyArgs} args - Arguments to filter Policies to delete.
+     * @example
+     * // Delete a few Policies
+     * const { count } = await prisma.policy.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PolicyDeleteManyArgs>(args?: SelectSubset<T, PolicyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Policies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PolicyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Policies
+     * const policy = await prisma.policy.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PolicyUpdateManyArgs>(args: SelectSubset<T, PolicyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Policy.
+     * @param {PolicyUpsertArgs} args - Arguments to update or create a Policy.
+     * @example
+     * // Update or create a Policy
+     * const policy = await prisma.policy.upsert({
+     *   create: {
+     *     // ... data to create a Policy
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Policy we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PolicyUpsertArgs>(args: SelectSubset<T, PolicyUpsertArgs<ExtArgs>>): Prisma__PolicyClient<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Policies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PolicyCountArgs} args - Arguments to filter Policies to count.
+     * @example
+     * // Count the number of Policies
+     * const count = await prisma.policy.count({
+     *   where: {
+     *     // ... the filter for the Policies we want to count
+     *   }
+     * })
+    **/
+    count<T extends PolicyCountArgs>(
+      args?: Subset<T, PolicyCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PolicyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Policy.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PolicyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PolicyAggregateArgs>(args: Subset<T, PolicyAggregateArgs>): Prisma.PrismaPromise<GetPolicyAggregateType<T>>
+
+    /**
+     * Group by Policy.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PolicyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PolicyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PolicyGroupByArgs['orderBy'] }
+        : { orderBy?: PolicyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PolicyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPolicyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Policy model
+   */
+  readonly fields: PolicyFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Policy.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PolicyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    RolePolicy<T extends Policy$RolePolicyArgs<ExtArgs> = {}>(args?: Subset<T, Policy$RolePolicyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePolicyPayload<ExtArgs>, T, "findMany"> | Null>
+    PermissionPolicy<T extends Policy$PermissionPolicyArgs<ExtArgs> = {}>(args?: Subset<T, Policy$PermissionPolicyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PermissionPolicyPayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Policy model
+   */ 
+  interface PolicyFieldRefs {
+    readonly id: FieldRef<"Policy", 'Int'>
+    readonly type: FieldRef<"Policy", 'Int'>
+    readonly effect: FieldRef<"Policy", 'String'>
+    readonly action: FieldRef<"Policy", 'String'>
+    readonly subject: FieldRef<"Policy", 'String'>
+    readonly fields: FieldRef<"Policy", 'Json'>
+    readonly conditions: FieldRef<"Policy", 'Json'>
+    readonly args: FieldRef<"Policy", 'Json'>
+    readonly encode: FieldRef<"Policy", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Policy findUnique
+   */
+  export type PolicyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which Policy to fetch.
+     */
+    where: PolicyWhereUniqueInput
+  }
+
+  /**
+   * Policy findUniqueOrThrow
+   */
+  export type PolicyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which Policy to fetch.
+     */
+    where: PolicyWhereUniqueInput
+  }
+
+  /**
+   * Policy findFirst
+   */
+  export type PolicyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which Policy to fetch.
+     */
+    where?: PolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Policies to fetch.
+     */
+    orderBy?: PolicyOrderByWithRelationInput | PolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Policies.
+     */
+    cursor?: PolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Policies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Policies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Policies.
+     */
+    distinct?: PolicyScalarFieldEnum | PolicyScalarFieldEnum[]
+  }
+
+  /**
+   * Policy findFirstOrThrow
+   */
+  export type PolicyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which Policy to fetch.
+     */
+    where?: PolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Policies to fetch.
+     */
+    orderBy?: PolicyOrderByWithRelationInput | PolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Policies.
+     */
+    cursor?: PolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Policies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Policies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Policies.
+     */
+    distinct?: PolicyScalarFieldEnum | PolicyScalarFieldEnum[]
+  }
+
+  /**
+   * Policy findMany
+   */
+  export type PolicyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which Policies to fetch.
+     */
+    where?: PolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Policies to fetch.
+     */
+    orderBy?: PolicyOrderByWithRelationInput | PolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Policies.
+     */
+    cursor?: PolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Policies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Policies.
+     */
+    skip?: number
+    distinct?: PolicyScalarFieldEnum | PolicyScalarFieldEnum[]
+  }
+
+  /**
+   * Policy create
+   */
+  export type PolicyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Policy.
+     */
+    data: XOR<PolicyCreateInput, PolicyUncheckedCreateInput>
+  }
+
+  /**
+   * Policy createMany
+   */
+  export type PolicyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Policies.
+     */
+    data: PolicyCreateManyInput | PolicyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Policy createManyAndReturn
+   */
+  export type PolicyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Policies.
+     */
+    data: PolicyCreateManyInput | PolicyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Policy update
+   */
+  export type PolicyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Policy.
+     */
+    data: XOR<PolicyUpdateInput, PolicyUncheckedUpdateInput>
+    /**
+     * Choose, which Policy to update.
+     */
+    where: PolicyWhereUniqueInput
+  }
+
+  /**
+   * Policy updateMany
+   */
+  export type PolicyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Policies.
+     */
+    data: XOR<PolicyUpdateManyMutationInput, PolicyUncheckedUpdateManyInput>
+    /**
+     * Filter which Policies to update
+     */
+    where?: PolicyWhereInput
+  }
+
+  /**
+   * Policy upsert
+   */
+  export type PolicyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Policy to update in case it exists.
+     */
+    where: PolicyWhereUniqueInput
+    /**
+     * In case the Policy found by the `where` argument doesn't exist, create a new Policy with this data.
+     */
+    create: XOR<PolicyCreateInput, PolicyUncheckedCreateInput>
+    /**
+     * In case the Policy was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PolicyUpdateInput, PolicyUncheckedUpdateInput>
+  }
+
+  /**
+   * Policy delete
+   */
+  export type PolicyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyInclude<ExtArgs> | null
+    /**
+     * Filter which Policy to delete.
+     */
+    where: PolicyWhereUniqueInput
+  }
+
+  /**
+   * Policy deleteMany
+   */
+  export type PolicyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Policies to delete
+     */
+    where?: PolicyWhereInput
+  }
+
+  /**
+   * Policy.RolePolicy
+   */
+  export type Policy$RolePolicyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePolicy
+     */
+    select?: RolePolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePolicyInclude<ExtArgs> | null
+    where?: RolePolicyWhereInput
+    orderBy?: RolePolicyOrderByWithRelationInput | RolePolicyOrderByWithRelationInput[]
+    cursor?: RolePolicyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RolePolicyScalarFieldEnum | RolePolicyScalarFieldEnum[]
+  }
+
+  /**
+   * Policy.PermissionPolicy
+   */
+  export type Policy$PermissionPolicyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PermissionPolicy
+     */
+    select?: PermissionPolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionPolicyInclude<ExtArgs> | null
+    where?: PermissionPolicyWhereInput
+    orderBy?: PermissionPolicyOrderByWithRelationInput | PermissionPolicyOrderByWithRelationInput[]
+    cursor?: PermissionPolicyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PermissionPolicyScalarFieldEnum | PermissionPolicyScalarFieldEnum[]
+  }
+
+  /**
+   * Policy without action
+   */
+  export type PolicyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model RolePolicy
+   */
+
+  export type AggregateRolePolicy = {
+    _count: RolePolicyCountAggregateOutputType | null
+    _avg: RolePolicyAvgAggregateOutputType | null
+    _sum: RolePolicySumAggregateOutputType | null
+    _min: RolePolicyMinAggregateOutputType | null
+    _max: RolePolicyMaxAggregateOutputType | null
+  }
+
+  export type RolePolicyAvgAggregateOutputType = {
+    roleId: number | null
+    policyId: number | null
+  }
+
+  export type RolePolicySumAggregateOutputType = {
+    roleId: number | null
+    policyId: number | null
+  }
+
+  export type RolePolicyMinAggregateOutputType = {
+    roleId: number | null
+    policyId: number | null
+  }
+
+  export type RolePolicyMaxAggregateOutputType = {
+    roleId: number | null
+    policyId: number | null
+  }
+
+  export type RolePolicyCountAggregateOutputType = {
+    roleId: number
+    policyId: number
+    _all: number
+  }
+
+
+  export type RolePolicyAvgAggregateInputType = {
+    roleId?: true
+    policyId?: true
+  }
+
+  export type RolePolicySumAggregateInputType = {
+    roleId?: true
+    policyId?: true
+  }
+
+  export type RolePolicyMinAggregateInputType = {
+    roleId?: true
+    policyId?: true
+  }
+
+  export type RolePolicyMaxAggregateInputType = {
+    roleId?: true
+    policyId?: true
+  }
+
+  export type RolePolicyCountAggregateInputType = {
+    roleId?: true
+    policyId?: true
+    _all?: true
+  }
+
+  export type RolePolicyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RolePolicy to aggregate.
+     */
+    where?: RolePolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RolePolicies to fetch.
+     */
+    orderBy?: RolePolicyOrderByWithRelationInput | RolePolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RolePolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RolePolicies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RolePolicies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RolePolicies
+    **/
+    _count?: true | RolePolicyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RolePolicyAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RolePolicySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RolePolicyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RolePolicyMaxAggregateInputType
+  }
+
+  export type GetRolePolicyAggregateType<T extends RolePolicyAggregateArgs> = {
+        [P in keyof T & keyof AggregateRolePolicy]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRolePolicy[P]>
+      : GetScalarType<T[P], AggregateRolePolicy[P]>
+  }
+
+
+
+
+  export type RolePolicyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RolePolicyWhereInput
+    orderBy?: RolePolicyOrderByWithAggregationInput | RolePolicyOrderByWithAggregationInput[]
+    by: RolePolicyScalarFieldEnum[] | RolePolicyScalarFieldEnum
+    having?: RolePolicyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RolePolicyCountAggregateInputType | true
+    _avg?: RolePolicyAvgAggregateInputType
+    _sum?: RolePolicySumAggregateInputType
+    _min?: RolePolicyMinAggregateInputType
+    _max?: RolePolicyMaxAggregateInputType
+  }
+
+  export type RolePolicyGroupByOutputType = {
+    roleId: number
+    policyId: number
+    _count: RolePolicyCountAggregateOutputType | null
+    _avg: RolePolicyAvgAggregateOutputType | null
+    _sum: RolePolicySumAggregateOutputType | null
+    _min: RolePolicyMinAggregateOutputType | null
+    _max: RolePolicyMaxAggregateOutputType | null
+  }
+
+  type GetRolePolicyGroupByPayload<T extends RolePolicyGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RolePolicyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RolePolicyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RolePolicyGroupByOutputType[P]>
+            : GetScalarType<T[P], RolePolicyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RolePolicySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    roleId?: boolean
+    policyId?: boolean
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+    policy?: boolean | PolicyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rolePolicy"]>
+
+  export type RolePolicySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    roleId?: boolean
+    policyId?: boolean
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+    policy?: boolean | PolicyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rolePolicy"]>
+
+  export type RolePolicySelectScalar = {
+    roleId?: boolean
+    policyId?: boolean
+  }
+
+  export type RolePolicyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+    policy?: boolean | PolicyDefaultArgs<ExtArgs>
+  }
+  export type RolePolicyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    role?: boolean | RoleDefaultArgs<ExtArgs>
+    policy?: boolean | PolicyDefaultArgs<ExtArgs>
+  }
+
+  export type $RolePolicyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RolePolicy"
+    objects: {
+      role: Prisma.$RolePayload<ExtArgs>
+      policy: Prisma.$PolicyPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      roleId: number
+      policyId: number
+    }, ExtArgs["result"]["rolePolicy"]>
+    composites: {}
+  }
+
+  type RolePolicyGetPayload<S extends boolean | null | undefined | RolePolicyDefaultArgs> = $Result.GetResult<Prisma.$RolePolicyPayload, S>
+
+  type RolePolicyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<RolePolicyFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: RolePolicyCountAggregateInputType | true
+    }
+
+  export interface RolePolicyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RolePolicy'], meta: { name: 'RolePolicy' } }
+    /**
+     * Find zero or one RolePolicy that matches the filter.
+     * @param {RolePolicyFindUniqueArgs} args - Arguments to find a RolePolicy
+     * @example
+     * // Get one RolePolicy
+     * const rolePolicy = await prisma.rolePolicy.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RolePolicyFindUniqueArgs>(args: SelectSubset<T, RolePolicyFindUniqueArgs<ExtArgs>>): Prisma__RolePolicyClient<$Result.GetResult<Prisma.$RolePolicyPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one RolePolicy that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {RolePolicyFindUniqueOrThrowArgs} args - Arguments to find a RolePolicy
+     * @example
+     * // Get one RolePolicy
+     * const rolePolicy = await prisma.rolePolicy.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RolePolicyFindUniqueOrThrowArgs>(args: SelectSubset<T, RolePolicyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RolePolicyClient<$Result.GetResult<Prisma.$RolePolicyPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first RolePolicy that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RolePolicyFindFirstArgs} args - Arguments to find a RolePolicy
+     * @example
+     * // Get one RolePolicy
+     * const rolePolicy = await prisma.rolePolicy.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RolePolicyFindFirstArgs>(args?: SelectSubset<T, RolePolicyFindFirstArgs<ExtArgs>>): Prisma__RolePolicyClient<$Result.GetResult<Prisma.$RolePolicyPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first RolePolicy that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RolePolicyFindFirstOrThrowArgs} args - Arguments to find a RolePolicy
+     * @example
+     * // Get one RolePolicy
+     * const rolePolicy = await prisma.rolePolicy.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RolePolicyFindFirstOrThrowArgs>(args?: SelectSubset<T, RolePolicyFindFirstOrThrowArgs<ExtArgs>>): Prisma__RolePolicyClient<$Result.GetResult<Prisma.$RolePolicyPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more RolePolicies that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RolePolicyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RolePolicies
+     * const rolePolicies = await prisma.rolePolicy.findMany()
+     * 
+     * // Get first 10 RolePolicies
+     * const rolePolicies = await prisma.rolePolicy.findMany({ take: 10 })
+     * 
+     * // Only select the `roleId`
+     * const rolePolicyWithRoleIdOnly = await prisma.rolePolicy.findMany({ select: { roleId: true } })
+     * 
+     */
+    findMany<T extends RolePolicyFindManyArgs>(args?: SelectSubset<T, RolePolicyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePolicyPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a RolePolicy.
+     * @param {RolePolicyCreateArgs} args - Arguments to create a RolePolicy.
+     * @example
+     * // Create one RolePolicy
+     * const RolePolicy = await prisma.rolePolicy.create({
+     *   data: {
+     *     // ... data to create a RolePolicy
+     *   }
+     * })
+     * 
+     */
+    create<T extends RolePolicyCreateArgs>(args: SelectSubset<T, RolePolicyCreateArgs<ExtArgs>>): Prisma__RolePolicyClient<$Result.GetResult<Prisma.$RolePolicyPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many RolePolicies.
+     * @param {RolePolicyCreateManyArgs} args - Arguments to create many RolePolicies.
+     * @example
+     * // Create many RolePolicies
+     * const rolePolicy = await prisma.rolePolicy.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RolePolicyCreateManyArgs>(args?: SelectSubset<T, RolePolicyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many RolePolicies and returns the data saved in the database.
+     * @param {RolePolicyCreateManyAndReturnArgs} args - Arguments to create many RolePolicies.
+     * @example
+     * // Create many RolePolicies
+     * const rolePolicy = await prisma.rolePolicy.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many RolePolicies and only return the `roleId`
+     * const rolePolicyWithRoleIdOnly = await prisma.rolePolicy.createManyAndReturn({ 
+     *   select: { roleId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RolePolicyCreateManyAndReturnArgs>(args?: SelectSubset<T, RolePolicyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePolicyPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a RolePolicy.
+     * @param {RolePolicyDeleteArgs} args - Arguments to delete one RolePolicy.
+     * @example
+     * // Delete one RolePolicy
+     * const RolePolicy = await prisma.rolePolicy.delete({
+     *   where: {
+     *     // ... filter to delete one RolePolicy
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RolePolicyDeleteArgs>(args: SelectSubset<T, RolePolicyDeleteArgs<ExtArgs>>): Prisma__RolePolicyClient<$Result.GetResult<Prisma.$RolePolicyPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one RolePolicy.
+     * @param {RolePolicyUpdateArgs} args - Arguments to update one RolePolicy.
+     * @example
+     * // Update one RolePolicy
+     * const rolePolicy = await prisma.rolePolicy.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RolePolicyUpdateArgs>(args: SelectSubset<T, RolePolicyUpdateArgs<ExtArgs>>): Prisma__RolePolicyClient<$Result.GetResult<Prisma.$RolePolicyPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more RolePolicies.
+     * @param {RolePolicyDeleteManyArgs} args - Arguments to filter RolePolicies to delete.
+     * @example
+     * // Delete a few RolePolicies
+     * const { count } = await prisma.rolePolicy.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RolePolicyDeleteManyArgs>(args?: SelectSubset<T, RolePolicyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RolePolicies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RolePolicyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RolePolicies
+     * const rolePolicy = await prisma.rolePolicy.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RolePolicyUpdateManyArgs>(args: SelectSubset<T, RolePolicyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one RolePolicy.
+     * @param {RolePolicyUpsertArgs} args - Arguments to update or create a RolePolicy.
+     * @example
+     * // Update or create a RolePolicy
+     * const rolePolicy = await prisma.rolePolicy.upsert({
+     *   create: {
+     *     // ... data to create a RolePolicy
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RolePolicy we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RolePolicyUpsertArgs>(args: SelectSubset<T, RolePolicyUpsertArgs<ExtArgs>>): Prisma__RolePolicyClient<$Result.GetResult<Prisma.$RolePolicyPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of RolePolicies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RolePolicyCountArgs} args - Arguments to filter RolePolicies to count.
+     * @example
+     * // Count the number of RolePolicies
+     * const count = await prisma.rolePolicy.count({
+     *   where: {
+     *     // ... the filter for the RolePolicies we want to count
+     *   }
+     * })
+    **/
+    count<T extends RolePolicyCountArgs>(
+      args?: Subset<T, RolePolicyCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RolePolicyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RolePolicy.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RolePolicyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RolePolicyAggregateArgs>(args: Subset<T, RolePolicyAggregateArgs>): Prisma.PrismaPromise<GetRolePolicyAggregateType<T>>
+
+    /**
+     * Group by RolePolicy.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RolePolicyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RolePolicyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RolePolicyGroupByArgs['orderBy'] }
+        : { orderBy?: RolePolicyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RolePolicyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRolePolicyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RolePolicy model
+   */
+  readonly fields: RolePolicyFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RolePolicy.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RolePolicyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    role<T extends RoleDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RoleDefaultArgs<ExtArgs>>): Prisma__RoleClient<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    policy<T extends PolicyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PolicyDefaultArgs<ExtArgs>>): Prisma__PolicyClient<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RolePolicy model
+   */ 
+  interface RolePolicyFieldRefs {
+    readonly roleId: FieldRef<"RolePolicy", 'Int'>
+    readonly policyId: FieldRef<"RolePolicy", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RolePolicy findUnique
+   */
+  export type RolePolicyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePolicy
+     */
+    select?: RolePolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which RolePolicy to fetch.
+     */
+    where: RolePolicyWhereUniqueInput
+  }
+
+  /**
+   * RolePolicy findUniqueOrThrow
+   */
+  export type RolePolicyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePolicy
+     */
+    select?: RolePolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which RolePolicy to fetch.
+     */
+    where: RolePolicyWhereUniqueInput
+  }
+
+  /**
+   * RolePolicy findFirst
+   */
+  export type RolePolicyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePolicy
+     */
+    select?: RolePolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which RolePolicy to fetch.
+     */
+    where?: RolePolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RolePolicies to fetch.
+     */
+    orderBy?: RolePolicyOrderByWithRelationInput | RolePolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RolePolicies.
+     */
+    cursor?: RolePolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RolePolicies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RolePolicies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RolePolicies.
+     */
+    distinct?: RolePolicyScalarFieldEnum | RolePolicyScalarFieldEnum[]
+  }
+
+  /**
+   * RolePolicy findFirstOrThrow
+   */
+  export type RolePolicyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePolicy
+     */
+    select?: RolePolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which RolePolicy to fetch.
+     */
+    where?: RolePolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RolePolicies to fetch.
+     */
+    orderBy?: RolePolicyOrderByWithRelationInput | RolePolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RolePolicies.
+     */
+    cursor?: RolePolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RolePolicies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RolePolicies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RolePolicies.
+     */
+    distinct?: RolePolicyScalarFieldEnum | RolePolicyScalarFieldEnum[]
+  }
+
+  /**
+   * RolePolicy findMany
+   */
+  export type RolePolicyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePolicy
+     */
+    select?: RolePolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which RolePolicies to fetch.
+     */
+    where?: RolePolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RolePolicies to fetch.
+     */
+    orderBy?: RolePolicyOrderByWithRelationInput | RolePolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RolePolicies.
+     */
+    cursor?: RolePolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RolePolicies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RolePolicies.
+     */
+    skip?: number
+    distinct?: RolePolicyScalarFieldEnum | RolePolicyScalarFieldEnum[]
+  }
+
+  /**
+   * RolePolicy create
+   */
+  export type RolePolicyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePolicy
+     */
+    select?: RolePolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePolicyInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RolePolicy.
+     */
+    data: XOR<RolePolicyCreateInput, RolePolicyUncheckedCreateInput>
+  }
+
+  /**
+   * RolePolicy createMany
+   */
+  export type RolePolicyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RolePolicies.
+     */
+    data: RolePolicyCreateManyInput | RolePolicyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RolePolicy createManyAndReturn
+   */
+  export type RolePolicyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePolicy
+     */
+    select?: RolePolicySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many RolePolicies.
+     */
+    data: RolePolicyCreateManyInput | RolePolicyCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePolicyIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RolePolicy update
+   */
+  export type RolePolicyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePolicy
+     */
+    select?: RolePolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePolicyInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RolePolicy.
+     */
+    data: XOR<RolePolicyUpdateInput, RolePolicyUncheckedUpdateInput>
+    /**
+     * Choose, which RolePolicy to update.
+     */
+    where: RolePolicyWhereUniqueInput
+  }
+
+  /**
+   * RolePolicy updateMany
+   */
+  export type RolePolicyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RolePolicies.
+     */
+    data: XOR<RolePolicyUpdateManyMutationInput, RolePolicyUncheckedUpdateManyInput>
+    /**
+     * Filter which RolePolicies to update
+     */
+    where?: RolePolicyWhereInput
+  }
+
+  /**
+   * RolePolicy upsert
+   */
+  export type RolePolicyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePolicy
+     */
+    select?: RolePolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePolicyInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RolePolicy to update in case it exists.
+     */
+    where: RolePolicyWhereUniqueInput
+    /**
+     * In case the RolePolicy found by the `where` argument doesn't exist, create a new RolePolicy with this data.
+     */
+    create: XOR<RolePolicyCreateInput, RolePolicyUncheckedCreateInput>
+    /**
+     * In case the RolePolicy was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RolePolicyUpdateInput, RolePolicyUncheckedUpdateInput>
+  }
+
+  /**
+   * RolePolicy delete
+   */
+  export type RolePolicyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePolicy
+     */
+    select?: RolePolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePolicyInclude<ExtArgs> | null
+    /**
+     * Filter which RolePolicy to delete.
+     */
+    where: RolePolicyWhereUniqueInput
+  }
+
+  /**
+   * RolePolicy deleteMany
+   */
+  export type RolePolicyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RolePolicies to delete
+     */
+    where?: RolePolicyWhereInput
+  }
+
+  /**
+   * RolePolicy without action
+   */
+  export type RolePolicyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RolePolicy
+     */
+    select?: RolePolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RolePolicyInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PermissionPolicy
+   */
+
+  export type AggregatePermissionPolicy = {
+    _count: PermissionPolicyCountAggregateOutputType | null
+    _avg: PermissionPolicyAvgAggregateOutputType | null
+    _sum: PermissionPolicySumAggregateOutputType | null
+    _min: PermissionPolicyMinAggregateOutputType | null
+    _max: PermissionPolicyMaxAggregateOutputType | null
+  }
+
+  export type PermissionPolicyAvgAggregateOutputType = {
+    permissionId: number | null
+    policyId: number | null
+  }
+
+  export type PermissionPolicySumAggregateOutputType = {
+    permissionId: number | null
+    policyId: number | null
+  }
+
+  export type PermissionPolicyMinAggregateOutputType = {
+    permissionId: number | null
+    policyId: number | null
+  }
+
+  export type PermissionPolicyMaxAggregateOutputType = {
+    permissionId: number | null
+    policyId: number | null
+  }
+
+  export type PermissionPolicyCountAggregateOutputType = {
+    permissionId: number
+    policyId: number
+    _all: number
+  }
+
+
+  export type PermissionPolicyAvgAggregateInputType = {
+    permissionId?: true
+    policyId?: true
+  }
+
+  export type PermissionPolicySumAggregateInputType = {
+    permissionId?: true
+    policyId?: true
+  }
+
+  export type PermissionPolicyMinAggregateInputType = {
+    permissionId?: true
+    policyId?: true
+  }
+
+  export type PermissionPolicyMaxAggregateInputType = {
+    permissionId?: true
+    policyId?: true
+  }
+
+  export type PermissionPolicyCountAggregateInputType = {
+    permissionId?: true
+    policyId?: true
+    _all?: true
+  }
+
+  export type PermissionPolicyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PermissionPolicy to aggregate.
+     */
+    where?: PermissionPolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PermissionPolicies to fetch.
+     */
+    orderBy?: PermissionPolicyOrderByWithRelationInput | PermissionPolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PermissionPolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PermissionPolicies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PermissionPolicies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PermissionPolicies
+    **/
+    _count?: true | PermissionPolicyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PermissionPolicyAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PermissionPolicySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PermissionPolicyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PermissionPolicyMaxAggregateInputType
+  }
+
+  export type GetPermissionPolicyAggregateType<T extends PermissionPolicyAggregateArgs> = {
+        [P in keyof T & keyof AggregatePermissionPolicy]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePermissionPolicy[P]>
+      : GetScalarType<T[P], AggregatePermissionPolicy[P]>
+  }
+
+
+
+
+  export type PermissionPolicyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PermissionPolicyWhereInput
+    orderBy?: PermissionPolicyOrderByWithAggregationInput | PermissionPolicyOrderByWithAggregationInput[]
+    by: PermissionPolicyScalarFieldEnum[] | PermissionPolicyScalarFieldEnum
+    having?: PermissionPolicyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PermissionPolicyCountAggregateInputType | true
+    _avg?: PermissionPolicyAvgAggregateInputType
+    _sum?: PermissionPolicySumAggregateInputType
+    _min?: PermissionPolicyMinAggregateInputType
+    _max?: PermissionPolicyMaxAggregateInputType
+  }
+
+  export type PermissionPolicyGroupByOutputType = {
+    permissionId: number
+    policyId: number
+    _count: PermissionPolicyCountAggregateOutputType | null
+    _avg: PermissionPolicyAvgAggregateOutputType | null
+    _sum: PermissionPolicySumAggregateOutputType | null
+    _min: PermissionPolicyMinAggregateOutputType | null
+    _max: PermissionPolicyMaxAggregateOutputType | null
+  }
+
+  type GetPermissionPolicyGroupByPayload<T extends PermissionPolicyGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PermissionPolicyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PermissionPolicyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PermissionPolicyGroupByOutputType[P]>
+            : GetScalarType<T[P], PermissionPolicyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PermissionPolicySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    permissionId?: boolean
+    policyId?: boolean
+    permission?: boolean | PermissionDefaultArgs<ExtArgs>
+    policy?: boolean | PolicyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["permissionPolicy"]>
+
+  export type PermissionPolicySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    permissionId?: boolean
+    policyId?: boolean
+    permission?: boolean | PermissionDefaultArgs<ExtArgs>
+    policy?: boolean | PolicyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["permissionPolicy"]>
+
+  export type PermissionPolicySelectScalar = {
+    permissionId?: boolean
+    policyId?: boolean
+  }
+
+  export type PermissionPolicyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    permission?: boolean | PermissionDefaultArgs<ExtArgs>
+    policy?: boolean | PolicyDefaultArgs<ExtArgs>
+  }
+  export type PermissionPolicyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    permission?: boolean | PermissionDefaultArgs<ExtArgs>
+    policy?: boolean | PolicyDefaultArgs<ExtArgs>
+  }
+
+  export type $PermissionPolicyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PermissionPolicy"
+    objects: {
+      permission: Prisma.$PermissionPayload<ExtArgs>
+      policy: Prisma.$PolicyPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      permissionId: number
+      policyId: number
+    }, ExtArgs["result"]["permissionPolicy"]>
+    composites: {}
+  }
+
+  type PermissionPolicyGetPayload<S extends boolean | null | undefined | PermissionPolicyDefaultArgs> = $Result.GetResult<Prisma.$PermissionPolicyPayload, S>
+
+  type PermissionPolicyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<PermissionPolicyFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: PermissionPolicyCountAggregateInputType | true
+    }
+
+  export interface PermissionPolicyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PermissionPolicy'], meta: { name: 'PermissionPolicy' } }
+    /**
+     * Find zero or one PermissionPolicy that matches the filter.
+     * @param {PermissionPolicyFindUniqueArgs} args - Arguments to find a PermissionPolicy
+     * @example
+     * // Get one PermissionPolicy
+     * const permissionPolicy = await prisma.permissionPolicy.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PermissionPolicyFindUniqueArgs>(args: SelectSubset<T, PermissionPolicyFindUniqueArgs<ExtArgs>>): Prisma__PermissionPolicyClient<$Result.GetResult<Prisma.$PermissionPolicyPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one PermissionPolicy that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {PermissionPolicyFindUniqueOrThrowArgs} args - Arguments to find a PermissionPolicy
+     * @example
+     * // Get one PermissionPolicy
+     * const permissionPolicy = await prisma.permissionPolicy.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PermissionPolicyFindUniqueOrThrowArgs>(args: SelectSubset<T, PermissionPolicyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PermissionPolicyClient<$Result.GetResult<Prisma.$PermissionPolicyPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first PermissionPolicy that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PermissionPolicyFindFirstArgs} args - Arguments to find a PermissionPolicy
+     * @example
+     * // Get one PermissionPolicy
+     * const permissionPolicy = await prisma.permissionPolicy.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PermissionPolicyFindFirstArgs>(args?: SelectSubset<T, PermissionPolicyFindFirstArgs<ExtArgs>>): Prisma__PermissionPolicyClient<$Result.GetResult<Prisma.$PermissionPolicyPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first PermissionPolicy that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PermissionPolicyFindFirstOrThrowArgs} args - Arguments to find a PermissionPolicy
+     * @example
+     * // Get one PermissionPolicy
+     * const permissionPolicy = await prisma.permissionPolicy.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PermissionPolicyFindFirstOrThrowArgs>(args?: SelectSubset<T, PermissionPolicyFindFirstOrThrowArgs<ExtArgs>>): Prisma__PermissionPolicyClient<$Result.GetResult<Prisma.$PermissionPolicyPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more PermissionPolicies that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PermissionPolicyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PermissionPolicies
+     * const permissionPolicies = await prisma.permissionPolicy.findMany()
+     * 
+     * // Get first 10 PermissionPolicies
+     * const permissionPolicies = await prisma.permissionPolicy.findMany({ take: 10 })
+     * 
+     * // Only select the `permissionId`
+     * const permissionPolicyWithPermissionIdOnly = await prisma.permissionPolicy.findMany({ select: { permissionId: true } })
+     * 
+     */
+    findMany<T extends PermissionPolicyFindManyArgs>(args?: SelectSubset<T, PermissionPolicyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PermissionPolicyPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a PermissionPolicy.
+     * @param {PermissionPolicyCreateArgs} args - Arguments to create a PermissionPolicy.
+     * @example
+     * // Create one PermissionPolicy
+     * const PermissionPolicy = await prisma.permissionPolicy.create({
+     *   data: {
+     *     // ... data to create a PermissionPolicy
+     *   }
+     * })
+     * 
+     */
+    create<T extends PermissionPolicyCreateArgs>(args: SelectSubset<T, PermissionPolicyCreateArgs<ExtArgs>>): Prisma__PermissionPolicyClient<$Result.GetResult<Prisma.$PermissionPolicyPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many PermissionPolicies.
+     * @param {PermissionPolicyCreateManyArgs} args - Arguments to create many PermissionPolicies.
+     * @example
+     * // Create many PermissionPolicies
+     * const permissionPolicy = await prisma.permissionPolicy.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PermissionPolicyCreateManyArgs>(args?: SelectSubset<T, PermissionPolicyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PermissionPolicies and returns the data saved in the database.
+     * @param {PermissionPolicyCreateManyAndReturnArgs} args - Arguments to create many PermissionPolicies.
+     * @example
+     * // Create many PermissionPolicies
+     * const permissionPolicy = await prisma.permissionPolicy.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PermissionPolicies and only return the `permissionId`
+     * const permissionPolicyWithPermissionIdOnly = await prisma.permissionPolicy.createManyAndReturn({ 
+     *   select: { permissionId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PermissionPolicyCreateManyAndReturnArgs>(args?: SelectSubset<T, PermissionPolicyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PermissionPolicyPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a PermissionPolicy.
+     * @param {PermissionPolicyDeleteArgs} args - Arguments to delete one PermissionPolicy.
+     * @example
+     * // Delete one PermissionPolicy
+     * const PermissionPolicy = await prisma.permissionPolicy.delete({
+     *   where: {
+     *     // ... filter to delete one PermissionPolicy
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PermissionPolicyDeleteArgs>(args: SelectSubset<T, PermissionPolicyDeleteArgs<ExtArgs>>): Prisma__PermissionPolicyClient<$Result.GetResult<Prisma.$PermissionPolicyPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one PermissionPolicy.
+     * @param {PermissionPolicyUpdateArgs} args - Arguments to update one PermissionPolicy.
+     * @example
+     * // Update one PermissionPolicy
+     * const permissionPolicy = await prisma.permissionPolicy.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PermissionPolicyUpdateArgs>(args: SelectSubset<T, PermissionPolicyUpdateArgs<ExtArgs>>): Prisma__PermissionPolicyClient<$Result.GetResult<Prisma.$PermissionPolicyPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more PermissionPolicies.
+     * @param {PermissionPolicyDeleteManyArgs} args - Arguments to filter PermissionPolicies to delete.
+     * @example
+     * // Delete a few PermissionPolicies
+     * const { count } = await prisma.permissionPolicy.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PermissionPolicyDeleteManyArgs>(args?: SelectSubset<T, PermissionPolicyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PermissionPolicies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PermissionPolicyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PermissionPolicies
+     * const permissionPolicy = await prisma.permissionPolicy.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PermissionPolicyUpdateManyArgs>(args: SelectSubset<T, PermissionPolicyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one PermissionPolicy.
+     * @param {PermissionPolicyUpsertArgs} args - Arguments to update or create a PermissionPolicy.
+     * @example
+     * // Update or create a PermissionPolicy
+     * const permissionPolicy = await prisma.permissionPolicy.upsert({
+     *   create: {
+     *     // ... data to create a PermissionPolicy
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PermissionPolicy we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PermissionPolicyUpsertArgs>(args: SelectSubset<T, PermissionPolicyUpsertArgs<ExtArgs>>): Prisma__PermissionPolicyClient<$Result.GetResult<Prisma.$PermissionPolicyPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of PermissionPolicies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PermissionPolicyCountArgs} args - Arguments to filter PermissionPolicies to count.
+     * @example
+     * // Count the number of PermissionPolicies
+     * const count = await prisma.permissionPolicy.count({
+     *   where: {
+     *     // ... the filter for the PermissionPolicies we want to count
+     *   }
+     * })
+    **/
+    count<T extends PermissionPolicyCountArgs>(
+      args?: Subset<T, PermissionPolicyCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PermissionPolicyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PermissionPolicy.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PermissionPolicyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PermissionPolicyAggregateArgs>(args: Subset<T, PermissionPolicyAggregateArgs>): Prisma.PrismaPromise<GetPermissionPolicyAggregateType<T>>
+
+    /**
+     * Group by PermissionPolicy.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PermissionPolicyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PermissionPolicyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PermissionPolicyGroupByArgs['orderBy'] }
+        : { orderBy?: PermissionPolicyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PermissionPolicyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPermissionPolicyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PermissionPolicy model
+   */
+  readonly fields: PermissionPolicyFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PermissionPolicy.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PermissionPolicyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    permission<T extends PermissionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PermissionDefaultArgs<ExtArgs>>): Prisma__PermissionClient<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    policy<T extends PolicyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PolicyDefaultArgs<ExtArgs>>): Prisma__PolicyClient<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PermissionPolicy model
+   */ 
+  interface PermissionPolicyFieldRefs {
+    readonly permissionId: FieldRef<"PermissionPolicy", 'Int'>
+    readonly policyId: FieldRef<"PermissionPolicy", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PermissionPolicy findUnique
+   */
+  export type PermissionPolicyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PermissionPolicy
+     */
+    select?: PermissionPolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionPolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which PermissionPolicy to fetch.
+     */
+    where: PermissionPolicyWhereUniqueInput
+  }
+
+  /**
+   * PermissionPolicy findUniqueOrThrow
+   */
+  export type PermissionPolicyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PermissionPolicy
+     */
+    select?: PermissionPolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionPolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which PermissionPolicy to fetch.
+     */
+    where: PermissionPolicyWhereUniqueInput
+  }
+
+  /**
+   * PermissionPolicy findFirst
+   */
+  export type PermissionPolicyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PermissionPolicy
+     */
+    select?: PermissionPolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionPolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which PermissionPolicy to fetch.
+     */
+    where?: PermissionPolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PermissionPolicies to fetch.
+     */
+    orderBy?: PermissionPolicyOrderByWithRelationInput | PermissionPolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PermissionPolicies.
+     */
+    cursor?: PermissionPolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PermissionPolicies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PermissionPolicies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PermissionPolicies.
+     */
+    distinct?: PermissionPolicyScalarFieldEnum | PermissionPolicyScalarFieldEnum[]
+  }
+
+  /**
+   * PermissionPolicy findFirstOrThrow
+   */
+  export type PermissionPolicyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PermissionPolicy
+     */
+    select?: PermissionPolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionPolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which PermissionPolicy to fetch.
+     */
+    where?: PermissionPolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PermissionPolicies to fetch.
+     */
+    orderBy?: PermissionPolicyOrderByWithRelationInput | PermissionPolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PermissionPolicies.
+     */
+    cursor?: PermissionPolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PermissionPolicies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PermissionPolicies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PermissionPolicies.
+     */
+    distinct?: PermissionPolicyScalarFieldEnum | PermissionPolicyScalarFieldEnum[]
+  }
+
+  /**
+   * PermissionPolicy findMany
+   */
+  export type PermissionPolicyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PermissionPolicy
+     */
+    select?: PermissionPolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionPolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which PermissionPolicies to fetch.
+     */
+    where?: PermissionPolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PermissionPolicies to fetch.
+     */
+    orderBy?: PermissionPolicyOrderByWithRelationInput | PermissionPolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PermissionPolicies.
+     */
+    cursor?: PermissionPolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PermissionPolicies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PermissionPolicies.
+     */
+    skip?: number
+    distinct?: PermissionPolicyScalarFieldEnum | PermissionPolicyScalarFieldEnum[]
+  }
+
+  /**
+   * PermissionPolicy create
+   */
+  export type PermissionPolicyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PermissionPolicy
+     */
+    select?: PermissionPolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionPolicyInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PermissionPolicy.
+     */
+    data: XOR<PermissionPolicyCreateInput, PermissionPolicyUncheckedCreateInput>
+  }
+
+  /**
+   * PermissionPolicy createMany
+   */
+  export type PermissionPolicyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PermissionPolicies.
+     */
+    data: PermissionPolicyCreateManyInput | PermissionPolicyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PermissionPolicy createManyAndReturn
+   */
+  export type PermissionPolicyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PermissionPolicy
+     */
+    select?: PermissionPolicySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many PermissionPolicies.
+     */
+    data: PermissionPolicyCreateManyInput | PermissionPolicyCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionPolicyIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PermissionPolicy update
+   */
+  export type PermissionPolicyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PermissionPolicy
+     */
+    select?: PermissionPolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionPolicyInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PermissionPolicy.
+     */
+    data: XOR<PermissionPolicyUpdateInput, PermissionPolicyUncheckedUpdateInput>
+    /**
+     * Choose, which PermissionPolicy to update.
+     */
+    where: PermissionPolicyWhereUniqueInput
+  }
+
+  /**
+   * PermissionPolicy updateMany
+   */
+  export type PermissionPolicyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PermissionPolicies.
+     */
+    data: XOR<PermissionPolicyUpdateManyMutationInput, PermissionPolicyUncheckedUpdateManyInput>
+    /**
+     * Filter which PermissionPolicies to update
+     */
+    where?: PermissionPolicyWhereInput
+  }
+
+  /**
+   * PermissionPolicy upsert
+   */
+  export type PermissionPolicyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PermissionPolicy
+     */
+    select?: PermissionPolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionPolicyInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PermissionPolicy to update in case it exists.
+     */
+    where: PermissionPolicyWhereUniqueInput
+    /**
+     * In case the PermissionPolicy found by the `where` argument doesn't exist, create a new PermissionPolicy with this data.
+     */
+    create: XOR<PermissionPolicyCreateInput, PermissionPolicyUncheckedCreateInput>
+    /**
+     * In case the PermissionPolicy was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PermissionPolicyUpdateInput, PermissionPolicyUncheckedUpdateInput>
+  }
+
+  /**
+   * PermissionPolicy delete
+   */
+  export type PermissionPolicyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PermissionPolicy
+     */
+    select?: PermissionPolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionPolicyInclude<ExtArgs> | null
+    /**
+     * Filter which PermissionPolicy to delete.
+     */
+    where: PermissionPolicyWhereUniqueInput
+  }
+
+  /**
+   * PermissionPolicy deleteMany
+   */
+  export type PermissionPolicyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PermissionPolicies to delete
+     */
+    where?: PermissionPolicyWhereInput
+  }
+
+  /**
+   * PermissionPolicy without action
+   */
+  export type PermissionPolicyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PermissionPolicy
+     */
+    select?: PermissionPolicySelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PermissionPolicyInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -6164,12 +9456,51 @@ export namespace Prisma {
   export type RolePermissionsScalarFieldEnum = (typeof RolePermissionsScalarFieldEnum)[keyof typeof RolePermissionsScalarFieldEnum]
 
 
+  export const PolicyScalarFieldEnum: {
+    id: 'id',
+    type: 'type',
+    effect: 'effect',
+    action: 'action',
+    subject: 'subject',
+    fields: 'fields',
+    conditions: 'conditions',
+    args: 'args',
+    encode: 'encode'
+  };
+
+  export type PolicyScalarFieldEnum = (typeof PolicyScalarFieldEnum)[keyof typeof PolicyScalarFieldEnum]
+
+
+  export const RolePolicyScalarFieldEnum: {
+    roleId: 'roleId',
+    policyId: 'policyId'
+  };
+
+  export type RolePolicyScalarFieldEnum = (typeof RolePolicyScalarFieldEnum)[keyof typeof RolePolicyScalarFieldEnum]
+
+
+  export const PermissionPolicyScalarFieldEnum: {
+    permissionId: 'permissionId',
+    policyId: 'policyId'
+  };
+
+  export type PermissionPolicyScalarFieldEnum = (typeof PermissionPolicyScalarFieldEnum)[keyof typeof PermissionPolicyScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
   export const QueryMode: {
@@ -6186,6 +9517,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -6232,6 +9572,13 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
     
 
 
@@ -6318,6 +9665,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Role"> | string | null
     users?: UserRoleListRelationFilter
     RolePermissions?: RolePermissionsListRelationFilter
+    RolePolicy?: RolePolicyListRelationFilter
   }
 
   export type RoleOrderByWithRelationInput = {
@@ -6326,6 +9674,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     users?: UserRoleOrderByRelationAggregateInput
     RolePermissions?: RolePermissionsOrderByRelationAggregateInput
+    RolePolicy?: RolePolicyOrderByRelationAggregateInput
   }
 
   export type RoleWhereUniqueInput = Prisma.AtLeast<{
@@ -6337,6 +9686,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Role"> | string | null
     users?: UserRoleListRelationFilter
     RolePermissions?: RolePermissionsListRelationFilter
+    RolePolicy?: RolePolicyListRelationFilter
   }, "id" | "name">
 
   export type RoleOrderByWithAggregationInput = {
@@ -6414,6 +9764,7 @@ export namespace Prisma {
     action?: StringFilter<"Permission"> | string
     description?: StringNullableFilter<"Permission"> | string | null
     RolePermissions?: RolePermissionsListRelationFilter
+    PermissionPolicy?: PermissionPolicyListRelationFilter
   }
 
   export type PermissionOrderByWithRelationInput = {
@@ -6422,6 +9773,7 @@ export namespace Prisma {
     action?: SortOrder
     description?: SortOrderInput | SortOrder
     RolePermissions?: RolePermissionsOrderByRelationAggregateInput
+    PermissionPolicy?: PermissionPolicyOrderByRelationAggregateInput
   }
 
   export type PermissionWhereUniqueInput = Prisma.AtLeast<{
@@ -6433,6 +9785,7 @@ export namespace Prisma {
     action?: StringFilter<"Permission"> | string
     description?: StringNullableFilter<"Permission"> | string | null
     RolePermissions?: RolePermissionsListRelationFilter
+    PermissionPolicy?: PermissionPolicyListRelationFilter
   }, "id" | "name">
 
   export type PermissionOrderByWithAggregationInput = {
@@ -6503,6 +9856,178 @@ export namespace Prisma {
     permissionId?: IntWithAggregatesFilter<"RolePermissions"> | number
   }
 
+  export type PolicyWhereInput = {
+    AND?: PolicyWhereInput | PolicyWhereInput[]
+    OR?: PolicyWhereInput[]
+    NOT?: PolicyWhereInput | PolicyWhereInput[]
+    id?: IntFilter<"Policy"> | number
+    type?: IntFilter<"Policy"> | number
+    effect?: StringFilter<"Policy"> | string
+    action?: StringFilter<"Policy"> | string
+    subject?: StringFilter<"Policy"> | string
+    fields?: JsonNullableFilter<"Policy">
+    conditions?: JsonNullableFilter<"Policy">
+    args?: JsonNullableFilter<"Policy">
+    encode?: StringFilter<"Policy"> | string
+    RolePolicy?: RolePolicyListRelationFilter
+    PermissionPolicy?: PermissionPolicyListRelationFilter
+  }
+
+  export type PolicyOrderByWithRelationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    effect?: SortOrder
+    action?: SortOrder
+    subject?: SortOrder
+    fields?: SortOrderInput | SortOrder
+    conditions?: SortOrderInput | SortOrder
+    args?: SortOrderInput | SortOrder
+    encode?: SortOrder
+    RolePolicy?: RolePolicyOrderByRelationAggregateInput
+    PermissionPolicy?: PermissionPolicyOrderByRelationAggregateInput
+  }
+
+  export type PolicyWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    encode?: string
+    AND?: PolicyWhereInput | PolicyWhereInput[]
+    OR?: PolicyWhereInput[]
+    NOT?: PolicyWhereInput | PolicyWhereInput[]
+    type?: IntFilter<"Policy"> | number
+    effect?: StringFilter<"Policy"> | string
+    action?: StringFilter<"Policy"> | string
+    subject?: StringFilter<"Policy"> | string
+    fields?: JsonNullableFilter<"Policy">
+    conditions?: JsonNullableFilter<"Policy">
+    args?: JsonNullableFilter<"Policy">
+    RolePolicy?: RolePolicyListRelationFilter
+    PermissionPolicy?: PermissionPolicyListRelationFilter
+  }, "id" | "encode">
+
+  export type PolicyOrderByWithAggregationInput = {
+    id?: SortOrder
+    type?: SortOrder
+    effect?: SortOrder
+    action?: SortOrder
+    subject?: SortOrder
+    fields?: SortOrderInput | SortOrder
+    conditions?: SortOrderInput | SortOrder
+    args?: SortOrderInput | SortOrder
+    encode?: SortOrder
+    _count?: PolicyCountOrderByAggregateInput
+    _avg?: PolicyAvgOrderByAggregateInput
+    _max?: PolicyMaxOrderByAggregateInput
+    _min?: PolicyMinOrderByAggregateInput
+    _sum?: PolicySumOrderByAggregateInput
+  }
+
+  export type PolicyScalarWhereWithAggregatesInput = {
+    AND?: PolicyScalarWhereWithAggregatesInput | PolicyScalarWhereWithAggregatesInput[]
+    OR?: PolicyScalarWhereWithAggregatesInput[]
+    NOT?: PolicyScalarWhereWithAggregatesInput | PolicyScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Policy"> | number
+    type?: IntWithAggregatesFilter<"Policy"> | number
+    effect?: StringWithAggregatesFilter<"Policy"> | string
+    action?: StringWithAggregatesFilter<"Policy"> | string
+    subject?: StringWithAggregatesFilter<"Policy"> | string
+    fields?: JsonNullableWithAggregatesFilter<"Policy">
+    conditions?: JsonNullableWithAggregatesFilter<"Policy">
+    args?: JsonNullableWithAggregatesFilter<"Policy">
+    encode?: StringWithAggregatesFilter<"Policy"> | string
+  }
+
+  export type RolePolicyWhereInput = {
+    AND?: RolePolicyWhereInput | RolePolicyWhereInput[]
+    OR?: RolePolicyWhereInput[]
+    NOT?: RolePolicyWhereInput | RolePolicyWhereInput[]
+    roleId?: IntFilter<"RolePolicy"> | number
+    policyId?: IntFilter<"RolePolicy"> | number
+    role?: XOR<RoleRelationFilter, RoleWhereInput>
+    policy?: XOR<PolicyRelationFilter, PolicyWhereInput>
+  }
+
+  export type RolePolicyOrderByWithRelationInput = {
+    roleId?: SortOrder
+    policyId?: SortOrder
+    role?: RoleOrderByWithRelationInput
+    policy?: PolicyOrderByWithRelationInput
+  }
+
+  export type RolePolicyWhereUniqueInput = Prisma.AtLeast<{
+    roleId_policyId?: RolePolicyRoleIdPolicyIdCompoundUniqueInput
+    AND?: RolePolicyWhereInput | RolePolicyWhereInput[]
+    OR?: RolePolicyWhereInput[]
+    NOT?: RolePolicyWhereInput | RolePolicyWhereInput[]
+    roleId?: IntFilter<"RolePolicy"> | number
+    policyId?: IntFilter<"RolePolicy"> | number
+    role?: XOR<RoleRelationFilter, RoleWhereInput>
+    policy?: XOR<PolicyRelationFilter, PolicyWhereInput>
+  }, "roleId_policyId">
+
+  export type RolePolicyOrderByWithAggregationInput = {
+    roleId?: SortOrder
+    policyId?: SortOrder
+    _count?: RolePolicyCountOrderByAggregateInput
+    _avg?: RolePolicyAvgOrderByAggregateInput
+    _max?: RolePolicyMaxOrderByAggregateInput
+    _min?: RolePolicyMinOrderByAggregateInput
+    _sum?: RolePolicySumOrderByAggregateInput
+  }
+
+  export type RolePolicyScalarWhereWithAggregatesInput = {
+    AND?: RolePolicyScalarWhereWithAggregatesInput | RolePolicyScalarWhereWithAggregatesInput[]
+    OR?: RolePolicyScalarWhereWithAggregatesInput[]
+    NOT?: RolePolicyScalarWhereWithAggregatesInput | RolePolicyScalarWhereWithAggregatesInput[]
+    roleId?: IntWithAggregatesFilter<"RolePolicy"> | number
+    policyId?: IntWithAggregatesFilter<"RolePolicy"> | number
+  }
+
+  export type PermissionPolicyWhereInput = {
+    AND?: PermissionPolicyWhereInput | PermissionPolicyWhereInput[]
+    OR?: PermissionPolicyWhereInput[]
+    NOT?: PermissionPolicyWhereInput | PermissionPolicyWhereInput[]
+    permissionId?: IntFilter<"PermissionPolicy"> | number
+    policyId?: IntFilter<"PermissionPolicy"> | number
+    permission?: XOR<PermissionRelationFilter, PermissionWhereInput>
+    policy?: XOR<PolicyRelationFilter, PolicyWhereInput>
+  }
+
+  export type PermissionPolicyOrderByWithRelationInput = {
+    permissionId?: SortOrder
+    policyId?: SortOrder
+    permission?: PermissionOrderByWithRelationInput
+    policy?: PolicyOrderByWithRelationInput
+  }
+
+  export type PermissionPolicyWhereUniqueInput = Prisma.AtLeast<{
+    permissionId_policyId?: PermissionPolicyPermissionIdPolicyIdCompoundUniqueInput
+    AND?: PermissionPolicyWhereInput | PermissionPolicyWhereInput[]
+    OR?: PermissionPolicyWhereInput[]
+    NOT?: PermissionPolicyWhereInput | PermissionPolicyWhereInput[]
+    permissionId?: IntFilter<"PermissionPolicy"> | number
+    policyId?: IntFilter<"PermissionPolicy"> | number
+    permission?: XOR<PermissionRelationFilter, PermissionWhereInput>
+    policy?: XOR<PolicyRelationFilter, PolicyWhereInput>
+  }, "permissionId_policyId">
+
+  export type PermissionPolicyOrderByWithAggregationInput = {
+    permissionId?: SortOrder
+    policyId?: SortOrder
+    _count?: PermissionPolicyCountOrderByAggregateInput
+    _avg?: PermissionPolicyAvgOrderByAggregateInput
+    _max?: PermissionPolicyMaxOrderByAggregateInput
+    _min?: PermissionPolicyMinOrderByAggregateInput
+    _sum?: PermissionPolicySumOrderByAggregateInput
+  }
+
+  export type PermissionPolicyScalarWhereWithAggregatesInput = {
+    AND?: PermissionPolicyScalarWhereWithAggregatesInput | PermissionPolicyScalarWhereWithAggregatesInput[]
+    OR?: PermissionPolicyScalarWhereWithAggregatesInput[]
+    NOT?: PermissionPolicyScalarWhereWithAggregatesInput | PermissionPolicyScalarWhereWithAggregatesInput[]
+    permissionId?: IntWithAggregatesFilter<"PermissionPolicy"> | number
+    policyId?: IntWithAggregatesFilter<"PermissionPolicy"> | number
+  }
+
   export type UserCreateInput = {
     username: string
     password: string
@@ -6565,6 +10090,7 @@ export namespace Prisma {
     description?: string | null
     users?: UserRoleCreateNestedManyWithoutRoleInput
     RolePermissions?: RolePermissionsCreateNestedManyWithoutRoleInput
+    RolePolicy?: RolePolicyCreateNestedManyWithoutRoleInput
   }
 
   export type RoleUncheckedCreateInput = {
@@ -6573,6 +10099,7 @@ export namespace Prisma {
     description?: string | null
     users?: UserRoleUncheckedCreateNestedManyWithoutRoleInput
     RolePermissions?: RolePermissionsUncheckedCreateNestedManyWithoutRoleInput
+    RolePolicy?: RolePolicyUncheckedCreateNestedManyWithoutRoleInput
   }
 
   export type RoleUpdateInput = {
@@ -6580,6 +10107,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     users?: UserRoleUpdateManyWithoutRoleNestedInput
     RolePermissions?: RolePermissionsUpdateManyWithoutRoleNestedInput
+    RolePolicy?: RolePolicyUpdateManyWithoutRoleNestedInput
   }
 
   export type RoleUncheckedUpdateInput = {
@@ -6588,6 +10116,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     users?: UserRoleUncheckedUpdateManyWithoutRoleNestedInput
     RolePermissions?: RolePermissionsUncheckedUpdateManyWithoutRoleNestedInput
+    RolePolicy?: RolePolicyUncheckedUpdateManyWithoutRoleNestedInput
   }
 
   export type RoleCreateManyInput = {
@@ -6646,6 +10175,7 @@ export namespace Prisma {
     action: string
     description?: string | null
     RolePermissions?: RolePermissionsCreateNestedManyWithoutPermissionInput
+    PermissionPolicy?: PermissionPolicyCreateNestedManyWithoutPermissionInput
   }
 
   export type PermissionUncheckedCreateInput = {
@@ -6654,6 +10184,7 @@ export namespace Prisma {
     action: string
     description?: string | null
     RolePermissions?: RolePermissionsUncheckedCreateNestedManyWithoutPermissionInput
+    PermissionPolicy?: PermissionPolicyUncheckedCreateNestedManyWithoutPermissionInput
   }
 
   export type PermissionUpdateInput = {
@@ -6661,6 +10192,7 @@ export namespace Prisma {
     action?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     RolePermissions?: RolePermissionsUpdateManyWithoutPermissionNestedInput
+    PermissionPolicy?: PermissionPolicyUpdateManyWithoutPermissionNestedInput
   }
 
   export type PermissionUncheckedUpdateInput = {
@@ -6669,6 +10201,7 @@ export namespace Prisma {
     action?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     RolePermissions?: RolePermissionsUncheckedUpdateManyWithoutPermissionNestedInput
+    PermissionPolicy?: PermissionPolicyUncheckedUpdateManyWithoutPermissionNestedInput
   }
 
   export type PermissionCreateManyInput = {
@@ -6723,6 +10256,163 @@ export namespace Prisma {
   export type RolePermissionsUncheckedUpdateManyInput = {
     roleId?: IntFieldUpdateOperationsInput | number
     permissionId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PolicyCreateInput = {
+    type: number
+    effect: string
+    action: string
+    subject: string
+    fields?: NullableJsonNullValueInput | InputJsonValue
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    args?: NullableJsonNullValueInput | InputJsonValue
+    encode: string
+    RolePolicy?: RolePolicyCreateNestedManyWithoutPolicyInput
+    PermissionPolicy?: PermissionPolicyCreateNestedManyWithoutPolicyInput
+  }
+
+  export type PolicyUncheckedCreateInput = {
+    id?: number
+    type: number
+    effect: string
+    action: string
+    subject: string
+    fields?: NullableJsonNullValueInput | InputJsonValue
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    args?: NullableJsonNullValueInput | InputJsonValue
+    encode: string
+    RolePolicy?: RolePolicyUncheckedCreateNestedManyWithoutPolicyInput
+    PermissionPolicy?: PermissionPolicyUncheckedCreateNestedManyWithoutPolicyInput
+  }
+
+  export type PolicyUpdateInput = {
+    type?: IntFieldUpdateOperationsInput | number
+    effect?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    fields?: NullableJsonNullValueInput | InputJsonValue
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    args?: NullableJsonNullValueInput | InputJsonValue
+    encode?: StringFieldUpdateOperationsInput | string
+    RolePolicy?: RolePolicyUpdateManyWithoutPolicyNestedInput
+    PermissionPolicy?: PermissionPolicyUpdateManyWithoutPolicyNestedInput
+  }
+
+  export type PolicyUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: IntFieldUpdateOperationsInput | number
+    effect?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    fields?: NullableJsonNullValueInput | InputJsonValue
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    args?: NullableJsonNullValueInput | InputJsonValue
+    encode?: StringFieldUpdateOperationsInput | string
+    RolePolicy?: RolePolicyUncheckedUpdateManyWithoutPolicyNestedInput
+    PermissionPolicy?: PermissionPolicyUncheckedUpdateManyWithoutPolicyNestedInput
+  }
+
+  export type PolicyCreateManyInput = {
+    id?: number
+    type: number
+    effect: string
+    action: string
+    subject: string
+    fields?: NullableJsonNullValueInput | InputJsonValue
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    args?: NullableJsonNullValueInput | InputJsonValue
+    encode: string
+  }
+
+  export type PolicyUpdateManyMutationInput = {
+    type?: IntFieldUpdateOperationsInput | number
+    effect?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    fields?: NullableJsonNullValueInput | InputJsonValue
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    args?: NullableJsonNullValueInput | InputJsonValue
+    encode?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PolicyUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: IntFieldUpdateOperationsInput | number
+    effect?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    fields?: NullableJsonNullValueInput | InputJsonValue
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    args?: NullableJsonNullValueInput | InputJsonValue
+    encode?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type RolePolicyCreateInput = {
+    role: RoleCreateNestedOneWithoutRolePolicyInput
+    policy: PolicyCreateNestedOneWithoutRolePolicyInput
+  }
+
+  export type RolePolicyUncheckedCreateInput = {
+    roleId: number
+    policyId: number
+  }
+
+  export type RolePolicyUpdateInput = {
+    role?: RoleUpdateOneRequiredWithoutRolePolicyNestedInput
+    policy?: PolicyUpdateOneRequiredWithoutRolePolicyNestedInput
+  }
+
+  export type RolePolicyUncheckedUpdateInput = {
+    roleId?: IntFieldUpdateOperationsInput | number
+    policyId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type RolePolicyCreateManyInput = {
+    roleId: number
+    policyId: number
+  }
+
+  export type RolePolicyUpdateManyMutationInput = {
+
+  }
+
+  export type RolePolicyUncheckedUpdateManyInput = {
+    roleId?: IntFieldUpdateOperationsInput | number
+    policyId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PermissionPolicyCreateInput = {
+    permission: PermissionCreateNestedOneWithoutPermissionPolicyInput
+    policy: PolicyCreateNestedOneWithoutPermissionPolicyInput
+  }
+
+  export type PermissionPolicyUncheckedCreateInput = {
+    permissionId: number
+    policyId: number
+  }
+
+  export type PermissionPolicyUpdateInput = {
+    permission?: PermissionUpdateOneRequiredWithoutPermissionPolicyNestedInput
+    policy?: PolicyUpdateOneRequiredWithoutPermissionPolicyNestedInput
+  }
+
+  export type PermissionPolicyUncheckedUpdateInput = {
+    permissionId?: IntFieldUpdateOperationsInput | number
+    policyId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PermissionPolicyCreateManyInput = {
+    permissionId: number
+    policyId: number
+  }
+
+  export type PermissionPolicyUpdateManyMutationInput = {
+
+  }
+
+  export type PermissionPolicyUncheckedUpdateManyInput = {
+    permissionId?: IntFieldUpdateOperationsInput | number
+    policyId?: IntFieldUpdateOperationsInput | number
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -6873,12 +10563,22 @@ export namespace Prisma {
     none?: RolePermissionsWhereInput
   }
 
+  export type RolePolicyListRelationFilter = {
+    every?: RolePolicyWhereInput
+    some?: RolePolicyWhereInput
+    none?: RolePolicyWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
   export type RolePermissionsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RolePolicyOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -6966,6 +10666,16 @@ export namespace Prisma {
     roleId?: SortOrder
   }
 
+  export type PermissionPolicyListRelationFilter = {
+    every?: PermissionPolicyWhereInput
+    some?: PermissionPolicyWhereInput
+    none?: PermissionPolicyWhereInput
+  }
+
+  export type PermissionPolicyOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type PermissionCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -7028,6 +10738,158 @@ export namespace Prisma {
   export type RolePermissionsSumOrderByAggregateInput = {
     roleId?: SortOrder
     permissionId?: SortOrder
+  }
+  export type JsonNullableFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type PolicyCountOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    effect?: SortOrder
+    action?: SortOrder
+    subject?: SortOrder
+    fields?: SortOrder
+    conditions?: SortOrder
+    args?: SortOrder
+    encode?: SortOrder
+  }
+
+  export type PolicyAvgOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+  }
+
+  export type PolicyMaxOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    effect?: SortOrder
+    action?: SortOrder
+    subject?: SortOrder
+    encode?: SortOrder
+  }
+
+  export type PolicyMinOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+    effect?: SortOrder
+    action?: SortOrder
+    subject?: SortOrder
+    encode?: SortOrder
+  }
+
+  export type PolicySumOrderByAggregateInput = {
+    id?: SortOrder
+    type?: SortOrder
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
+  export type PolicyRelationFilter = {
+    is?: PolicyWhereInput
+    isNot?: PolicyWhereInput
+  }
+
+  export type RolePolicyRoleIdPolicyIdCompoundUniqueInput = {
+    roleId: number
+    policyId: number
+  }
+
+  export type RolePolicyCountOrderByAggregateInput = {
+    roleId?: SortOrder
+    policyId?: SortOrder
+  }
+
+  export type RolePolicyAvgOrderByAggregateInput = {
+    roleId?: SortOrder
+    policyId?: SortOrder
+  }
+
+  export type RolePolicyMaxOrderByAggregateInput = {
+    roleId?: SortOrder
+    policyId?: SortOrder
+  }
+
+  export type RolePolicyMinOrderByAggregateInput = {
+    roleId?: SortOrder
+    policyId?: SortOrder
+  }
+
+  export type RolePolicySumOrderByAggregateInput = {
+    roleId?: SortOrder
+    policyId?: SortOrder
+  }
+
+  export type PermissionPolicyPermissionIdPolicyIdCompoundUniqueInput = {
+    permissionId: number
+    policyId: number
+  }
+
+  export type PermissionPolicyCountOrderByAggregateInput = {
+    permissionId?: SortOrder
+    policyId?: SortOrder
+  }
+
+  export type PermissionPolicyAvgOrderByAggregateInput = {
+    permissionId?: SortOrder
+    policyId?: SortOrder
+  }
+
+  export type PermissionPolicyMaxOrderByAggregateInput = {
+    permissionId?: SortOrder
+    policyId?: SortOrder
+  }
+
+  export type PermissionPolicyMinOrderByAggregateInput = {
+    permissionId?: SortOrder
+    policyId?: SortOrder
+  }
+
+  export type PermissionPolicySumOrderByAggregateInput = {
+    permissionId?: SortOrder
+    policyId?: SortOrder
   }
 
   export type UserRoleCreateNestedManyWithoutUserInput = {
@@ -7102,6 +10964,13 @@ export namespace Prisma {
     connect?: RolePermissionsWhereUniqueInput | RolePermissionsWhereUniqueInput[]
   }
 
+  export type RolePolicyCreateNestedManyWithoutRoleInput = {
+    create?: XOR<RolePolicyCreateWithoutRoleInput, RolePolicyUncheckedCreateWithoutRoleInput> | RolePolicyCreateWithoutRoleInput[] | RolePolicyUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: RolePolicyCreateOrConnectWithoutRoleInput | RolePolicyCreateOrConnectWithoutRoleInput[]
+    createMany?: RolePolicyCreateManyRoleInputEnvelope
+    connect?: RolePolicyWhereUniqueInput | RolePolicyWhereUniqueInput[]
+  }
+
   export type UserRoleUncheckedCreateNestedManyWithoutRoleInput = {
     create?: XOR<UserRoleCreateWithoutRoleInput, UserRoleUncheckedCreateWithoutRoleInput> | UserRoleCreateWithoutRoleInput[] | UserRoleUncheckedCreateWithoutRoleInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutRoleInput | UserRoleCreateOrConnectWithoutRoleInput[]
@@ -7114,6 +10983,13 @@ export namespace Prisma {
     connectOrCreate?: RolePermissionsCreateOrConnectWithoutRoleInput | RolePermissionsCreateOrConnectWithoutRoleInput[]
     createMany?: RolePermissionsCreateManyRoleInputEnvelope
     connect?: RolePermissionsWhereUniqueInput | RolePermissionsWhereUniqueInput[]
+  }
+
+  export type RolePolicyUncheckedCreateNestedManyWithoutRoleInput = {
+    create?: XOR<RolePolicyCreateWithoutRoleInput, RolePolicyUncheckedCreateWithoutRoleInput> | RolePolicyCreateWithoutRoleInput[] | RolePolicyUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: RolePolicyCreateOrConnectWithoutRoleInput | RolePolicyCreateOrConnectWithoutRoleInput[]
+    createMany?: RolePolicyCreateManyRoleInputEnvelope
+    connect?: RolePolicyWhereUniqueInput | RolePolicyWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -7148,6 +11024,20 @@ export namespace Prisma {
     deleteMany?: RolePermissionsScalarWhereInput | RolePermissionsScalarWhereInput[]
   }
 
+  export type RolePolicyUpdateManyWithoutRoleNestedInput = {
+    create?: XOR<RolePolicyCreateWithoutRoleInput, RolePolicyUncheckedCreateWithoutRoleInput> | RolePolicyCreateWithoutRoleInput[] | RolePolicyUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: RolePolicyCreateOrConnectWithoutRoleInput | RolePolicyCreateOrConnectWithoutRoleInput[]
+    upsert?: RolePolicyUpsertWithWhereUniqueWithoutRoleInput | RolePolicyUpsertWithWhereUniqueWithoutRoleInput[]
+    createMany?: RolePolicyCreateManyRoleInputEnvelope
+    set?: RolePolicyWhereUniqueInput | RolePolicyWhereUniqueInput[]
+    disconnect?: RolePolicyWhereUniqueInput | RolePolicyWhereUniqueInput[]
+    delete?: RolePolicyWhereUniqueInput | RolePolicyWhereUniqueInput[]
+    connect?: RolePolicyWhereUniqueInput | RolePolicyWhereUniqueInput[]
+    update?: RolePolicyUpdateWithWhereUniqueWithoutRoleInput | RolePolicyUpdateWithWhereUniqueWithoutRoleInput[]
+    updateMany?: RolePolicyUpdateManyWithWhereWithoutRoleInput | RolePolicyUpdateManyWithWhereWithoutRoleInput[]
+    deleteMany?: RolePolicyScalarWhereInput | RolePolicyScalarWhereInput[]
+  }
+
   export type UserRoleUncheckedUpdateManyWithoutRoleNestedInput = {
     create?: XOR<UserRoleCreateWithoutRoleInput, UserRoleUncheckedCreateWithoutRoleInput> | UserRoleCreateWithoutRoleInput[] | UserRoleUncheckedCreateWithoutRoleInput[]
     connectOrCreate?: UserRoleCreateOrConnectWithoutRoleInput | UserRoleCreateOrConnectWithoutRoleInput[]
@@ -7174,6 +11064,20 @@ export namespace Prisma {
     update?: RolePermissionsUpdateWithWhereUniqueWithoutRoleInput | RolePermissionsUpdateWithWhereUniqueWithoutRoleInput[]
     updateMany?: RolePermissionsUpdateManyWithWhereWithoutRoleInput | RolePermissionsUpdateManyWithWhereWithoutRoleInput[]
     deleteMany?: RolePermissionsScalarWhereInput | RolePermissionsScalarWhereInput[]
+  }
+
+  export type RolePolicyUncheckedUpdateManyWithoutRoleNestedInput = {
+    create?: XOR<RolePolicyCreateWithoutRoleInput, RolePolicyUncheckedCreateWithoutRoleInput> | RolePolicyCreateWithoutRoleInput[] | RolePolicyUncheckedCreateWithoutRoleInput[]
+    connectOrCreate?: RolePolicyCreateOrConnectWithoutRoleInput | RolePolicyCreateOrConnectWithoutRoleInput[]
+    upsert?: RolePolicyUpsertWithWhereUniqueWithoutRoleInput | RolePolicyUpsertWithWhereUniqueWithoutRoleInput[]
+    createMany?: RolePolicyCreateManyRoleInputEnvelope
+    set?: RolePolicyWhereUniqueInput | RolePolicyWhereUniqueInput[]
+    disconnect?: RolePolicyWhereUniqueInput | RolePolicyWhereUniqueInput[]
+    delete?: RolePolicyWhereUniqueInput | RolePolicyWhereUniqueInput[]
+    connect?: RolePolicyWhereUniqueInput | RolePolicyWhereUniqueInput[]
+    update?: RolePolicyUpdateWithWhereUniqueWithoutRoleInput | RolePolicyUpdateWithWhereUniqueWithoutRoleInput[]
+    updateMany?: RolePolicyUpdateManyWithWhereWithoutRoleInput | RolePolicyUpdateManyWithWhereWithoutRoleInput[]
+    deleteMany?: RolePolicyScalarWhereInput | RolePolicyScalarWhereInput[]
   }
 
   export type RoleCreateNestedOneWithoutUsersInput = {
@@ -7211,11 +11115,25 @@ export namespace Prisma {
     connect?: RolePermissionsWhereUniqueInput | RolePermissionsWhereUniqueInput[]
   }
 
+  export type PermissionPolicyCreateNestedManyWithoutPermissionInput = {
+    create?: XOR<PermissionPolicyCreateWithoutPermissionInput, PermissionPolicyUncheckedCreateWithoutPermissionInput> | PermissionPolicyCreateWithoutPermissionInput[] | PermissionPolicyUncheckedCreateWithoutPermissionInput[]
+    connectOrCreate?: PermissionPolicyCreateOrConnectWithoutPermissionInput | PermissionPolicyCreateOrConnectWithoutPermissionInput[]
+    createMany?: PermissionPolicyCreateManyPermissionInputEnvelope
+    connect?: PermissionPolicyWhereUniqueInput | PermissionPolicyWhereUniqueInput[]
+  }
+
   export type RolePermissionsUncheckedCreateNestedManyWithoutPermissionInput = {
     create?: XOR<RolePermissionsCreateWithoutPermissionInput, RolePermissionsUncheckedCreateWithoutPermissionInput> | RolePermissionsCreateWithoutPermissionInput[] | RolePermissionsUncheckedCreateWithoutPermissionInput[]
     connectOrCreate?: RolePermissionsCreateOrConnectWithoutPermissionInput | RolePermissionsCreateOrConnectWithoutPermissionInput[]
     createMany?: RolePermissionsCreateManyPermissionInputEnvelope
     connect?: RolePermissionsWhereUniqueInput | RolePermissionsWhereUniqueInput[]
+  }
+
+  export type PermissionPolicyUncheckedCreateNestedManyWithoutPermissionInput = {
+    create?: XOR<PermissionPolicyCreateWithoutPermissionInput, PermissionPolicyUncheckedCreateWithoutPermissionInput> | PermissionPolicyCreateWithoutPermissionInput[] | PermissionPolicyUncheckedCreateWithoutPermissionInput[]
+    connectOrCreate?: PermissionPolicyCreateOrConnectWithoutPermissionInput | PermissionPolicyCreateOrConnectWithoutPermissionInput[]
+    createMany?: PermissionPolicyCreateManyPermissionInputEnvelope
+    connect?: PermissionPolicyWhereUniqueInput | PermissionPolicyWhereUniqueInput[]
   }
 
   export type RolePermissionsUpdateManyWithoutPermissionNestedInput = {
@@ -7232,6 +11150,20 @@ export namespace Prisma {
     deleteMany?: RolePermissionsScalarWhereInput | RolePermissionsScalarWhereInput[]
   }
 
+  export type PermissionPolicyUpdateManyWithoutPermissionNestedInput = {
+    create?: XOR<PermissionPolicyCreateWithoutPermissionInput, PermissionPolicyUncheckedCreateWithoutPermissionInput> | PermissionPolicyCreateWithoutPermissionInput[] | PermissionPolicyUncheckedCreateWithoutPermissionInput[]
+    connectOrCreate?: PermissionPolicyCreateOrConnectWithoutPermissionInput | PermissionPolicyCreateOrConnectWithoutPermissionInput[]
+    upsert?: PermissionPolicyUpsertWithWhereUniqueWithoutPermissionInput | PermissionPolicyUpsertWithWhereUniqueWithoutPermissionInput[]
+    createMany?: PermissionPolicyCreateManyPermissionInputEnvelope
+    set?: PermissionPolicyWhereUniqueInput | PermissionPolicyWhereUniqueInput[]
+    disconnect?: PermissionPolicyWhereUniqueInput | PermissionPolicyWhereUniqueInput[]
+    delete?: PermissionPolicyWhereUniqueInput | PermissionPolicyWhereUniqueInput[]
+    connect?: PermissionPolicyWhereUniqueInput | PermissionPolicyWhereUniqueInput[]
+    update?: PermissionPolicyUpdateWithWhereUniqueWithoutPermissionInput | PermissionPolicyUpdateWithWhereUniqueWithoutPermissionInput[]
+    updateMany?: PermissionPolicyUpdateManyWithWhereWithoutPermissionInput | PermissionPolicyUpdateManyWithWhereWithoutPermissionInput[]
+    deleteMany?: PermissionPolicyScalarWhereInput | PermissionPolicyScalarWhereInput[]
+  }
+
   export type RolePermissionsUncheckedUpdateManyWithoutPermissionNestedInput = {
     create?: XOR<RolePermissionsCreateWithoutPermissionInput, RolePermissionsUncheckedCreateWithoutPermissionInput> | RolePermissionsCreateWithoutPermissionInput[] | RolePermissionsUncheckedCreateWithoutPermissionInput[]
     connectOrCreate?: RolePermissionsCreateOrConnectWithoutPermissionInput | RolePermissionsCreateOrConnectWithoutPermissionInput[]
@@ -7244,6 +11176,20 @@ export namespace Prisma {
     update?: RolePermissionsUpdateWithWhereUniqueWithoutPermissionInput | RolePermissionsUpdateWithWhereUniqueWithoutPermissionInput[]
     updateMany?: RolePermissionsUpdateManyWithWhereWithoutPermissionInput | RolePermissionsUpdateManyWithWhereWithoutPermissionInput[]
     deleteMany?: RolePermissionsScalarWhereInput | RolePermissionsScalarWhereInput[]
+  }
+
+  export type PermissionPolicyUncheckedUpdateManyWithoutPermissionNestedInput = {
+    create?: XOR<PermissionPolicyCreateWithoutPermissionInput, PermissionPolicyUncheckedCreateWithoutPermissionInput> | PermissionPolicyCreateWithoutPermissionInput[] | PermissionPolicyUncheckedCreateWithoutPermissionInput[]
+    connectOrCreate?: PermissionPolicyCreateOrConnectWithoutPermissionInput | PermissionPolicyCreateOrConnectWithoutPermissionInput[]
+    upsert?: PermissionPolicyUpsertWithWhereUniqueWithoutPermissionInput | PermissionPolicyUpsertWithWhereUniqueWithoutPermissionInput[]
+    createMany?: PermissionPolicyCreateManyPermissionInputEnvelope
+    set?: PermissionPolicyWhereUniqueInput | PermissionPolicyWhereUniqueInput[]
+    disconnect?: PermissionPolicyWhereUniqueInput | PermissionPolicyWhereUniqueInput[]
+    delete?: PermissionPolicyWhereUniqueInput | PermissionPolicyWhereUniqueInput[]
+    connect?: PermissionPolicyWhereUniqueInput | PermissionPolicyWhereUniqueInput[]
+    update?: PermissionPolicyUpdateWithWhereUniqueWithoutPermissionInput | PermissionPolicyUpdateWithWhereUniqueWithoutPermissionInput[]
+    updateMany?: PermissionPolicyUpdateManyWithWhereWithoutPermissionInput | PermissionPolicyUpdateManyWithWhereWithoutPermissionInput[]
+    deleteMany?: PermissionPolicyScalarWhereInput | PermissionPolicyScalarWhereInput[]
   }
 
   export type RoleCreateNestedOneWithoutRolePermissionsInput = {
@@ -7272,6 +11218,146 @@ export namespace Prisma {
     upsert?: PermissionUpsertWithoutRolePermissionsInput
     connect?: PermissionWhereUniqueInput
     update?: XOR<XOR<PermissionUpdateToOneWithWhereWithoutRolePermissionsInput, PermissionUpdateWithoutRolePermissionsInput>, PermissionUncheckedUpdateWithoutRolePermissionsInput>
+  }
+
+  export type RolePolicyCreateNestedManyWithoutPolicyInput = {
+    create?: XOR<RolePolicyCreateWithoutPolicyInput, RolePolicyUncheckedCreateWithoutPolicyInput> | RolePolicyCreateWithoutPolicyInput[] | RolePolicyUncheckedCreateWithoutPolicyInput[]
+    connectOrCreate?: RolePolicyCreateOrConnectWithoutPolicyInput | RolePolicyCreateOrConnectWithoutPolicyInput[]
+    createMany?: RolePolicyCreateManyPolicyInputEnvelope
+    connect?: RolePolicyWhereUniqueInput | RolePolicyWhereUniqueInput[]
+  }
+
+  export type PermissionPolicyCreateNestedManyWithoutPolicyInput = {
+    create?: XOR<PermissionPolicyCreateWithoutPolicyInput, PermissionPolicyUncheckedCreateWithoutPolicyInput> | PermissionPolicyCreateWithoutPolicyInput[] | PermissionPolicyUncheckedCreateWithoutPolicyInput[]
+    connectOrCreate?: PermissionPolicyCreateOrConnectWithoutPolicyInput | PermissionPolicyCreateOrConnectWithoutPolicyInput[]
+    createMany?: PermissionPolicyCreateManyPolicyInputEnvelope
+    connect?: PermissionPolicyWhereUniqueInput | PermissionPolicyWhereUniqueInput[]
+  }
+
+  export type RolePolicyUncheckedCreateNestedManyWithoutPolicyInput = {
+    create?: XOR<RolePolicyCreateWithoutPolicyInput, RolePolicyUncheckedCreateWithoutPolicyInput> | RolePolicyCreateWithoutPolicyInput[] | RolePolicyUncheckedCreateWithoutPolicyInput[]
+    connectOrCreate?: RolePolicyCreateOrConnectWithoutPolicyInput | RolePolicyCreateOrConnectWithoutPolicyInput[]
+    createMany?: RolePolicyCreateManyPolicyInputEnvelope
+    connect?: RolePolicyWhereUniqueInput | RolePolicyWhereUniqueInput[]
+  }
+
+  export type PermissionPolicyUncheckedCreateNestedManyWithoutPolicyInput = {
+    create?: XOR<PermissionPolicyCreateWithoutPolicyInput, PermissionPolicyUncheckedCreateWithoutPolicyInput> | PermissionPolicyCreateWithoutPolicyInput[] | PermissionPolicyUncheckedCreateWithoutPolicyInput[]
+    connectOrCreate?: PermissionPolicyCreateOrConnectWithoutPolicyInput | PermissionPolicyCreateOrConnectWithoutPolicyInput[]
+    createMany?: PermissionPolicyCreateManyPolicyInputEnvelope
+    connect?: PermissionPolicyWhereUniqueInput | PermissionPolicyWhereUniqueInput[]
+  }
+
+  export type RolePolicyUpdateManyWithoutPolicyNestedInput = {
+    create?: XOR<RolePolicyCreateWithoutPolicyInput, RolePolicyUncheckedCreateWithoutPolicyInput> | RolePolicyCreateWithoutPolicyInput[] | RolePolicyUncheckedCreateWithoutPolicyInput[]
+    connectOrCreate?: RolePolicyCreateOrConnectWithoutPolicyInput | RolePolicyCreateOrConnectWithoutPolicyInput[]
+    upsert?: RolePolicyUpsertWithWhereUniqueWithoutPolicyInput | RolePolicyUpsertWithWhereUniqueWithoutPolicyInput[]
+    createMany?: RolePolicyCreateManyPolicyInputEnvelope
+    set?: RolePolicyWhereUniqueInput | RolePolicyWhereUniqueInput[]
+    disconnect?: RolePolicyWhereUniqueInput | RolePolicyWhereUniqueInput[]
+    delete?: RolePolicyWhereUniqueInput | RolePolicyWhereUniqueInput[]
+    connect?: RolePolicyWhereUniqueInput | RolePolicyWhereUniqueInput[]
+    update?: RolePolicyUpdateWithWhereUniqueWithoutPolicyInput | RolePolicyUpdateWithWhereUniqueWithoutPolicyInput[]
+    updateMany?: RolePolicyUpdateManyWithWhereWithoutPolicyInput | RolePolicyUpdateManyWithWhereWithoutPolicyInput[]
+    deleteMany?: RolePolicyScalarWhereInput | RolePolicyScalarWhereInput[]
+  }
+
+  export type PermissionPolicyUpdateManyWithoutPolicyNestedInput = {
+    create?: XOR<PermissionPolicyCreateWithoutPolicyInput, PermissionPolicyUncheckedCreateWithoutPolicyInput> | PermissionPolicyCreateWithoutPolicyInput[] | PermissionPolicyUncheckedCreateWithoutPolicyInput[]
+    connectOrCreate?: PermissionPolicyCreateOrConnectWithoutPolicyInput | PermissionPolicyCreateOrConnectWithoutPolicyInput[]
+    upsert?: PermissionPolicyUpsertWithWhereUniqueWithoutPolicyInput | PermissionPolicyUpsertWithWhereUniqueWithoutPolicyInput[]
+    createMany?: PermissionPolicyCreateManyPolicyInputEnvelope
+    set?: PermissionPolicyWhereUniqueInput | PermissionPolicyWhereUniqueInput[]
+    disconnect?: PermissionPolicyWhereUniqueInput | PermissionPolicyWhereUniqueInput[]
+    delete?: PermissionPolicyWhereUniqueInput | PermissionPolicyWhereUniqueInput[]
+    connect?: PermissionPolicyWhereUniqueInput | PermissionPolicyWhereUniqueInput[]
+    update?: PermissionPolicyUpdateWithWhereUniqueWithoutPolicyInput | PermissionPolicyUpdateWithWhereUniqueWithoutPolicyInput[]
+    updateMany?: PermissionPolicyUpdateManyWithWhereWithoutPolicyInput | PermissionPolicyUpdateManyWithWhereWithoutPolicyInput[]
+    deleteMany?: PermissionPolicyScalarWhereInput | PermissionPolicyScalarWhereInput[]
+  }
+
+  export type RolePolicyUncheckedUpdateManyWithoutPolicyNestedInput = {
+    create?: XOR<RolePolicyCreateWithoutPolicyInput, RolePolicyUncheckedCreateWithoutPolicyInput> | RolePolicyCreateWithoutPolicyInput[] | RolePolicyUncheckedCreateWithoutPolicyInput[]
+    connectOrCreate?: RolePolicyCreateOrConnectWithoutPolicyInput | RolePolicyCreateOrConnectWithoutPolicyInput[]
+    upsert?: RolePolicyUpsertWithWhereUniqueWithoutPolicyInput | RolePolicyUpsertWithWhereUniqueWithoutPolicyInput[]
+    createMany?: RolePolicyCreateManyPolicyInputEnvelope
+    set?: RolePolicyWhereUniqueInput | RolePolicyWhereUniqueInput[]
+    disconnect?: RolePolicyWhereUniqueInput | RolePolicyWhereUniqueInput[]
+    delete?: RolePolicyWhereUniqueInput | RolePolicyWhereUniqueInput[]
+    connect?: RolePolicyWhereUniqueInput | RolePolicyWhereUniqueInput[]
+    update?: RolePolicyUpdateWithWhereUniqueWithoutPolicyInput | RolePolicyUpdateWithWhereUniqueWithoutPolicyInput[]
+    updateMany?: RolePolicyUpdateManyWithWhereWithoutPolicyInput | RolePolicyUpdateManyWithWhereWithoutPolicyInput[]
+    deleteMany?: RolePolicyScalarWhereInput | RolePolicyScalarWhereInput[]
+  }
+
+  export type PermissionPolicyUncheckedUpdateManyWithoutPolicyNestedInput = {
+    create?: XOR<PermissionPolicyCreateWithoutPolicyInput, PermissionPolicyUncheckedCreateWithoutPolicyInput> | PermissionPolicyCreateWithoutPolicyInput[] | PermissionPolicyUncheckedCreateWithoutPolicyInput[]
+    connectOrCreate?: PermissionPolicyCreateOrConnectWithoutPolicyInput | PermissionPolicyCreateOrConnectWithoutPolicyInput[]
+    upsert?: PermissionPolicyUpsertWithWhereUniqueWithoutPolicyInput | PermissionPolicyUpsertWithWhereUniqueWithoutPolicyInput[]
+    createMany?: PermissionPolicyCreateManyPolicyInputEnvelope
+    set?: PermissionPolicyWhereUniqueInput | PermissionPolicyWhereUniqueInput[]
+    disconnect?: PermissionPolicyWhereUniqueInput | PermissionPolicyWhereUniqueInput[]
+    delete?: PermissionPolicyWhereUniqueInput | PermissionPolicyWhereUniqueInput[]
+    connect?: PermissionPolicyWhereUniqueInput | PermissionPolicyWhereUniqueInput[]
+    update?: PermissionPolicyUpdateWithWhereUniqueWithoutPolicyInput | PermissionPolicyUpdateWithWhereUniqueWithoutPolicyInput[]
+    updateMany?: PermissionPolicyUpdateManyWithWhereWithoutPolicyInput | PermissionPolicyUpdateManyWithWhereWithoutPolicyInput[]
+    deleteMany?: PermissionPolicyScalarWhereInput | PermissionPolicyScalarWhereInput[]
+  }
+
+  export type RoleCreateNestedOneWithoutRolePolicyInput = {
+    create?: XOR<RoleCreateWithoutRolePolicyInput, RoleUncheckedCreateWithoutRolePolicyInput>
+    connectOrCreate?: RoleCreateOrConnectWithoutRolePolicyInput
+    connect?: RoleWhereUniqueInput
+  }
+
+  export type PolicyCreateNestedOneWithoutRolePolicyInput = {
+    create?: XOR<PolicyCreateWithoutRolePolicyInput, PolicyUncheckedCreateWithoutRolePolicyInput>
+    connectOrCreate?: PolicyCreateOrConnectWithoutRolePolicyInput
+    connect?: PolicyWhereUniqueInput
+  }
+
+  export type RoleUpdateOneRequiredWithoutRolePolicyNestedInput = {
+    create?: XOR<RoleCreateWithoutRolePolicyInput, RoleUncheckedCreateWithoutRolePolicyInput>
+    connectOrCreate?: RoleCreateOrConnectWithoutRolePolicyInput
+    upsert?: RoleUpsertWithoutRolePolicyInput
+    connect?: RoleWhereUniqueInput
+    update?: XOR<XOR<RoleUpdateToOneWithWhereWithoutRolePolicyInput, RoleUpdateWithoutRolePolicyInput>, RoleUncheckedUpdateWithoutRolePolicyInput>
+  }
+
+  export type PolicyUpdateOneRequiredWithoutRolePolicyNestedInput = {
+    create?: XOR<PolicyCreateWithoutRolePolicyInput, PolicyUncheckedCreateWithoutRolePolicyInput>
+    connectOrCreate?: PolicyCreateOrConnectWithoutRolePolicyInput
+    upsert?: PolicyUpsertWithoutRolePolicyInput
+    connect?: PolicyWhereUniqueInput
+    update?: XOR<XOR<PolicyUpdateToOneWithWhereWithoutRolePolicyInput, PolicyUpdateWithoutRolePolicyInput>, PolicyUncheckedUpdateWithoutRolePolicyInput>
+  }
+
+  export type PermissionCreateNestedOneWithoutPermissionPolicyInput = {
+    create?: XOR<PermissionCreateWithoutPermissionPolicyInput, PermissionUncheckedCreateWithoutPermissionPolicyInput>
+    connectOrCreate?: PermissionCreateOrConnectWithoutPermissionPolicyInput
+    connect?: PermissionWhereUniqueInput
+  }
+
+  export type PolicyCreateNestedOneWithoutPermissionPolicyInput = {
+    create?: XOR<PolicyCreateWithoutPermissionPolicyInput, PolicyUncheckedCreateWithoutPermissionPolicyInput>
+    connectOrCreate?: PolicyCreateOrConnectWithoutPermissionPolicyInput
+    connect?: PolicyWhereUniqueInput
+  }
+
+  export type PermissionUpdateOneRequiredWithoutPermissionPolicyNestedInput = {
+    create?: XOR<PermissionCreateWithoutPermissionPolicyInput, PermissionUncheckedCreateWithoutPermissionPolicyInput>
+    connectOrCreate?: PermissionCreateOrConnectWithoutPermissionPolicyInput
+    upsert?: PermissionUpsertWithoutPermissionPolicyInput
+    connect?: PermissionWhereUniqueInput
+    update?: XOR<XOR<PermissionUpdateToOneWithWhereWithoutPermissionPolicyInput, PermissionUpdateWithoutPermissionPolicyInput>, PermissionUncheckedUpdateWithoutPermissionPolicyInput>
+  }
+
+  export type PolicyUpdateOneRequiredWithoutPermissionPolicyNestedInput = {
+    create?: XOR<PolicyCreateWithoutPermissionPolicyInput, PolicyUncheckedCreateWithoutPermissionPolicyInput>
+    connectOrCreate?: PolicyCreateOrConnectWithoutPermissionPolicyInput
+    upsert?: PolicyUpsertWithoutPermissionPolicyInput
+    connect?: PolicyWhereUniqueInput
+    update?: XOR<XOR<PolicyUpdateToOneWithWhereWithoutPermissionPolicyInput, PolicyUpdateWithoutPermissionPolicyInput>, PolicyUncheckedUpdateWithoutPermissionPolicyInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -7409,6 +11495,28 @@ export namespace Prisma {
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
+  export type NestedJsonNullableFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type UserRoleCreateWithoutUserInput = {
     role: RoleCreateNestedOneWithoutUsersInput
@@ -7488,6 +11596,24 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type RolePolicyCreateWithoutRoleInput = {
+    policy: PolicyCreateNestedOneWithoutRolePolicyInput
+  }
+
+  export type RolePolicyUncheckedCreateWithoutRoleInput = {
+    policyId: number
+  }
+
+  export type RolePolicyCreateOrConnectWithoutRoleInput = {
+    where: RolePolicyWhereUniqueInput
+    create: XOR<RolePolicyCreateWithoutRoleInput, RolePolicyUncheckedCreateWithoutRoleInput>
+  }
+
+  export type RolePolicyCreateManyRoleInputEnvelope = {
+    data: RolePolicyCreateManyRoleInput | RolePolicyCreateManyRoleInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserRoleUpsertWithWhereUniqueWithoutRoleInput = {
     where: UserRoleWhereUniqueInput
     update: XOR<UserRoleUpdateWithoutRoleInput, UserRoleUncheckedUpdateWithoutRoleInput>
@@ -7528,10 +11654,35 @@ export namespace Prisma {
     permissionId?: IntFilter<"RolePermissions"> | number
   }
 
+  export type RolePolicyUpsertWithWhereUniqueWithoutRoleInput = {
+    where: RolePolicyWhereUniqueInput
+    update: XOR<RolePolicyUpdateWithoutRoleInput, RolePolicyUncheckedUpdateWithoutRoleInput>
+    create: XOR<RolePolicyCreateWithoutRoleInput, RolePolicyUncheckedCreateWithoutRoleInput>
+  }
+
+  export type RolePolicyUpdateWithWhereUniqueWithoutRoleInput = {
+    where: RolePolicyWhereUniqueInput
+    data: XOR<RolePolicyUpdateWithoutRoleInput, RolePolicyUncheckedUpdateWithoutRoleInput>
+  }
+
+  export type RolePolicyUpdateManyWithWhereWithoutRoleInput = {
+    where: RolePolicyScalarWhereInput
+    data: XOR<RolePolicyUpdateManyMutationInput, RolePolicyUncheckedUpdateManyWithoutRoleInput>
+  }
+
+  export type RolePolicyScalarWhereInput = {
+    AND?: RolePolicyScalarWhereInput | RolePolicyScalarWhereInput[]
+    OR?: RolePolicyScalarWhereInput[]
+    NOT?: RolePolicyScalarWhereInput | RolePolicyScalarWhereInput[]
+    roleId?: IntFilter<"RolePolicy"> | number
+    policyId?: IntFilter<"RolePolicy"> | number
+  }
+
   export type RoleCreateWithoutUsersInput = {
     name: string
     description?: string | null
     RolePermissions?: RolePermissionsCreateNestedManyWithoutRoleInput
+    RolePolicy?: RolePolicyCreateNestedManyWithoutRoleInput
   }
 
   export type RoleUncheckedCreateWithoutUsersInput = {
@@ -7539,6 +11690,7 @@ export namespace Prisma {
     name: string
     description?: string | null
     RolePermissions?: RolePermissionsUncheckedCreateNestedManyWithoutRoleInput
+    RolePolicy?: RolePolicyUncheckedCreateNestedManyWithoutRoleInput
   }
 
   export type RoleCreateOrConnectWithoutUsersInput = {
@@ -7581,6 +11733,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     RolePermissions?: RolePermissionsUpdateManyWithoutRoleNestedInput
+    RolePolicy?: RolePolicyUpdateManyWithoutRoleNestedInput
   }
 
   export type RoleUncheckedUpdateWithoutUsersInput = {
@@ -7588,6 +11741,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     RolePermissions?: RolePermissionsUncheckedUpdateManyWithoutRoleNestedInput
+    RolePolicy?: RolePolicyUncheckedUpdateManyWithoutRoleNestedInput
   }
 
   export type UserUpsertWithoutUserRoleInput = {
@@ -7634,6 +11788,24 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PermissionPolicyCreateWithoutPermissionInput = {
+    policy: PolicyCreateNestedOneWithoutPermissionPolicyInput
+  }
+
+  export type PermissionPolicyUncheckedCreateWithoutPermissionInput = {
+    policyId: number
+  }
+
+  export type PermissionPolicyCreateOrConnectWithoutPermissionInput = {
+    where: PermissionPolicyWhereUniqueInput
+    create: XOR<PermissionPolicyCreateWithoutPermissionInput, PermissionPolicyUncheckedCreateWithoutPermissionInput>
+  }
+
+  export type PermissionPolicyCreateManyPermissionInputEnvelope = {
+    data: PermissionPolicyCreateManyPermissionInput | PermissionPolicyCreateManyPermissionInput[]
+    skipDuplicates?: boolean
+  }
+
   export type RolePermissionsUpsertWithWhereUniqueWithoutPermissionInput = {
     where: RolePermissionsWhereUniqueInput
     update: XOR<RolePermissionsUpdateWithoutPermissionInput, RolePermissionsUncheckedUpdateWithoutPermissionInput>
@@ -7650,10 +11822,35 @@ export namespace Prisma {
     data: XOR<RolePermissionsUpdateManyMutationInput, RolePermissionsUncheckedUpdateManyWithoutPermissionInput>
   }
 
+  export type PermissionPolicyUpsertWithWhereUniqueWithoutPermissionInput = {
+    where: PermissionPolicyWhereUniqueInput
+    update: XOR<PermissionPolicyUpdateWithoutPermissionInput, PermissionPolicyUncheckedUpdateWithoutPermissionInput>
+    create: XOR<PermissionPolicyCreateWithoutPermissionInput, PermissionPolicyUncheckedCreateWithoutPermissionInput>
+  }
+
+  export type PermissionPolicyUpdateWithWhereUniqueWithoutPermissionInput = {
+    where: PermissionPolicyWhereUniqueInput
+    data: XOR<PermissionPolicyUpdateWithoutPermissionInput, PermissionPolicyUncheckedUpdateWithoutPermissionInput>
+  }
+
+  export type PermissionPolicyUpdateManyWithWhereWithoutPermissionInput = {
+    where: PermissionPolicyScalarWhereInput
+    data: XOR<PermissionPolicyUpdateManyMutationInput, PermissionPolicyUncheckedUpdateManyWithoutPermissionInput>
+  }
+
+  export type PermissionPolicyScalarWhereInput = {
+    AND?: PermissionPolicyScalarWhereInput | PermissionPolicyScalarWhereInput[]
+    OR?: PermissionPolicyScalarWhereInput[]
+    NOT?: PermissionPolicyScalarWhereInput | PermissionPolicyScalarWhereInput[]
+    permissionId?: IntFilter<"PermissionPolicy"> | number
+    policyId?: IntFilter<"PermissionPolicy"> | number
+  }
+
   export type RoleCreateWithoutRolePermissionsInput = {
     name: string
     description?: string | null
     users?: UserRoleCreateNestedManyWithoutRoleInput
+    RolePolicy?: RolePolicyCreateNestedManyWithoutRoleInput
   }
 
   export type RoleUncheckedCreateWithoutRolePermissionsInput = {
@@ -7661,6 +11858,7 @@ export namespace Prisma {
     name: string
     description?: string | null
     users?: UserRoleUncheckedCreateNestedManyWithoutRoleInput
+    RolePolicy?: RolePolicyUncheckedCreateNestedManyWithoutRoleInput
   }
 
   export type RoleCreateOrConnectWithoutRolePermissionsInput = {
@@ -7672,6 +11870,7 @@ export namespace Prisma {
     name: string
     action: string
     description?: string | null
+    PermissionPolicy?: PermissionPolicyCreateNestedManyWithoutPermissionInput
   }
 
   export type PermissionUncheckedCreateWithoutRolePermissionsInput = {
@@ -7679,6 +11878,7 @@ export namespace Prisma {
     name: string
     action: string
     description?: string | null
+    PermissionPolicy?: PermissionPolicyUncheckedCreateNestedManyWithoutPermissionInput
   }
 
   export type PermissionCreateOrConnectWithoutRolePermissionsInput = {
@@ -7701,6 +11901,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     users?: UserRoleUpdateManyWithoutRoleNestedInput
+    RolePolicy?: RolePolicyUpdateManyWithoutRoleNestedInput
   }
 
   export type RoleUncheckedUpdateWithoutRolePermissionsInput = {
@@ -7708,6 +11909,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     users?: UserRoleUncheckedUpdateManyWithoutRoleNestedInput
+    RolePolicy?: RolePolicyUncheckedUpdateManyWithoutRoleNestedInput
   }
 
   export type PermissionUpsertWithoutRolePermissionsInput = {
@@ -7725,6 +11927,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     action?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    PermissionPolicy?: PermissionPolicyUpdateManyWithoutPermissionNestedInput
   }
 
   export type PermissionUncheckedUpdateWithoutRolePermissionsInput = {
@@ -7732,6 +11935,299 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     action?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    PermissionPolicy?: PermissionPolicyUncheckedUpdateManyWithoutPermissionNestedInput
+  }
+
+  export type RolePolicyCreateWithoutPolicyInput = {
+    role: RoleCreateNestedOneWithoutRolePolicyInput
+  }
+
+  export type RolePolicyUncheckedCreateWithoutPolicyInput = {
+    roleId: number
+  }
+
+  export type RolePolicyCreateOrConnectWithoutPolicyInput = {
+    where: RolePolicyWhereUniqueInput
+    create: XOR<RolePolicyCreateWithoutPolicyInput, RolePolicyUncheckedCreateWithoutPolicyInput>
+  }
+
+  export type RolePolicyCreateManyPolicyInputEnvelope = {
+    data: RolePolicyCreateManyPolicyInput | RolePolicyCreateManyPolicyInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PermissionPolicyCreateWithoutPolicyInput = {
+    permission: PermissionCreateNestedOneWithoutPermissionPolicyInput
+  }
+
+  export type PermissionPolicyUncheckedCreateWithoutPolicyInput = {
+    permissionId: number
+  }
+
+  export type PermissionPolicyCreateOrConnectWithoutPolicyInput = {
+    where: PermissionPolicyWhereUniqueInput
+    create: XOR<PermissionPolicyCreateWithoutPolicyInput, PermissionPolicyUncheckedCreateWithoutPolicyInput>
+  }
+
+  export type PermissionPolicyCreateManyPolicyInputEnvelope = {
+    data: PermissionPolicyCreateManyPolicyInput | PermissionPolicyCreateManyPolicyInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RolePolicyUpsertWithWhereUniqueWithoutPolicyInput = {
+    where: RolePolicyWhereUniqueInput
+    update: XOR<RolePolicyUpdateWithoutPolicyInput, RolePolicyUncheckedUpdateWithoutPolicyInput>
+    create: XOR<RolePolicyCreateWithoutPolicyInput, RolePolicyUncheckedCreateWithoutPolicyInput>
+  }
+
+  export type RolePolicyUpdateWithWhereUniqueWithoutPolicyInput = {
+    where: RolePolicyWhereUniqueInput
+    data: XOR<RolePolicyUpdateWithoutPolicyInput, RolePolicyUncheckedUpdateWithoutPolicyInput>
+  }
+
+  export type RolePolicyUpdateManyWithWhereWithoutPolicyInput = {
+    where: RolePolicyScalarWhereInput
+    data: XOR<RolePolicyUpdateManyMutationInput, RolePolicyUncheckedUpdateManyWithoutPolicyInput>
+  }
+
+  export type PermissionPolicyUpsertWithWhereUniqueWithoutPolicyInput = {
+    where: PermissionPolicyWhereUniqueInput
+    update: XOR<PermissionPolicyUpdateWithoutPolicyInput, PermissionPolicyUncheckedUpdateWithoutPolicyInput>
+    create: XOR<PermissionPolicyCreateWithoutPolicyInput, PermissionPolicyUncheckedCreateWithoutPolicyInput>
+  }
+
+  export type PermissionPolicyUpdateWithWhereUniqueWithoutPolicyInput = {
+    where: PermissionPolicyWhereUniqueInput
+    data: XOR<PermissionPolicyUpdateWithoutPolicyInput, PermissionPolicyUncheckedUpdateWithoutPolicyInput>
+  }
+
+  export type PermissionPolicyUpdateManyWithWhereWithoutPolicyInput = {
+    where: PermissionPolicyScalarWhereInput
+    data: XOR<PermissionPolicyUpdateManyMutationInput, PermissionPolicyUncheckedUpdateManyWithoutPolicyInput>
+  }
+
+  export type RoleCreateWithoutRolePolicyInput = {
+    name: string
+    description?: string | null
+    users?: UserRoleCreateNestedManyWithoutRoleInput
+    RolePermissions?: RolePermissionsCreateNestedManyWithoutRoleInput
+  }
+
+  export type RoleUncheckedCreateWithoutRolePolicyInput = {
+    id?: number
+    name: string
+    description?: string | null
+    users?: UserRoleUncheckedCreateNestedManyWithoutRoleInput
+    RolePermissions?: RolePermissionsUncheckedCreateNestedManyWithoutRoleInput
+  }
+
+  export type RoleCreateOrConnectWithoutRolePolicyInput = {
+    where: RoleWhereUniqueInput
+    create: XOR<RoleCreateWithoutRolePolicyInput, RoleUncheckedCreateWithoutRolePolicyInput>
+  }
+
+  export type PolicyCreateWithoutRolePolicyInput = {
+    type: number
+    effect: string
+    action: string
+    subject: string
+    fields?: NullableJsonNullValueInput | InputJsonValue
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    args?: NullableJsonNullValueInput | InputJsonValue
+    encode: string
+    PermissionPolicy?: PermissionPolicyCreateNestedManyWithoutPolicyInput
+  }
+
+  export type PolicyUncheckedCreateWithoutRolePolicyInput = {
+    id?: number
+    type: number
+    effect: string
+    action: string
+    subject: string
+    fields?: NullableJsonNullValueInput | InputJsonValue
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    args?: NullableJsonNullValueInput | InputJsonValue
+    encode: string
+    PermissionPolicy?: PermissionPolicyUncheckedCreateNestedManyWithoutPolicyInput
+  }
+
+  export type PolicyCreateOrConnectWithoutRolePolicyInput = {
+    where: PolicyWhereUniqueInput
+    create: XOR<PolicyCreateWithoutRolePolicyInput, PolicyUncheckedCreateWithoutRolePolicyInput>
+  }
+
+  export type RoleUpsertWithoutRolePolicyInput = {
+    update: XOR<RoleUpdateWithoutRolePolicyInput, RoleUncheckedUpdateWithoutRolePolicyInput>
+    create: XOR<RoleCreateWithoutRolePolicyInput, RoleUncheckedCreateWithoutRolePolicyInput>
+    where?: RoleWhereInput
+  }
+
+  export type RoleUpdateToOneWithWhereWithoutRolePolicyInput = {
+    where?: RoleWhereInput
+    data: XOR<RoleUpdateWithoutRolePolicyInput, RoleUncheckedUpdateWithoutRolePolicyInput>
+  }
+
+  export type RoleUpdateWithoutRolePolicyInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    users?: UserRoleUpdateManyWithoutRoleNestedInput
+    RolePermissions?: RolePermissionsUpdateManyWithoutRoleNestedInput
+  }
+
+  export type RoleUncheckedUpdateWithoutRolePolicyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    users?: UserRoleUncheckedUpdateManyWithoutRoleNestedInput
+    RolePermissions?: RolePermissionsUncheckedUpdateManyWithoutRoleNestedInput
+  }
+
+  export type PolicyUpsertWithoutRolePolicyInput = {
+    update: XOR<PolicyUpdateWithoutRolePolicyInput, PolicyUncheckedUpdateWithoutRolePolicyInput>
+    create: XOR<PolicyCreateWithoutRolePolicyInput, PolicyUncheckedCreateWithoutRolePolicyInput>
+    where?: PolicyWhereInput
+  }
+
+  export type PolicyUpdateToOneWithWhereWithoutRolePolicyInput = {
+    where?: PolicyWhereInput
+    data: XOR<PolicyUpdateWithoutRolePolicyInput, PolicyUncheckedUpdateWithoutRolePolicyInput>
+  }
+
+  export type PolicyUpdateWithoutRolePolicyInput = {
+    type?: IntFieldUpdateOperationsInput | number
+    effect?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    fields?: NullableJsonNullValueInput | InputJsonValue
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    args?: NullableJsonNullValueInput | InputJsonValue
+    encode?: StringFieldUpdateOperationsInput | string
+    PermissionPolicy?: PermissionPolicyUpdateManyWithoutPolicyNestedInput
+  }
+
+  export type PolicyUncheckedUpdateWithoutRolePolicyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: IntFieldUpdateOperationsInput | number
+    effect?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    fields?: NullableJsonNullValueInput | InputJsonValue
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    args?: NullableJsonNullValueInput | InputJsonValue
+    encode?: StringFieldUpdateOperationsInput | string
+    PermissionPolicy?: PermissionPolicyUncheckedUpdateManyWithoutPolicyNestedInput
+  }
+
+  export type PermissionCreateWithoutPermissionPolicyInput = {
+    name: string
+    action: string
+    description?: string | null
+    RolePermissions?: RolePermissionsCreateNestedManyWithoutPermissionInput
+  }
+
+  export type PermissionUncheckedCreateWithoutPermissionPolicyInput = {
+    id?: number
+    name: string
+    action: string
+    description?: string | null
+    RolePermissions?: RolePermissionsUncheckedCreateNestedManyWithoutPermissionInput
+  }
+
+  export type PermissionCreateOrConnectWithoutPermissionPolicyInput = {
+    where: PermissionWhereUniqueInput
+    create: XOR<PermissionCreateWithoutPermissionPolicyInput, PermissionUncheckedCreateWithoutPermissionPolicyInput>
+  }
+
+  export type PolicyCreateWithoutPermissionPolicyInput = {
+    type: number
+    effect: string
+    action: string
+    subject: string
+    fields?: NullableJsonNullValueInput | InputJsonValue
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    args?: NullableJsonNullValueInput | InputJsonValue
+    encode: string
+    RolePolicy?: RolePolicyCreateNestedManyWithoutPolicyInput
+  }
+
+  export type PolicyUncheckedCreateWithoutPermissionPolicyInput = {
+    id?: number
+    type: number
+    effect: string
+    action: string
+    subject: string
+    fields?: NullableJsonNullValueInput | InputJsonValue
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    args?: NullableJsonNullValueInput | InputJsonValue
+    encode: string
+    RolePolicy?: RolePolicyUncheckedCreateNestedManyWithoutPolicyInput
+  }
+
+  export type PolicyCreateOrConnectWithoutPermissionPolicyInput = {
+    where: PolicyWhereUniqueInput
+    create: XOR<PolicyCreateWithoutPermissionPolicyInput, PolicyUncheckedCreateWithoutPermissionPolicyInput>
+  }
+
+  export type PermissionUpsertWithoutPermissionPolicyInput = {
+    update: XOR<PermissionUpdateWithoutPermissionPolicyInput, PermissionUncheckedUpdateWithoutPermissionPolicyInput>
+    create: XOR<PermissionCreateWithoutPermissionPolicyInput, PermissionUncheckedCreateWithoutPermissionPolicyInput>
+    where?: PermissionWhereInput
+  }
+
+  export type PermissionUpdateToOneWithWhereWithoutPermissionPolicyInput = {
+    where?: PermissionWhereInput
+    data: XOR<PermissionUpdateWithoutPermissionPolicyInput, PermissionUncheckedUpdateWithoutPermissionPolicyInput>
+  }
+
+  export type PermissionUpdateWithoutPermissionPolicyInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    RolePermissions?: RolePermissionsUpdateManyWithoutPermissionNestedInput
+  }
+
+  export type PermissionUncheckedUpdateWithoutPermissionPolicyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    RolePermissions?: RolePermissionsUncheckedUpdateManyWithoutPermissionNestedInput
+  }
+
+  export type PolicyUpsertWithoutPermissionPolicyInput = {
+    update: XOR<PolicyUpdateWithoutPermissionPolicyInput, PolicyUncheckedUpdateWithoutPermissionPolicyInput>
+    create: XOR<PolicyCreateWithoutPermissionPolicyInput, PolicyUncheckedCreateWithoutPermissionPolicyInput>
+    where?: PolicyWhereInput
+  }
+
+  export type PolicyUpdateToOneWithWhereWithoutPermissionPolicyInput = {
+    where?: PolicyWhereInput
+    data: XOR<PolicyUpdateWithoutPermissionPolicyInput, PolicyUncheckedUpdateWithoutPermissionPolicyInput>
+  }
+
+  export type PolicyUpdateWithoutPermissionPolicyInput = {
+    type?: IntFieldUpdateOperationsInput | number
+    effect?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    fields?: NullableJsonNullValueInput | InputJsonValue
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    args?: NullableJsonNullValueInput | InputJsonValue
+    encode?: StringFieldUpdateOperationsInput | string
+    RolePolicy?: RolePolicyUpdateManyWithoutPolicyNestedInput
+  }
+
+  export type PolicyUncheckedUpdateWithoutPermissionPolicyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: IntFieldUpdateOperationsInput | number
+    effect?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    subject?: StringFieldUpdateOperationsInput | string
+    fields?: NullableJsonNullValueInput | InputJsonValue
+    conditions?: NullableJsonNullValueInput | InputJsonValue
+    args?: NullableJsonNullValueInput | InputJsonValue
+    encode?: StringFieldUpdateOperationsInput | string
+    RolePolicy?: RolePolicyUncheckedUpdateManyWithoutPolicyNestedInput
   }
 
   export type UserRoleCreateManyUserInput = {
@@ -7758,6 +12254,10 @@ export namespace Prisma {
     permissionId: number
   }
 
+  export type RolePolicyCreateManyRoleInput = {
+    policyId: number
+  }
+
   export type UserRoleUpdateWithoutRoleInput = {
     user?: UserUpdateOneRequiredWithoutUserRoleNestedInput
   }
@@ -7782,8 +12282,24 @@ export namespace Prisma {
     permissionId?: IntFieldUpdateOperationsInput | number
   }
 
+  export type RolePolicyUpdateWithoutRoleInput = {
+    policy?: PolicyUpdateOneRequiredWithoutRolePolicyNestedInput
+  }
+
+  export type RolePolicyUncheckedUpdateWithoutRoleInput = {
+    policyId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type RolePolicyUncheckedUpdateManyWithoutRoleInput = {
+    policyId?: IntFieldUpdateOperationsInput | number
+  }
+
   export type RolePermissionsCreateManyPermissionInput = {
     roleId: number
+  }
+
+  export type PermissionPolicyCreateManyPermissionInput = {
+    policyId: number
   }
 
   export type RolePermissionsUpdateWithoutPermissionInput = {
@@ -7796,6 +12312,50 @@ export namespace Prisma {
 
   export type RolePermissionsUncheckedUpdateManyWithoutPermissionInput = {
     roleId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PermissionPolicyUpdateWithoutPermissionInput = {
+    policy?: PolicyUpdateOneRequiredWithoutPermissionPolicyNestedInput
+  }
+
+  export type PermissionPolicyUncheckedUpdateWithoutPermissionInput = {
+    policyId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PermissionPolicyUncheckedUpdateManyWithoutPermissionInput = {
+    policyId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type RolePolicyCreateManyPolicyInput = {
+    roleId: number
+  }
+
+  export type PermissionPolicyCreateManyPolicyInput = {
+    permissionId: number
+  }
+
+  export type RolePolicyUpdateWithoutPolicyInput = {
+    role?: RoleUpdateOneRequiredWithoutRolePolicyNestedInput
+  }
+
+  export type RolePolicyUncheckedUpdateWithoutPolicyInput = {
+    roleId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type RolePolicyUncheckedUpdateManyWithoutPolicyInput = {
+    roleId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PermissionPolicyUpdateWithoutPolicyInput = {
+    permission?: PermissionUpdateOneRequiredWithoutPermissionPolicyNestedInput
+  }
+
+  export type PermissionPolicyUncheckedUpdateWithoutPolicyInput = {
+    permissionId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PermissionPolicyUncheckedUpdateManyWithoutPolicyInput = {
+    permissionId?: IntFieldUpdateOperationsInput | number
   }
 
 
@@ -7816,6 +12376,10 @@ export namespace Prisma {
      */
     export type PermissionCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PermissionCountOutputTypeDefaultArgs<ExtArgs>
     /**
+     * @deprecated Use PolicyCountOutputTypeDefaultArgs instead
+     */
+    export type PolicyCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PolicyCountOutputTypeDefaultArgs<ExtArgs>
+    /**
      * @deprecated Use UserDefaultArgs instead
      */
     export type UserArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = UserDefaultArgs<ExtArgs>
@@ -7835,6 +12399,18 @@ export namespace Prisma {
      * @deprecated Use RolePermissionsDefaultArgs instead
      */
     export type RolePermissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = RolePermissionsDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use PolicyDefaultArgs instead
+     */
+    export type PolicyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PolicyDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use RolePolicyDefaultArgs instead
+     */
+    export type RolePolicyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = RolePolicyDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use PermissionPolicyDefaultArgs instead
+     */
+    export type PermissionPolicyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PermissionPolicyDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany
