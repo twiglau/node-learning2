@@ -113,7 +113,7 @@ export class RoleService {
         },
         RolePolicy: {
           include: {
-            role: true,
+            policy: true,
           },
         },
       },

@@ -1,24 +1,23 @@
 import {
   CaslAbilityService,
-  EffectEnum,
   IPolicy,
-  PolicyEnum,
 } from '@/access-control/policy/casl-ability.service';
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { permittedFieldsOf } from '@casl/ability/extra';
+import {
+  CanActivate,
+  ExecutionContext,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 import { PermissionService } from '@/access-control/permission/permission.service';
 import { UserRepository } from '@/user/user.repository';
 import { RoleService } from '@/access-control/role/role.service';
 import { PERMISSION_KEY } from '../decorators/role-permission.decorator';
-
-class Article {
-  title: string;
-  description: string;
-  authorId: number;
-  private: boolean;
-}
+import { ConfigEnum } from '../enum/config.enum';
+import { PRISMA_DATABASE } from '@/database/database-constants';
+import { PrismaClient } from 'prisma/client/postgresql';
+import { plainToInstance } from 'class-transformer';
 
 @Injectable()
 export class PolicyGuard implements CanActivate {
@@ -29,6 +28,7 @@ export class PolicyGuard implements CanActivate {
     private permissionService: PermissionService,
     private userRepository: UserRepository,
     private roleService: RoleService,
+    @Inject(PRISMA_DATABASE) private readonly prismaClient: PrismaClient,
   ) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
     // 通过 caslAbilityService 获取用户已有权限的实例
@@ -62,7 +62,7 @@ export class PolicyGuard implements CanActivate {
     // 2. 获取 policy: 通过 permission
     const permissionPolicy =
       await this.permissionService.findByName(personal_right);
-    console.log('PolicyGuard permissionPolicy:', permissionPolicy);
+
     // 3. 缩小范围：policy -> subjects -> 缩小PermissionPolicy的查询范围
     const subjects = permissionPolicy?.PermissionPolicy.map(
       (p) => p.policy.subject,
@@ -71,61 +71,96 @@ export class PolicyGuard implements CanActivate {
     const req = context.switchToHttp().getRequest();
     const { username } = req.user;
     const user = await this.userRepository.findOne(username);
-
-    const roleIds = user?.UserRole.map((role) => role.roleId);
-    const rolePolicies = await this.roleService.findAllByIds(roleIds);
-
-    console.log('policy gurad user:', rolePolicies);
-    const polices: IPolicy[] = [
-      // {
-      //   type: PolicyEnum.json,
-      //   effect: EffectEnum.can,
-      //   action: 'read',
-      //   subject: 'Article',
-      //   fields: ['title', 'description'],
-      //   conditions: { private: false },
-      // },
-      // {
-      //   type: PolicyEnum.mongo,
-      //   effect: EffectEnum.can,
-      //   action: 'read',
-      //   subject: 'Article',
-      //   conditions: {
-      //     $nor: [{ authorId: 1 }, { private: true }],
-      //   },
-      // },
-      {
-        type: PolicyEnum.func,
-        effect: EffectEnum.can,
-        action: 'read',
-        subject: 'Article',
-        conditions: '({authorId}) => authorId === user.id',
-        args: 'user',
-      },
-    ];
-    const abilities = this.caslAbilityService.buildAbility(polices, [
-      { id: 1 },
-    ]);
-    const ARTICLE_FIELDS = [
-      'title',
-      'description',
-      'authorId',
-      'published',
-      'private',
-    ];
-    const options = {
-      fieldsFrom: (rule) => rule.fields || ARTICLE_FIELDS,
-    };
-    const article = new Article();
-    article.authorId = 1;
-    article.private = false;
-
-    for (const ability of abilities) {
-      const fields = permittedFieldsOf(ability, 'read', article, options);
-      const flag = ability.can('read', article, 'title');
-      console.log('PolicyGuard ~flag~', flag, fields);
+    if (!user) {
+      return false;
     }
 
-    return true;
+    const roleIds = user?.UserRole.map((role) => role.roleId);
+    const rolePolicies: any[] = await this.roleService.findAllByIds(roleIds);
+
+    // 判断是否在白名单
+    const roleWhiteList = this.configService.get(ConfigEnum.ROLE_WHITELIST);
+    if (roleWhiteList) {
+      const whiteListArr = roleWhiteList.split(',')?.map(Number);
+      if (whiteListArr.some((w) => roleIds?.includes(w))) {
+        return true;
+      }
+    }
+
+    const policies: IPolicy[] = rolePolicies.reduce((acc, cur) => {
+      const rolePolicy = cur.RolePolicy?.filter((p) => {
+        return subjects?.includes(p.policy.subject);
+      });
+      acc.push(...rolePolicy.map((r) => r.policy));
+    }, []);
+
+    // 挂载信息
+    delete user.password;
+    user.RolePolicy = rolePolicies;
+    user.policies = policies;
+    user.roleIds = roleIds;
+    user.permissions = user.roles?.reduce((acc, cur) => {
+      return [...acc, ...cur.UserRole.RolePermissions];
+    }, []);
+
+    const abilities = this.caslAbilityService.buildAbility(policies, [
+      user,
+      req,
+      this.reflector,
+    ]);
+
+    if (policies.length === 0) {
+      return true;
+    }
+
+    let allPermissionGranted = true;
+    const tempPermissionPolicy = [...permissionPolicy!.PermissionPolicy];
+    for (const p of [...tempPermissionPolicy]) {
+      const { action, subject, fields } = p.policy;
+      let permissionGranted = false;
+
+      for (const ability of abilities) {
+        const subjectObj = await this.prismaClient[subject].findUnique({
+          where: {
+            id: user.id,
+          },
+        });
+        const subjectIns: any =
+          typeof subject === 'string'
+            ? subject
+            : plainToInstance(subject, subjectObj);
+
+        if (fields) {
+          if ((fields as any)?.length > 0 && Array.isArray(fields)) {
+            permissionGranted = fields.every((field) => {
+              return ability.can(action, subjectIns, field as string);
+            });
+          } else if (fields['data']) {
+            permissionGranted = fields['data'].every((field) =>
+              ability.can(action, subjectIns, field),
+            );
+          }
+        } else {
+          permissionGranted = ability.can(action, subjectIns);
+        }
+
+        if (permissionGranted) {
+          break;
+        }
+      }
+
+      if (permissionGranted) {
+        const idx = tempPermissionPolicy.indexOf(p);
+        if (idx >= 0) {
+          tempPermissionPolicy.splice(idx, 1);
+        }
+      }
+    }
+
+    if (tempPermissionPolicy.length !== 0) {
+      allPermissionGranted = false;
+    }
+
+    return allPermissionGranted;
   }
 }
