@@ -2,7 +2,7 @@ import { PartialType } from '@nestjs/mapped-types';
 import { CreateUserDto } from './create-user.dto';
 import { IsArray, IsInt, IsString, ValidateIf } from 'class-validator';
 import { Type } from 'class-transformer';
-import { CreateRoleDto } from '@/role/dto/create-role.dto';
+import { CreateRoleDto } from '@/access-control/role/dto/create-role.dto';
 
 export class UpdateUserDto extends PartialType(CreateUserDto) {
   /**

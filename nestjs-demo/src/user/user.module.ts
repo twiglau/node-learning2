@@ -11,9 +11,9 @@ import { UserMongooseRepository } from './repository/user.mongoose.repository';
 import { UserPrismaRepository } from './repository/user.prisma.repository';
 import { UserRepository } from './user.repository';
 import { UserController } from './user.controller';
-import { RoleModule } from '@/role/role.module';
-import { PolicyModule } from '@/policy/policy.module';
-import { PermissionModule } from '@/permission/permission.module';
+import { RoleModule } from '@/access-control/role/role.module';
+import { PolicyModule } from '@/access-control/policy/policy.module';
+import { PermissionModule } from '@/access-control/permission/permission.module';
 
 const parseConfig = getEnvs();
 const tenantMode = toBoolean(parseConfig['TENANT_MODE']);

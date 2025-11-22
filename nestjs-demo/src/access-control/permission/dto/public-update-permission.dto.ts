@@ -1,7 +1,7 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { updatePermissionDto } from './update-permission.dto';
 import { Expose, Transform, Type } from 'class-transformer';
-import { CreatePolicyDto } from '@/policy/dto/create-policy.dto';
+import { CreatePolicyDto } from '@/access-control/policy/dto/create-policy.dto';
 
 export class PublicUpdatePermissionDto extends PartialType(
   updatePermissionDto,

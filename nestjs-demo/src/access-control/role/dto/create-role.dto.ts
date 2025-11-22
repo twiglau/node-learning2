@@ -1,5 +1,5 @@
-import { CreatePermissionDto } from '@/permission/dto/create-premission.dto';
-import { CreatePolicyDto } from '@/policy/dto/create-policy.dto';
+import { CreatePermissionDto } from '@/access-control/permission/dto/create-premission.dto';
+import { CreatePolicyDto } from '@/access-control/policy/dto/create-policy.dto';
 import { plainToInstance, Transform, Type } from 'class-transformer';
 import { IsArray, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 

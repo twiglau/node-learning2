@@ -13,7 +13,7 @@ import {
 import { UserRepository } from './user.repository';
 import { CreateUserDto } from './dto/create-user.dto';
 import { Serialize } from '@/common/decorators/serialize.decorator';
-import { PublicUserDto } from '@/auth/dto/public-user.dto';
+import { PublicUserDto } from '@/access-control/auth/dto/public-user.dto';
 // import { AuthGuard } from '@nestjs/passport';
 // import { AdminGuard } from '@/common/guard/admin.guard';
 import { RolePermissionGuard } from '@/common/guard/role-permission.guard';

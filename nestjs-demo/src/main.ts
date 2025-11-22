@@ -13,9 +13,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
   const port = configService.get<number>('PORT', 3000);
-  const cors = configService.get('CORS', false);
-  const prefix = configService.get('PREFIX', '/api');
-  const versionStr = configService.get<string>('VERSION');
+  const cors = configService.get('APP_CORS', false);
+  const prefix = configService.get('APP_PREFIX', '/api');
+  const versionStr = configService.get<string>('APP_VERSION');
   let version = [versionStr];
   if (versionStr && versionStr.indexOf(',')) {
     version = versionStr.split(',');

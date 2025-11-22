@@ -3,14 +3,14 @@ import {
   EffectEnum,
   IPolicy,
   PolicyEnum,
-} from '@/policy/casl-ability.service';
+} from '@/access-control/policy/casl-ability.service';
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { permittedFieldsOf } from '@casl/ability/extra';
 import { Reflector } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
-import { PermissionService } from '@/permission/permission.service';
+import { PermissionService } from '@/access-control/permission/permission.service';
 import { UserRepository } from '@/user/user.repository';
-import { RoleService } from '@/role/role.service';
+import { RoleService } from '@/access-control/role/role.service';
 import { PERMISSION_KEY } from '../decorators/role-permission.decorator';
 
 class Article {

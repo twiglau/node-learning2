@@ -1,4 +1,4 @@
-import { CreatePolicyDto } from '@/policy/dto/create-policy.dto';
+import { CreatePolicyDto } from '@/access-control/policy/dto/create-policy.dto';
 import { Type } from 'class-transformer';
 import {
   IsArray,
