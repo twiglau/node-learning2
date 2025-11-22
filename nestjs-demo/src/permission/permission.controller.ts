@@ -12,6 +12,8 @@ import {
 import { CreatePermissionDto } from './dto/create-premission.dto';
 import { PermissionService } from './permission.service';
 import { updatePermissionDto } from './dto/update-permission.dto';
+import { Serialize } from '@/common/decorators/serialize.decorator';
+import { PublicUpdatePermissionDto } from './dto/public-update-permission.dto';
 
 @Controller('permission')
 export class PermissionController {
@@ -48,6 +50,7 @@ export class PermissionController {
   }
 
   @Patch(':id')
+  @Serialize(PublicUpdatePermissionDto)
   update(
     @Param('id') id: string,
     @Body() updatePermissionDto: updatePermissionDto,

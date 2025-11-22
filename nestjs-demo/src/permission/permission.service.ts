@@ -61,6 +61,18 @@ export class PermissionService {
       where: { id },
     });
   }
+  findByName(name: string) {
+    return this.prismaClient.permission.findUnique({
+      where: { name },
+      include: {
+        PermissionPolicy: {
+          include: {
+            policy: true,
+          },
+        },
+      },
+    });
+  }
 
   async update(id: number, updatePermissionDto: updatePermissionDto) {
     const { policies, ...restData } = updatePermissionDto;
